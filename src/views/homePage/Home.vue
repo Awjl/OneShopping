@@ -1,35 +1,36 @@
 <template>
   <div class="home">
-    <wv-swipe :height="160" :autoplay="3000">
+    <SeachBox></SeachBox>
+    <wv-swipe :height="140" :autoplay="3000">
       <wv-swipe-item v-for="(item, index) in imgData" :key="index">
-        <div>{{index}}
+        <div>
           <img :src="item.img" alt="">
         </div>
       </wv-swipe-item>
     </wv-swipe>
     <div class="homeLove">
       <div class="homeLoverTitle">
-        暖心级别，你的段数是？
+        宠TA，我也宠你
       </div>
       <div class="homeLoveItem">
-        <div class="love-left">
+        <router-link tag="div" class="love-left" to="/Home/SpecialArea">
           <img src="../../assets/images/bg/home/love1.png" alt="">
-        </div>
+        </router-link>
         <div class="love-right">
-          <div>
+          <router-link tag="div" to="/Home/SpecialArea">
             <img src="../../assets/images/bg/home/love2.png" alt="">
-          </div>
-          <div class="last">
+          </router-link>
+          <router-link tag="div" class="last" to="/Home/SpecialArea">
             <img src="../../assets/images/bg/home/love3.png" alt="">
-          </div>
+          </router-link>
         </div>
       </div>
     </div>
     <div class="homeItem">
-      <div class="homeItemTitle">- 新品首发 -</div>
-      <div class="homeItemImg">
+      <div class="homeItemTitle">- 又上新啦 -</div>
+      <router-link tag="div" to="/Home/NoviceArea" class="homeItemImg">
         <img src="../../assets/images/data/banner/banner2.png" alt="">
-      </div>
+      </router-link>
       <div class="listItem-img">
         <div class="Item-box">
           <div class="item">
@@ -138,22 +139,24 @@
 
 <script>
 import { Swipe, SwipeItem } from "we-vue";
+import SeachBox from "../../base/seachBox/seachBox";
 
 export default {
   name: "home",
   data() {
     return {
       imgData: [
-        { img: "../../assets/images/data/banner/banner1.png" },
-        { img: "../../assets/images/data/banner/banner2.png" },
-        { img: "../../assets/images/data/banner/banner3.png" },
-        { img: "../../assets/images/data/banner/banner4.png" }
+        { img: "/img/banner1.2c2cfb5d.png" },
+        { img: "/img/banner2.b1078cd6.png" },
+        { img: "/img/banner3.ff271174.png" },
+        { img: "/img/banner4.9e6c6797.png" }
       ]
     };
   },
   components: {
     Swipe,
-    SwipeItem
+    SwipeItem,
+    SeachBox
   }
 };
 </script>

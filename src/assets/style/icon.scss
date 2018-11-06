@@ -50,6 +50,25 @@
   background-image: url(../images/icon/Bean.png);
 }
 
+.homeIcon {
+  display: block;
+  width: 70px;
+  height: 70px;
+  background-size: 100%;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+}
+
+.logoIcon {
+  background-image: url(../images/icon/logo.png);
+}
+
+.seachIcon {
+  width: 40px;
+  height: 40px;
+  background-image: url(../images/icon/seach.png);
+}
+
 /* 公益 */
 
 .lovericon {
@@ -129,22 +148,27 @@
   margin-right: 40px;
   background-image: url(../images/icon/myItem1.png);
 }
+
 .myico2 {
   margin-right: 40px;
   background-image: url(../images/icon/myItem2.png);
 }
+
 .myico3 {
   margin-right: 40px;
   background-image: url(../images/icon/myItem3.png);
 }
+
 .myico4 {
   margin-right: 40px;
   background-image: url(../images/icon/myItem4.png);
 }
+
 .myico5 {
   margin-right: 40px;
   background-image: url(../images/icon/myItem5.png);
 }
+
 .myico6 {
   margin-right: 40px;
   background-image: url(../images/icon/myItem6.png);
