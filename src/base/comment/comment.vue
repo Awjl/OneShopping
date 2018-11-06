@@ -127,4 +127,7 @@ export default {
     }
   }
 }
+.comment div:last-child .commentItemRight {
+  border: none;
+}
 </style>

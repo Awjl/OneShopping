@@ -119,7 +119,7 @@ export default {
   name: "shoppingDetails",
   data() {
     return {
-      show: false,
+      show: true,
       commentData: [
         {
           TouImg: "./img/1.c4c256bd.png",
@@ -377,7 +377,6 @@ export default {
 }
 .DetailsComment {
   padding: 0 30px;
-  margin-bottom: 40px;
   .DetailsCommentTitle {
     width: 100%;
     text-align: center;
