@@ -1,6 +1,6 @@
 <template>
-  <div class="areaDratal">
-    <div class="areaDratalImg">
+  <div class="NovDratal">
+    <div class="NovDratalImg">
       <img src="../../assets/images/data/banner/banner2.png" alt="">
     </div>
     <ShoppingList :listImg="listImg"></ShoppingList>
@@ -42,6 +42,14 @@ export default {
       ]
     };
   },
+  created() {
+    this.menu();
+  },
+  methods: {
+    menu() {
+      window.scrollTo(0, 0);
+    }
+  },
   components: {
     ShoppingList
   }
@@ -49,9 +57,9 @@ export default {
 </script>
 
 <style lang="scss">
-.areaDratal {
-  padding: 0 40px 110px;
-  .areaDratalImg {
+.NovDratal {
+  padding: 0 40px 100px;
+  .NovDratalImg {
     margin: 20px 0;
   }
 }

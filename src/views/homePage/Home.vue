@@ -64,9 +64,9 @@
     </div>
     <div class="homeItem">
       <div class="homeItemTitle">- 热卖专区 -</div>
-      <div class="homeItemImg">
+      <router-link tag="div" to="/Home/HotArea" class="homeItemImg">
         <img src="../../assets/images/data/banner/banner3.png" alt="">
-      </div>
+      </router-link>
       <div class="listItem-img">
         <div class="Item-box">
           <div class="item">

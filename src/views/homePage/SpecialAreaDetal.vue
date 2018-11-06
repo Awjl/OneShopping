@@ -50,7 +50,7 @@ export default {
 
 <style lang="scss">
 .areaDratal {
-  padding: 0 40px 110px;
+  padding: 0 40px 100px;
   .areaDratalImg {
     margin: 20px 0;
   }

@@ -7,7 +7,8 @@ import Shopping from "./views/shoppingPage/shopping.vue"; // 商城页面
 import My from "./views/myPage/my.vue"; // 个人中心页面
 import SpecialArea from "./views/homePage/SpecialArea.vue"; // 专区页面
 import AreaDratal from "./views/homePage/SpecialAreaDetal.vue"; // 专区详情页
-import NoviceArea from "./views/homePage/NoviceArea.vue"; // 新手详情页
+import NoviceArea from "./views/homePage/NoviceArea.vue"; // 新手专区
+import HotArea from "./views/homePage/HotArea.vue"; // 热卖专区
 
 Vue.use(Router);
 
@@ -48,6 +49,14 @@ export default new Router({
           name: "NoviceArea",
           meta: {
             title: "新手专区"
+          }
+        },
+        {
+          path: "/Home/HotArea",
+          component: HotArea,
+          name: "HotArea",
+          meta: {
+            title: "热卖专区"
           }
         },
         {
