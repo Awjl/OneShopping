@@ -34,25 +34,25 @@
       <div class="listItem-img">
         <div class="Item-box">
           <div class="item">
-            <div class="item-img">
+            <div class="item-img" @click="goDetails()">
               <img src="../../assets/images/data/home/1.png" alt="">
               <p class="item-name">小宠物玩具可调节</p>
               <p class="item-money">￥58</p>
               <p class="item-bean"><i class="iconmoney"></i> 宠物豆<span>+2</span></p>
             </div>
-            <div class="item-img">
+            <div class="item-img" @click="goDetails()">
               <img src="../../assets/images/data/home/2.png" alt="">
               <p class="item-name">小宠物玩具可调节</p>
               <p class="item-money">￥58</p>
               <p class="item-bean"><i class="iconmoney"></i> 宠物豆<span>+2</span></p>
             </div>
-            <div class="item-img">
+            <div class="item-img" @click="goDetails()">
               <img src="../../assets/images/data/home/3.png" alt="">
               <p class="item-name">小宠物玩具可调节</p>
               <p class="item-money">￥58</p>
               <p class="item-bean"><i class="iconmoney"></i> 宠物豆<span>+2</span></p>
             </div>
-            <div class="item-img">
+            <div class="item-img" @click="goDetails()">
               <img src="../../assets/images/data/home/4.png" alt="">
               <p class="item-name">小宠物玩具可调节</p>
               <p class="item-money">￥58</p>
@@ -70,25 +70,25 @@
       <div class="listItem-img">
         <div class="Item-box">
           <div class="item">
-            <div class="item-img">
+            <div class="item-img" @click="goDetails()">
               <img src="../../assets/images/data/home/1.png" alt="">
               <p class="item-name">小宠物玩具可调节</p>
               <p class="item-money">￥58</p>
               <p class="item-bean"><i class="iconmoney"></i> 宠物豆<span>+2</span></p>
             </div>
-            <div class="item-img">
+            <div class="item-img" @click="goDetails()">
               <img src="../../assets/images/data/home/2.png" alt="">
               <p class="item-name">小宠物玩具可调节</p>
               <p class="item-money">￥58</p>
               <p class="item-bean"><i class="iconmoney"></i> 宠物豆<span>+2</span></p>
             </div>
-            <div class="item-img">
+            <div class="item-img" @click="goDetails()">
               <img src="../../assets/images/data/home/3.png" alt="">
               <p class="item-name">小宠物玩具可调节</p>
               <p class="item-money">￥58</p>
               <p class="item-bean"><i class="iconmoney"></i> 宠物豆<span>+2</span></p>
             </div>
-            <div class="item-img">
+            <div class="item-img" @click="goDetails()">
               <img src="../../assets/images/data/home/4.png" alt="">
               <p class="item-name">小宠物玩具可调节</p>
               <p class="item-money">￥58</p>
@@ -100,31 +100,31 @@
     </div>
     <div class="homeItem">
       <div class="homeItemTitle">- 汪的盛宴 -</div>
-      <div class="homeItemImg">
+      <router-link tag="div" to="/Home/FoodArea" class="homeItemImg">
         <img src="../../assets/images/data/banner/banner4.png" alt="">
-      </div>
+      </router-link>
       <div class="listItem-img">
         <div class="Item-box">
           <div class="item">
-            <div class="item-img">
+            <div class="item-img" @click="goDetails()">
               <img src="../../assets/images/data/home/1.png" alt="">
               <p class="item-name">小宠物玩具可调节</p>
               <p class="item-money">￥58</p>
               <p class="item-bean"><i class="iconmoney"></i> 宠物豆<span>+2</span></p>
             </div>
-            <div class="item-img">
+            <div class="item-img" @click="goDetails()">
               <img src="../../assets/images/data/home/2.png" alt="">
               <p class="item-name">小宠物玩具可调节</p>
               <p class="item-money">￥58</p>
               <p class="item-bean"><i class="iconmoney"></i> 宠物豆<span>+2</span></p>
             </div>
-            <div class="item-img">
+            <div class="item-img" @click="goDetails()">
               <img src="../../assets/images/data/home/3.png" alt="">
               <p class="item-name">小宠物玩具可调节</p>
               <p class="item-money">￥58</p>
               <p class="item-bean"><i class="iconmoney"></i> 宠物豆<span>+2</span></p>
             </div>
-            <div class="item-img">
+            <div class="item-img" @click="goDetails()">
               <img src="../../assets/images/data/home/4.png" alt="">
               <p class="item-name">小宠物玩具可调节</p>
               <p class="item-money">￥58</p>
@@ -152,6 +152,13 @@ export default {
         { img: "/img/banner4.9e6c6797.png" }
       ]
     };
+  },
+  methods: {
+    goDetails() {
+      this.$router.push({
+        path: "/Details"
+      });
+    }
   },
   components: {
     Swipe,
@@ -209,7 +216,7 @@ export default {
   }
   .listItem-img {
     width: 100%;
-    height: 400px;
+    height: 420px;
     overflow: hidden;
     .Item-box {
       width: 100%;
@@ -246,11 +253,11 @@ export default {
           }
           .item-bean {
             display: flex;
+            height: 40px;
             align-items: center;
             font-size: 20px;
             color: #999;
             letter-spacing: 0.71px;
-            line-height: 28px;
             i {
               margin-right: 16px;
             }

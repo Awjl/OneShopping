@@ -1,10 +1,10 @@
 <template>
   <div class="DataList">
-    <div class="DataItem" v-for="(item, index) in listImg" :key="index">
+    <div class="DataItem" v-for="(item, index) in listImg" :key="index" @click="goDetails()">
       <img :src="item.img" alt="">
-      <p class="item-name">小宠物玩具可调节</p>
-      <p class="item-money">暖心价：<span>￥58</span></p>
-      <p class="item-bean"><i class="iconmoney"></i> 宠物豆<span>+2</span></p>
+      <p class="item-name">{{item.name}}</p>
+      <p class="item-money">暖心价：<span>￥{{item.price}}</span></p>
+      <p class="item-bean"><i class="iconmoney"></i> 宠物豆<span>+{{item.addNum}}</span></p>
     </div>
   </div>
 </template>
@@ -12,7 +12,21 @@
 <script>
 export default {
   name: "List",
-  props: ["listImg"]
+  props: ["listImg"],
+  created() {
+    this.menu();
+  },
+  methods: {
+    goDetails() {
+      console.log("231");
+      this.$router.push({
+        path: "/Details"
+      });
+    },
+    menu() {
+      window.scrollTo(0, 0);
+    }
+  }
 };
 </script>
 
@@ -49,7 +63,6 @@ export default {
       font-size: 20px;
       color: #999;
       letter-spacing: 0.71px;
-      line-height: 28px;
       i {
         margin-right: 16px;
       }

@@ -9,6 +9,8 @@ import SpecialArea from "./views/homePage/SpecialArea.vue"; // 专区页面
 import AreaDratal from "./views/homePage/SpecialAreaDetal.vue"; // 专区详情页
 import NoviceArea from "./views/homePage/NoviceArea.vue"; // 新手专区
 import HotArea from "./views/homePage/HotArea.vue"; // 热卖专区
+import FoodArea from "./views/homePage/foodArea.vue"; // 食物专区
+import Details from "./views/homePage/details.vue"; // 商品详情页
 
 Vue.use(Router);
 
@@ -32,7 +34,7 @@ export default new Router({
           component: SpecialArea,
           name: "SpecialArea",
           meta: {
-            title: "特惠专区"
+            title: "特惠列表"
           }
         },
         {
@@ -40,7 +42,7 @@ export default new Router({
           component: AreaDratal,
           name: "AreaDratal",
           meta: {
-            title: "专区详情"
+            title: "特惠专区"
           }
         },
         {
@@ -48,7 +50,7 @@ export default new Router({
           component: NoviceArea,
           name: "NoviceArea",
           meta: {
-            title: "新手专区"
+            title: "新品专区"
           }
         },
         {
@@ -57,6 +59,14 @@ export default new Router({
           name: "HotArea",
           meta: {
             title: "热卖专区"
+          }
+        },
+        {
+          path: "/Home/FoodArea",
+          component: FoodArea,
+          name: "FoodArea",
+          meta: {
+            title: "汪的盛宴"
           }
         },
         {
@@ -84,6 +94,14 @@ export default new Router({
           }
         }
       ]
+    },
+    {
+      path: "/Details",
+      component: Details,
+      name: "Details",
+      meta: {
+        title: "商品详情"
+      }
     }
   ]
 });
