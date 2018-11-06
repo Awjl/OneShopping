@@ -26,10 +26,10 @@
     <div class="shoLine"></div>
     <div class="shoppingNav">
       <div class="shoppingNavBox">
-        <div :class="{shopingact: show}">
+        <div :class="{shopingact: show}" @click="DetailsTab()">
           图文详情
         </div>
-        <div :class="{shopingact: !show}">
+        <div :class="{shopingact: !show}" @click="DetailsTab()">
           TA们说
         </div>
       </div>
@@ -129,6 +129,7 @@ export default {
           time: "12:36",
           commentNum: 0,
           like: 26,
+          myLike: false,
           ListComoent: [],
           dataImg: [
             "./img/1.c4c256bd.png",
@@ -144,6 +145,7 @@ export default {
           time: "12:36",
           commentNum: 0,
           like: 26,
+          myLike: true,
           ListComoent: [],
           dataImg: []
         }
@@ -175,6 +177,11 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    DetailsTab() {
+      this.show = !this.show;
+    }
   },
   components: {
     Swipe,
@@ -316,14 +323,13 @@ export default {
     height: 86px;
     border-bottom: 2px solid #dcdcdc;
     box-sizing: border-box;
-
     div {
       width: 50%;
       height: 86px;
+      font-size: 28px;
       text-align: center;
       line-height: 86px;
       box-sizing: border-box;
-
       &.shopingact {
         font-size: 28px;
         color: #60d4ba;

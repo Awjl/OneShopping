@@ -21,8 +21,26 @@
         <div class="commentItemConter">
           {{item.comment}}
         </div>
-        <div class="commentItemListImg" v-if="item.dataImg">
-          <img :src="img" alt="" v-for="(img, index) in item.dataImg" :key="index">
+        <div class="commentItemListImg" v-if="item.dataImg.length >= 0">
+          <div v-for="(img, index) in item.dataImg" :key="index">
+            <img :src="img" alt="">
+          </div>
+        </div>
+        <div class="commentItemTime">
+          <div class="commenTite">
+            {{item.time}}
+          </div>
+          <div class="commenLike">
+            <span>
+              <img src="../../assets/images/icon/comment.png" alt=""> {{item.score}}
+            </span>
+            <span v-if="item.myLike">
+              <img src="../../assets/images/icon/like.png" alt=""> {{item.like}}
+            </span>
+            <span v-if="!item.myLike">
+              <img src="../../assets/images/icon/likeAct.png" alt=""> {{item.like}}
+            </span>
+          </div>
         </div>
       </div>
     </div>
@@ -40,6 +58,7 @@ export default {
 .commentItem {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 20px;
   .commentItemLeft {
     .commentItemImg {
       width: 60px;
@@ -50,6 +69,8 @@ export default {
   }
   .commentItemRight {
     width: 604px;
+    border-bottom: 2px solid #eaeaea;
+    padding-bottom: 30px;
     .commentItemNeme {
       height: 60px;
       display: flex;
@@ -75,8 +96,34 @@ export default {
       margin: 10px 0;
     }
     .commentItemListImg {
-      width: 100%;
       display: flex;
+      flex-wrap: wrap;
+      margin: 20px 0;
+      div {
+        display: block;
+        width: 128px;
+        height: 128px;
+        margin-right: 30px;
+      }
+    }
+    .commentItemTime {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .commenLike {
+        display: flex;
+        align-items: center;
+        span {
+          display: flex;
+          align-items: center;
+          margin-left: 30px;
+          img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+          }
+        }
+      }
     }
   }
 }
