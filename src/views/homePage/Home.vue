@@ -146,7 +146,7 @@ export default {
   data() {
     return {
       imgData: [
-        { img: "/img/banner1.2c2cfb5d.png" },
+        // { img: "/img/banner1.2c2cfb5d.png" },
         { img: "/img/banner2.b1078cd6.png" },
         { img: "/img/banner3.ff271174.png" },
         { img: "/img/banner4.9e6c6797.png" }

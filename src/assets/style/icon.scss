@@ -190,3 +190,20 @@
   background-image: url(../images/bg/home/close.png);
   background-size: 100% 100%;
 }
+
+.shoppingCartBox {
+  background-image: url(../images/bg/home/shoCart.png);
+  background-size: 100% 100%;
+}
+
+.CartClose {
+  display: block;
+  width: 60px;
+  height: 60px;
+  background-size: auto 100%;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  float: right;
+  margin-right: 30px;
+  background-image: url(../images/icon/close.png);
+}

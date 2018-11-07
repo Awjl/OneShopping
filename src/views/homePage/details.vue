@@ -100,13 +100,14 @@
         <img src="../../assets/images/icon/shou.png" alt="">
         <p>收藏</p>
       </div>
-      <div class="BottonBtn">
+      <div class="BottonBtn" @click="JoinShoppingCart()">
         加入购物车
       </div>
       <div class="BottonBtn BottomAct" @click="Judge()">
         立即购买
       </div>
     </div>
+    <ShoppingCart :showShoppingCart="showShoppingCart" v-on:ClickHideShoppingCart="ClickHideShoppingCart"></ShoppingCart>
     <Permission :showBox="showBox" v-on:childByValue="childByValue"></Permission>
     <CommentBox :showCommentBox="showCommentBox" v-on:hideBoxC="hideBoxC"></CommentBox>
   </div>
@@ -114,10 +115,11 @@
 
 <script>
 import { Swipe, SwipeItem } from "we-vue";
-import ShoppingList from "@/base/shoppingList/shoppingList";
-import Comment from "@/base/comment/comment";
-import Permission from "@/base/Permission/permission";
-import CommentBox from "@/base/CommentBox/CommentBox";
+import ShoppingList from "@/base/shoppingList/shoppingList"; // 商品列表
+import Comment from "@/base/comment/comment"; // 评论列表
+import Permission from "@/base/Permission/permission"; // 权限提醒
+import CommentBox from "@/base/CommentBox/CommentBox"; // 评论框
+import ShoppingCart from "@/base/shoppingCart/shoppingCart"; // 购物车
 
 export default {
   name: "shoppingDetails",
@@ -126,6 +128,7 @@ export default {
       show: true,
       showBox: false,
       showCommentBox: false,
+      showShoppingCart: false,
       commentData: [
         {
           TouImg: "./img/1.c4c256bd.png",
@@ -215,6 +218,12 @@ export default {
     hideBoxC(hideBoxC) {
       // 隐藏评论框
       this.showCommentBox = hideBoxC;
+    },
+    JoinShoppingCart() {
+      this.showShoppingCart = true;
+    },
+    ClickHideShoppingCart(hideCartBox) {
+      this.showShoppingCart = hideCartBox;
     }
   },
   components: {
@@ -223,7 +232,8 @@ export default {
     ShoppingList,
     Comment,
     Permission,
-    CommentBox
+    CommentBox,
+    ShoppingCart
   }
 };
 </script>
