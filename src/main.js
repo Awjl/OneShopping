@@ -13,7 +13,11 @@ Vue.config.productionTip = false;
 Vue.use(VueWechatTitle); // 修改标题
 
 Vue.use(WeVue);
-
+// Vue.directive("focus", {
+//   inserted(el) {
+//     el.focus();
+//   }
+// });
 new Vue({
   router,
   store,

@@ -21,9 +21,15 @@
         <div class="commentItemConter">
           {{item.comment}}
         </div>
-        <div class="commentItemListImg" v-if="item.dataImg.length >= 0">
+        <div class="commentItemListImg" v-if="item.dataImg.length > 0">
           <div v-for="(img, index) in item.dataImg" :key="index">
             <img :src="img" alt="">
+          </div>
+        </div>
+        <div class="OtherComment" v-if="item.ListComoent.length > 0">
+          <div class="OtherCommentAngule angule"></div>
+          <div class="OtherCommentItem" v-for="(OtherItem, index) in item.ListComoent" :key="index">
+            <span>{{OtherItem.name}}</span>：{{OtherItem.ItemCom}}
           </div>
         </div>
         <div class="commentItemTime">
@@ -31,7 +37,7 @@
             {{item.time}}
           </div>
           <div class="commenLike">
-            <span>
+            <span @click="showCommen">
               <img src="../../assets/images/icon/comment.png" alt=""> {{item.score}}
             </span>
             <span v-if="item.myLike">
@@ -50,7 +56,20 @@
 <script>
 export default {
   name: "comment",
-  props: ["commentData"]
+  props: ["commentData"],
+  data() {
+    return {
+      showBoxcom: true
+    };
+  },
+  created() {
+    console.log(this.commentData);
+  },
+  methods: {
+    showCommen() {
+      this.$emit("cliShowBox", this.showBoxcom);
+    }
+  }
 };
 </script>
 
@@ -97,19 +116,47 @@ export default {
     }
     .commentItemListImg {
       display: flex;
+      justify-content: space-between;
       flex-wrap: wrap;
       margin: 20px 0;
       div {
-        display: block;
+        // display: block;
         width: 128px;
-        height: 128px;
-        margin-right: 30px;
+        // height: 128px;
+        // margin-right: 20px;
+        margin-bottom: 20px;
+      }
+    }
+    .OtherComment {
+      padding: 20px;
+      background: #f2f2f2;
+      font-size: 24px;
+      color: #3f3f3f;
+      letter-spacing: 0.86px;
+      line-height: 33px;
+      margin: 20px 0;
+      position: relative;
+      .OtherCommentAngule {
+        position: absolute;
+        width: 36px;
+        height: 24px;
+        top: -18px;
+        left: 20px;
+      }
+      .OtherCommentItem {
+        margin: 10px 0;
+      }
+      span {
+        font-size: 24px;
+        color: #222222;
+        letter-spacing: 0.86px;
       }
     }
     .commentItemTime {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      color: #999999;
       .commenLike {
         display: flex;
         align-items: center;

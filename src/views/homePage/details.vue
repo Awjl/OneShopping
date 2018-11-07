@@ -79,7 +79,7 @@
       <div class="DetailsCommentTitle">
         宝贝好评率97.8%
       </div>
-      <Comment :commentData="commentData"></Comment>
+      <Comment :commentData="commentData" v-on:cliShowBox="cliShowBox"></Comment>
     </div>
     <div class="Other">
       <div class="OtherTitel">
@@ -103,23 +103,29 @@
       <div class="BottonBtn">
         加入购物车
       </div>
-      <div class="BottonBtn BottomAct">
+      <div class="BottonBtn BottomAct" @click="Judge()">
         立即购买
       </div>
     </div>
+    <Permission :showBox="showBox" v-on:childByValue="childByValue"></Permission>
+    <CommentBox :showCommentBox="showCommentBox" v-on:hideBoxC="hideBoxC"></CommentBox>
   </div>
 </template>
 
 <script>
 import { Swipe, SwipeItem } from "we-vue";
 import ShoppingList from "@/base/shoppingList/shoppingList";
-import Comment from "@/base/comment/comment.vue";
+import Comment from "@/base/comment/comment";
+import Permission from "@/base/Permission/permission";
+import CommentBox from "@/base/CommentBox/CommentBox";
 
 export default {
   name: "shoppingDetails",
   data() {
     return {
       show: true,
+      showBox: false,
+      showCommentBox: false,
       commentData: [
         {
           TouImg: "./img/1.c4c256bd.png",
@@ -130,8 +136,19 @@ export default {
           commentNum: 0,
           like: 26,
           myLike: false,
-          ListComoent: [],
+          ListComoent: [
+            {
+              name: `葫芦娃回复`,
+              ItemCom: `我和你收到的礼品是一样哎～超级开心啦！`
+            },
+            {
+              name: `葫芦娃回复`,
+              ItemCom: `我和你收到的礼品是一样哎～超级开心啦！`
+            }
+          ],
           dataImg: [
+            "./img/1.c4c256bd.png",
+            "./img/1.c4c256bd.png",
             "./img/1.c4c256bd.png",
             "./img/1.c4c256bd.png",
             "./img/1.c4c256bd.png"
@@ -180,14 +197,33 @@ export default {
   },
   methods: {
     DetailsTab() {
+      // 导航栏切换
       this.show = !this.show;
+    },
+    Judge() {
+      // 显示权限框
+      this.showBox = true;
+    },
+    childByValue(childValue) {
+      // 隐藏权限框
+      this.showBox = childValue;
+    },
+    cliShowBox(showBoxcom) {
+      // 显示评论框
+      this.showCommentBox = showBoxcom;
+    },
+    hideBoxC(hideBoxC) {
+      // 隐藏评论框
+      this.showCommentBox = hideBoxC;
     }
   },
   components: {
     Swipe,
     SwipeItem,
     ShoppingList,
-    Comment
+    Comment,
+    Permission,
+    CommentBox
   }
 };
 </script>
