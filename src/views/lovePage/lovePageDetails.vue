@@ -77,6 +77,9 @@
     <div class="CommentList" v-if="showStatre == 3">
       <Comment :commentData="commentData" v-on:cliShowBox="cliShowBox"></Comment>
     </div>
+    <div class="lovePageDetailsBtnBox">
+      <div class="lovePageDetailsBtn">我也出把力</div>
+    </div>
     <CommentBox :showCommentBox="showCommentBox" v-on:hideBoxC="hideBoxC"></CommentBox>
   </div>
 </template>
@@ -161,6 +164,27 @@ export default {
 </script>
 
 <style lang="scss">
+.lovePageDetails {
+  padding-bottom: 110px;
+  .lovePageDetailsBtnBox {
+    position: fixed;
+    bottom: 0;
+    height: 98px;
+    width: 100%;
+    background: #fff;
+    .lovePageDetailsBtn {
+      margin: 5px 30px;
+      height: 88px;
+      line-height: 88px;
+      text-align: center;
+      background: #60d4ba;
+      border-radius: 100px;
+      color: #fff;
+      font-size: 28px;
+      letter-spacing: 1px;
+    }
+  }
+}
 .lovePageBgBox {
   width: 100%;
   height: 300px;
