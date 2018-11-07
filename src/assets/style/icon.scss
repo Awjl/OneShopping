@@ -207,3 +207,26 @@
   margin-right: 30px;
   background-image: url(../images/icon/close.png);
 }
+
+// 公益详情
+.startIcon {
+  display: block;
+  width: 40px;
+  height: 40px;
+  background-size: auto 100%;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-image: url(../images/icon/begin.png);
+  margin-right: 40px;
+}
+
+.endIcon {
+  display: block;
+  width: 40px;
+  height: 40px;
+  background-size: auto 100%;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-image: url(../images/icon/end.png);
+  margin-right: 40px;
+}
