@@ -74,6 +74,7 @@ export default {
   background: rgba($color: #000000, $alpha: 0.5);
   display: flex;
   align-items: flex-end;
+  z-index: 999;
   .shoppingCartBox {
     width: 100%;
     height: 872px;
