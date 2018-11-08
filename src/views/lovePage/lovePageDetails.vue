@@ -79,9 +79,10 @@
     </div>
     <Ranking v-if="showStatre == 4"></Ranking>
     <div class="lovePageDetailsBtnBox">
-      <div class="lovePageDetailsBtn">我也出把力</div>
+      <div class="lovePageDetailsBtn" @click="showDonationBox">我也出把力</div>
     </div>
     <CommentBox :showCommentBox="showCommentBox" v-on:hideBoxC="hideBoxC"></CommentBox>
+    <Donation :showDonation="showDonation" v-on:ClickHideDonation="ClickHideDonation"></Donation>
   </div>
 </template>
 
@@ -91,6 +92,7 @@ import ProjectDynamics from "@/base/ProjectDynamics/ProjectDynamics"; // 进程
 import Comment from "@/base/comment/comment"; // 评论列表
 import CommentBox from "@/base/CommentBox/CommentBox"; // 评论框
 import Ranking from "@/base/Ranking/Ranking"; // 排名
+import Donation from "@/base/Donation/Donation"; // 这是捐赠
 
 export default {
   name: "lovePageDetails",
@@ -99,6 +101,7 @@ export default {
       sliderValue: 35,
       showStatre: 1,
       showCommentBox: false,
+      showDonation: false,
       commentData: [
         {
           TouImg: "./img/1.c4c256bd.png",
@@ -154,6 +157,13 @@ export default {
     hideBoxC(hideBoxC) {
       // 隐藏评论框
       this.showCommentBox = hideBoxC;
+    },
+    showDonationBox() {
+      this.showDonation = true;
+    },
+    ClickHideDonation(hideState) {
+      console.log(hideState);
+      this.showDonation = hideState;
     }
   },
   components: {
@@ -161,7 +171,8 @@ export default {
     ProjectDynamics,
     Comment,
     CommentBox,
-    Ranking
+    Ranking,
+    Donation
   }
 };
 </script>

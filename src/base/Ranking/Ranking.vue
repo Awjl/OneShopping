@@ -135,20 +135,7 @@ export default {
 <style lang="scss">
 .Ranking {
   padding: 0 30px;
-  .Bell-Btn {
-    background: #ffd664;
-    border-radius: 100px;
-    width: 100px;
-    height: 30px;
-    line-height: 30px;
-    text-align: center;
-    color: #fff;
-    margin: 20px auto;
-    img {
-      width: 20px;
-      margin-right: 5px;
-    }
-  }
+
   .RankingTopThreeBox {
     padding: 0 30px;
     .RankingTopThree {
@@ -260,8 +247,23 @@ export default {
       }
     }
   }
-  .RankingList>div:last-child .RankingConter{
+  .RankingList > div:last-child .RankingConter {
     border: none;
+  }
+  .Bell-Btn {
+    background: #ffd664;
+    border-radius: 100px;
+    width: 100px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    margin: 20px auto;
+    img {
+      width: 20px;
+      margin-right: 5px;
+    }
   }
 }
 </style>

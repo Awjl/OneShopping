@@ -12,6 +12,7 @@ import HotArea from "./views/homePage/HotArea.vue"; // 热卖专区
 import FoodArea from "./views/homePage/foodArea.vue"; // 食物专区
 import Details from "./views/homePage/details.vue"; // 商品详情页
 import lovePageDetailse from "./views/lovePage/lovePageDetails.vue"; // 公益详情页
+import BellObtain from "@/views/lovePage/bellObtain"; // 获取铃铛
 
 Vue.use(Router);
 
@@ -110,6 +111,14 @@ export default new Router({
       name: "lovePageDetailse",
       meta: {
         title: "暖心项目"
+      }
+    },
+    {
+      path: "/BellObtain",
+      component: BellObtain,
+      name: "BellObtain",
+      meta: {
+        title: "如何获取铃铛"
       }
     }
   ]
