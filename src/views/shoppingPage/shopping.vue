@@ -238,7 +238,7 @@
         <p>全选</p>
       </div>
       <p class="buyTotal">总价：￥114</p>
-      <div class="buyBtnBox" v-if="editTab">
+      <div class="buyBtnBox" v-if="editTab" @click="goTrueOrdeer">
         买咯
       </div>
       <div class="buyBtnBoxDel" v-if="!editTab">
@@ -274,6 +274,11 @@ export default {
     ClickHideShoppingCart(hideCartBox) {
       // 隐藏编辑
       this.showShoppingCart = hideCartBox;
+    },
+    goTrueOrdeer() {
+      this.$router.push({
+        path: "/TrueOrder"
+      });
     }
   },
   components: {
