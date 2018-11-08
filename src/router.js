@@ -13,6 +13,8 @@ import FoodArea from "./views/homePage/foodArea.vue"; // 食物专区
 import Details from "./views/homePage/details.vue"; // 商品详情页
 import lovePageDetailse from "./views/lovePage/lovePageDetails.vue"; // 公益详情页
 import BellObtain from "@/views/lovePage/bellObtain"; // 获取铃铛
+import LoveHelp from "@/views/lovePage/loveHelp"; // 求助页面
+import LoveVolunteer from "@/views/lovePage/loveVolunteer"; // 志愿者页面
 
 Vue.use(Router);
 
@@ -119,6 +121,22 @@ export default new Router({
       name: "BellObtain",
       meta: {
         title: "如何获取铃铛"
+      }
+    },
+    {
+      path: "/LoveHelp",
+      component: LoveHelp,
+      name: "LoveHelp",
+      meta: {
+        title: "申请求助"
+      }
+    },
+    {
+      path: "/LoveVolunteer",
+      component: LoveVolunteer,
+      name: "LoveVolunteer",
+      meta: {
+        title: "申请志愿者"
       }
     }
   ]

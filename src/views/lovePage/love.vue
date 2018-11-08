@@ -23,14 +23,15 @@
       </div>
     </div>
     <div class="loverActivity">
-      <div class="loverActivityItem">
+      <div class="loverActivityItem" @click="goHelp">
         <img src="../../assets/images/data/love/activity1.png" alt="">
         <div class="loverActivityTeT">
-          <p class="loverActivityTeTname">需要帮助吗？</p>
+          <p class="loverActivityTeTname">TA在哪里？<br>
+            TA怎么了？需要帮助吗？</p>
           <p class="loverActivityTecon">请告诉我们您需要求助的内容</p>
         </div>
       </div>
-      <div class="loverActivityItem">
+      <div class="loverActivityItem" @click="goVolunteer">
         <img src="../../assets/images/data/love/activit2.png" alt="">
         <div class="loverActivityTeT">
           <p class="loverActivityTeTname">志愿者，约吗？</p>
@@ -55,6 +56,16 @@ export default {
   methods: {
     showThis() {
       this.show = !this.show;
+    },
+    goHelp() {
+      this.$router.push({
+        path: "/LoveHelp"
+      });
+    },
+    goVolunteer() {
+      this.$router.push({
+        path: "/LoveVolunteer"
+      });
     }
   },
   components: {
@@ -146,13 +157,14 @@ export default {
       position: absolute;
       display: flex;
       justify-content: center;
-      align-items: center;
       flex-direction: column;
+      padding-left: 30px;
       color: #fff;
       .loverActivityTeTname {
         font-size: 28px;
         letter-spacing: 1px;
-        margin-bottom: 10px;
+        margin-bottom: 20px;
+        line-height: 30px;
       }
       .loverActivityTecon {
         font-size: 20px;
