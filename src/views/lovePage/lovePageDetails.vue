@@ -77,6 +77,7 @@
     <div class="CommentList" v-if="showStatre == 3">
       <Comment :commentData="commentData" v-on:cliShowBox="cliShowBox"></Comment>
     </div>
+    <Ranking v-if="showStatre == 4"></Ranking>
     <div class="lovePageDetailsBtnBox">
       <div class="lovePageDetailsBtn">我也出把力</div>
     </div>
@@ -85,10 +86,11 @@
 </template>
 
 <script>
-import LoveShoppingDetils from "@/base/loveShoppingDetils/loveShoppingDetils";
-import ProjectDynamics from "@/base/ProjectDynamics/ProjectDynamics";
+import LoveShoppingDetils from "@/base/loveShoppingDetils/loveShoppingDetils"; // 详情
+import ProjectDynamics from "@/base/ProjectDynamics/ProjectDynamics"; // 进程
 import Comment from "@/base/comment/comment"; // 评论列表
 import CommentBox from "@/base/CommentBox/CommentBox"; // 评论框
+import Ranking from "@/base/Ranking/Ranking"; // 排名
 
 export default {
   name: "lovePageDetails",
@@ -158,7 +160,8 @@ export default {
     LoveShoppingDetils,
     ProjectDynamics,
     Comment,
-    CommentBox
+    CommentBox,
+    Ranking
   }
 };
 </script>
