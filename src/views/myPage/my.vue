@@ -2,8 +2,12 @@
   <div class="My">
     <div class="my-bg">
       <img src="../../assets/images/data/my/my-bg.png" alt="">
+      <div class="my-Notice" @click="goMyNotice">
+        <img src="../../assets/images/icon/notice.png" alt="">
+        <div class="NoticeNum">2</div>
+      </div>
       <div class="my-tou">
-        <div class="myHeadportrait"> <img src="../../assets/images/data/my/my.png" alt="">
+        <div class="myHeadportrait" @click="goPerInformation"> <img src="../../assets/images/data/my/my.png" alt="">
         </div>
         <div class="my-name">
           平板家的妹妹
@@ -14,17 +18,17 @@
       </div>
       <div class="myTab">
         <div :class="{myTabAct: show}" @click="myTab()">
-          败的玩意儿
+          Bai家记
         </div>
         <div :class="{myTabAct: !show}" @click="myTab()">
-          暖心日记
+          爱心记
         </div>
       </div>
     </div>
     <div class="myList" v-if="show">
       <div class="myitem myorder">
         <div class="myitemLeft">
-          <i class="myicon myico1"></i> 我的订单
+          <i class="myicon myico1"></i> 败的玩意儿
         </div>
         <i class="myicon righticon"></i>
       </div>
@@ -65,30 +69,34 @@
         </div>
 
       </div>
-      <div class="myitem">
+    </div>
+    <div class="myList" v-if="show">
+      <div class="myitem myorder">
         <div class="myitemLeft">
-          <i class="myicon myico2"></i> 我的收藏
+          <i class="myicon myico2"></i> 贼稀罕
+        </div>
+        <i class="myicon righticon"></i>
+      </div>
+      <div class="myitem myorder">
+        <div class="myitemLeft">
+          <i class="myicon myico3"></i> 败家券
+        </div>
+        <i class="myicon righticon"></i>
+      </div>
+      <div class="myitem myorder">
+        <div class="myitemLeft">
+          <i class="myicon myico4"></i> 不要了
         </div>
         <i class="myicon righticon"></i>
       </div>
       <div class="myitem">
         <div class="myitemLeft">
-          <i class="myicon myico3"></i> 我的优惠券
+          <i class="myicon myico5"></i> 往哪寄
         </div>
         <i class="myicon righticon"></i>
       </div>
-      <div class="myitem">
-        <div class="myitemLeft">
-          <i class="myicon myico4"></i> 退货／售后
-        </div>
-        <i class="myicon righticon"></i>
-      </div>
-      <div class="myitem">
-        <div class="myitemLeft">
-          <i class="myicon myico5"></i> 收货地址
-        </div>
-        <i class="myicon righticon"></i>
-      </div>
+    </div>
+    <div class="myList" v-if="show">
       <div class="myitem">
         <div class="myitemLeft">
           <i class="myicon myico6"></i> 我的邀请
@@ -171,6 +179,16 @@ export default {
   methods: {
     myTab() {
       this.show = !this.show;
+    },
+    goPerInformation() {
+      this.$router.push({
+        path: "/PerInformation"
+      });
+    },
+    goMyNotice() {
+      this.$router.push({
+        path: "/MyNotice"
+      });
     }
   }
 };
@@ -178,7 +196,14 @@ export default {
 
 <style lang="scss">
 .My {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 1246px;
   padding-bottom: 110px;
+  background: #f2f2f2;
+  overflow-y: auto;
 }
 .my-bg {
   position: relative;
@@ -239,11 +264,31 @@ export default {
       }
     }
   }
+  .my-Notice {
+    width: 40px;
+    position: absolute;
+    top: 40px;
+    right: 40px;
+    .NoticeNum {
+      position: absolute;
+      top: -20px;
+      right: -20px;
+      width: 30px;
+      height: 30px;
+      text-align: center;
+      line-height: 30px;
+      color: #fff;
+      background: #ed6969;
+      border-radius: 50%;
+    }
+  }
 }
 .myList {
   width: 100%;
   padding: 0 40px;
   box-sizing: border-box;
+  background: #fff;
+  margin-bottom: 20px;
   .myitem {
     height: 88px;
     box-sizing: border-box;
@@ -253,6 +298,9 @@ export default {
     .myitemLeft {
       display: flex;
       align-items: center;
+      font-size: 28px;
+      color: #222222;
+      letter-spacing: 1.56px;
     }
   }
   .myAllgoods {
@@ -325,12 +373,13 @@ export default {
   }
   .myitem {
     width: calc(100%-80px);
-    margin: 0 40px;
+    padding: 0 40px;
     height: 88px;
     box-sizing: border-box;
     display: flex;
     align-items: center;
     justify-content: space-between;
+    background: #fff;
     .myitemLeft {
       display: flex;
       align-items: center;
@@ -340,6 +389,7 @@ export default {
     width: 100%;
     padding: 0 40px;
     box-sizing: border-box;
+    background: #fff;
     .DiaryItem {
       width: 100%;
       height: 250px;

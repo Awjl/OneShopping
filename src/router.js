@@ -19,6 +19,10 @@ import TrueOrder from "@/views/shoppingPage/TrueOrder"; // 确认订单
 import PayOrder from "@/views/shoppingPage/PayOrder"; // 支付订单
 import UseBell from "@/views/shoppingPage/useBell"; // 使用铃铛
 import UseCoupon from "@/views/shoppingPage/useCoupon"; // 使用优惠券
+import PerInformation from "@/views/myPage/perInformation"; // 个人信息页面
+import MyNotice from "@/views/myPage/myNotice"; // 我的通知
+import NoticeList from "@/views/myPage/noticeList"; // 通知列表
+import LogisticsList from "@/views/myPage/logisticsList"; // 物流列表
 
 Vue.use(Router);
 
@@ -173,6 +177,38 @@ export default new Router({
       name: "UseCoupon",
       meta: {
         title: "使用败家券"
+      }
+    },
+    {
+      path: "/PerInformation",
+      component: PerInformation,
+      name: "PerInformation",
+      meta: {
+        title: "个人信息"
+      }
+    },
+    {
+      path: "/MyNotice",
+      component: MyNotice,
+      name: "MyNotice",
+      meta: {
+        title: "我的消息"
+      }
+    },
+    {
+      path: "/NoticeList",
+      component: NoticeList,
+      name: "NoticeList",
+      meta: {
+        title: "通知"
+      }
+    },
+    {
+      path: "/LogisticsList",
+      component: LogisticsList,
+      name: "LogisticsList",
+      meta: {
+        title: "通知"
       }
     }
   ]
