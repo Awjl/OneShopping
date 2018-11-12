@@ -12,17 +12,25 @@ import HotArea from "./views/homePage/HotArea.vue"; // 热卖专区
 import FoodArea from "./views/homePage/foodArea.vue"; // 食物专区
 import Details from "./views/homePage/details.vue"; // 商品详情页
 import lovePageDetailse from "./views/lovePage/lovePageDetails.vue"; // 公益详情页
-import BellObtain from "@/views/lovePage/bellObtain"; // 获取铃铛
-import LoveHelp from "@/views/lovePage/loveHelp"; // 求助页面
-import LoveVolunteer from "@/views/lovePage/loveVolunteer"; // 志愿者页面
-import TrueOrder from "@/views/shoppingPage/TrueOrder"; // 确认订单
-import PayOrder from "@/views/shoppingPage/PayOrder"; // 支付订单
-import UseBell from "@/views/shoppingPage/useBell"; // 使用铃铛
-import UseCoupon from "@/views/shoppingPage/useCoupon"; // 使用优惠券
-import PerInformation from "@/views/myPage/perInformation"; // 个人信息页面
-import MyNotice from "@/views/myPage/myNotice"; // 我的通知
-import NoticeList from "@/views/myPage/noticeList"; // 通知列表
-import LogisticsList from "@/views/myPage/logisticsList"; // 物流列表
+import BellObtain from "./views/lovePage/bellObtain"; // 获取铃铛
+import LoveHelp from "./views/lovePage/loveHelp"; // 求助页面
+import LoveVolunteer from "./views/lovePage/loveVolunteer"; // 志愿者页面
+import TrueOrder from "./views/shoppingPage/TrueOrder"; // 确认订单
+import PayOrder from "./views/shoppingPage/PayOrder"; // 支付订单
+import UseBell from "./views/shoppingPage/useBell"; // 使用铃铛
+import UseCoupon from "./views/shoppingPage/useCoupon"; // 使用优惠券
+import PerInformation from "./views/myPage/perInformation"; // 个人信息页面
+import MyNotice from "./views/myPage/myNotice"; // 我的通知
+import NoticeList from "./views/myPage/noticeList"; // 通知列表
+import LogisticsList from "./views/myPage/logisticsList"; // 物流列表
+import BellNum from "./views/myPage/bellNum"; // 铃铛数量
+import HelpNum from "./views/myPage/helpNum"; // 求助数量
+import MyCollection from "./views/myPage/myCollection"; // 我的收藏
+import MyAfterSale from "./views/myPage/myAfterSale"; // 我的售后
+import MyAddres from "./views/myPage/myAddres"; // 我的地址
+import AddAddres from "./views/myPage/addAddres"; // 添加地址
+import MyPlease from "./views/myPage/myPlease"; // 我的邀请
+import MyOrder from "./views/myPage/myOrder"; // 我的订单列表
 
 Vue.use(Router);
 
@@ -209,6 +217,70 @@ export default new Router({
       name: "LogisticsList",
       meta: {
         title: "通知"
+      }
+    },
+    {
+      path: "/BellNum",
+      component: BellNum,
+      name: "BellNum",
+      meta: {
+        title: "我的铃铛"
+      }
+    },
+    {
+      path: "/HelpNum",
+      component: HelpNum,
+      name: "HelpNum",
+      meta: {
+        title: "我的求助"
+      }
+    },
+    {
+      path: "/MyCollection",
+      component: MyCollection,
+      name: "MyCollection",
+      meta: {
+        title: "贼稀罕"
+      }
+    },
+    {
+      path: "/MyAfterSale",
+      component: MyAfterSale,
+      name: "MyAfterSale",
+      meta: {
+        title: "退款／售后"
+      }
+    },
+    {
+      path: "/MyAddres",
+      component: MyAddres,
+      name: "MyAddres",
+      meta: {
+        title: "我的地址"
+      }
+    },
+    {
+      path: "/AddAddres",
+      component: AddAddres,
+      name: "AddAddres",
+      meta: {
+        title: "添加地址"
+      }
+    },
+    {
+      path: "/MyPlease",
+      component: MyPlease,
+      name: "MyPlease",
+      meta: {
+        title: "我的邀请"
+      }
+    },
+    {
+      path: "/MyOrder",
+      component: MyOrder,
+      name: "MyOrder",
+      meta: {
+        title: "我的订单"
       }
     }
   ]

@@ -12,7 +12,7 @@
         <div class="my-name">
           平板家的妹妹
         </div>
-        <div class="myBean-Btn">
+        <div class="myBean-Btn" @click="goBellNum">
           <img src="../../assets/images/icon/my-dou.png" alt="">12个
         </div>
       </div>
@@ -26,14 +26,14 @@
       </div>
     </div>
     <div class="myList" v-if="show">
-      <div class="myitem myorder">
+      <div class="myitem myorder" @click="goMyOrder(0)">
         <div class="myitemLeft">
           <i class="myicon myico1"></i> 败的玩意儿
         </div>
         <i class="myicon righticon"></i>
       </div>
       <div class="myAllgoods">
-        <div class="myAllgoodsItem">
+        <div class="myAllgoodsItem" @click="goMyOrder(1)">
           <div class="myAllgoodsItemImg">
             <img src="../../assets/images/icon/my1.png" alt="">
             <div class="messgNum">2</div>
@@ -42,54 +42,53 @@
             待付款
           </div>
         </div>
-        <div class="myAllgoodsItem">
+        <div class="myAllgoodsItem" @click="goMyOrder(2)">
           <div class="myAllgoodsItemImg">
             <img src="../../assets/images/icon/my2.png" alt="">
             <div class="messgNum">99</div>
           </div>
           <div class="myAllgoodsItemName">
-            待付款
+            待发货
           </div>
         </div>
-        <div class="myAllgoodsItem">
+        <div class="myAllgoodsItem" @click="goMyOrder(3)">
           <div class="myAllgoodsItemImg">
             <img src="../../assets/images/icon/my3.png" alt="">
           </div>
           <div class="myAllgoodsItemName">
-            待付款
+            待收货
           </div>
         </div>
-        <div class="myAllgoodsItem">
+        <div class="myAllgoodsItem" @click="goMyOrder(4)">
           <div class="myAllgoodsItemImg">
             <img src="../../assets/images/icon/my4.png" alt="">
           </div>
           <div class="myAllgoodsItemName">
-            待付款
+            待评价
           </div>
         </div>
-
       </div>
     </div>
     <div class="myList" v-if="show">
-      <div class="myitem myorder">
+      <div class="myitem myorder" @click="goMyCollection">
         <div class="myitemLeft">
           <i class="myicon myico2"></i> 贼稀罕
         </div>
         <i class="myicon righticon"></i>
       </div>
-      <div class="myitem myorder">
+      <div class="myitem myorder" @click="goUseCoupon">
         <div class="myitemLeft">
           <i class="myicon myico3"></i> 败家券
         </div>
         <i class="myicon righticon"></i>
       </div>
-      <div class="myitem myorder">
+      <div class="myitem myorder" @click="goMyAfterSale">
         <div class="myitemLeft">
           <i class="myicon myico4"></i> 不要了
         </div>
         <i class="myicon righticon"></i>
       </div>
-      <div class="myitem">
+      <div class="myitem" @click="goMyAddres">
         <div class="myitemLeft">
           <i class="myicon myico5"></i> 往哪寄
         </div>
@@ -97,7 +96,7 @@
       </div>
     </div>
     <div class="myList" v-if="show">
-      <div class="myitem">
+      <div class="myitem" @click="goMyPlace">
         <div class="myitemLeft">
           <i class="myicon myico6"></i> 我的邀请
         </div>
@@ -108,15 +107,15 @@
       <div class="myDiaryNum">
         <div class="NumLeft">
           <span>28</span>
-          <p>宠物豆／个</p>
+          <p>铃铛／个</p>
         </div>
         <div class="NumRight">
           <span>12</span>
-          <p>捐赠／个</p>
+          <p>已捐赠／个</p>
         </div>
       </div>
       <div class="DiaryHe"></div>
-      <div class="myitem myorder">
+      <div class="myitem myorder" @click="goHelpNum">
         <div class="myitemLeft">
           <i class="myicon myico1"></i> 申请救助记录 18
         </div>
@@ -188,6 +187,49 @@ export default {
     goMyNotice() {
       this.$router.push({
         path: "/MyNotice"
+      });
+    },
+    goBellNum() {
+      this.$router.push({
+        path: "/BellNum"
+      });
+    },
+    goHelpNum() {
+      this.$router.push({
+        path: "/HelpNum"
+      });
+    },
+    goMyCollection() {
+      this.$router.push({
+        path: "/MyCollection"
+      });
+    },
+    goUseCoupon() {
+      this.$router.push({
+        path: "/UseCoupon"
+      });
+    },
+    goMyAfterSale() {
+      this.$router.push({
+        path: "/MyAfterSale"
+      });
+    },
+    goMyAddres() {
+      this.$router.push({
+        path: "/MyAddres"
+      });
+    },
+    goMyPlace() {
+      this.$router.push({
+        path: "/MyPlease"
+      });
+    },
+    goMyOrder(val) {
+      this.$router.push({
+        path: "/MyOrder",
+        query: {
+          id: val
+        }
       });
     }
   }
