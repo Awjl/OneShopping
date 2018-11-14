@@ -324,3 +324,15 @@
   background-image: url(../images/bg/my/placeBg.png);
   position: relative;
 }
+
+/* 登录注册 */
+
+.loginRegistered {
+  width: 100vw;
+  height: 100vh;
+  background-size: auto 100%;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-image: url(../images/bg/login/loginBg.png);
+  overflow: hidden;
+}

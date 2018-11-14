@@ -31,6 +31,8 @@ import MyAddres from "./views/myPage/myAddres"; // 我的地址
 import AddAddres from "./views/myPage/addAddres"; // 添加地址
 import MyPlease from "./views/myPage/myPlease"; // 我的邀请
 import MyOrder from "./views/myPage/myOrder"; // 我的订单列表
+import Login from "./views/loginRegistered/login"; // 登录页面
+import Registered from "./views/loginRegistered/registered"; // 注册页面
 
 Vue.use(Router);
 
@@ -281,6 +283,22 @@ export default new Router({
       name: "MyOrder",
       meta: {
         title: "我的订单"
+      }
+    },
+    {
+      path: "/Login",
+      component: Login,
+      name: "Login",
+      meta: {
+        title: "登录"
+      }
+    },
+    {
+      path: "/Registered",
+      component: Registered,
+      name: "Registered",
+      meta: {
+        title: "注册"
       }
     }
   ]
