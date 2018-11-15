@@ -146,7 +146,6 @@ export default {
   data() {
     return {
       imgData: [
-        // { img: "/img/banner1.2c2cfb5d.png" },
         { img: "/img/banner2.b1078cd6.png" },
         { img: "/img/banner3.ff271174.png" },
         { img: "/img/banner4.9e6c6797.png" }
@@ -219,21 +218,21 @@ export default {
     height: 420px;
     overflow: hidden;
     .Item-box {
-      width: 100%;
       height: 100%;
-      overflow: hidden;
-      overflow-x: auto;
+      width: 100%;
       box-sizing: content-box;
+      display: -webkit-box;
+      overflow-x: scroll;
       &::-webkit-scrollbar {
         display: none;
         margin: 0;
         padding: 0;
       }
       .item {
-        width: 1000000px;
+        display: flex;
         .item-img {
           width: 260px;
-          float: left;
+          height: 420px;
           margin-right: 20px;
           .item-name {
             font-size: 24px;

@@ -45,26 +45,26 @@ export default {
       },
       // v-for循环判断是否为当前
       selected: false,
-      info: [{ id: 1, name: '北京', 
-      city: [{ id: 1, name: '北京市', 
-        district: [ { id: 1, name: '东城区' },
-            { id: 2, name: '西城区' },
-            { id: 3, name: '崇文区' },
-            { id: 4, name: '宣武区' },
-            { id: 5, name: '朝阳区' },
-            { id: 6, name: '丰台区' },
-            { id: 7, name: '石景山区' },
-            { id: 8, name: '海淀区' },
-            { id: 9, name: '门头沟区' },
-            { id: 10, name: '房山区' },
-            { id: 11, name: '通州区' },
-            { id: 12, name: '顺义区' },
-            { id: 13, name: '昌平区' },
-            { id: 14, name: '大兴区' },
-            { id: 15, name: '怀柔区' },
-            { id: 16, name: '平谷区' },
-            { id: 17, name: '密云县' },
-            { id: 18, name: '延庆县' }
+      info: [{        id: 1, name: '北京',
+        city: [{          id: 1, name: '北京市',
+          district: [{ id: 1, name: '东城区' },
+          { id: 2, name: '西城区' },
+          { id: 3, name: '崇文区' },
+          { id: 4, name: '宣武区' },
+          { id: 5, name: '朝阳区' },
+          { id: 6, name: '丰台区' },
+          { id: 7, name: '石景山区' },
+          { id: 8, name: '海淀区' },
+          { id: 9, name: '门头沟区' },
+          { id: 10, name: '房山区' },
+          { id: 11, name: '通州区' },
+          { id: 12, name: '顺义区' },
+          { id: 13, name: '昌平区' },
+          { id: 14, name: '大兴区' },
+          { id: 15, name: '怀柔区' },
+          { id: 16, name: '平谷区' },
+          { id: 17, name: '密云县' },
+          { id: 18, name: '延庆县' }
           ]        }
         ]      },
       {        id: 2, name: '天津', city: [
@@ -3676,65 +3676,65 @@ export default {
       return result
     },
     getProvinceId(code, input, index) {
-      this.province = code
-      this.Province = input
-      this.Addres.Province = this.Province
-      this.showProvince = false
-      this.showCity = true
-      this.showDistrict = false
-      this.showCityList = this._filter(this.info, 'city', this.province)
+      this.province = code;
+      this.Province = input;
+      this.Addres.Province = this.Province;
+      this.showProvince = false;
+      this.showCity = true;
+      this.showDistrict = false;
+      this.showCityList = this._filter(this.info, 'city', this.province);
       // 点击选择当前
-      this.info.map(a => a.selected = false)
-      this.info[index].selected = true
+      this.info.map(a => a.selected = false);
+      this.info[index].selected = true;
     },
     provinceSelected() {
       // 清除市级和区级列表
-      this.showCityList = false
-      this.showDistrictList = false
+      this.showCityList = false;
+      this.showDistrictList = false;
       // 清除市级和区级选项
-      this.City = false
-      this.District = false
+      this.City = false;
+      this.District = false;
       // 选项页面的切换
-      this.showProvince = true
-      this.showCity = false
-      this.showDistrict = false
+      this.showProvince = true;
+      this.showCity = false;
+      this.showDistrict = false;
     },
     getCityId(code, input, index) {
-      this.city = code
-      this.City = input
-      this.Addres.City = this.City
-      this.showProvince = false
-      this.showCity = false
-      this.showDistrict = true
-      this.showDistrictList = this._filter(this.showCityList, 'district', this.city)
+      this.city = code;
+      this.City = input;
+      this.Addres.City = this.City;
+      this.showProvince = false;
+      this.showCity = false;
+      this.showDistrict = true;
+      this.showDistrictList = this._filter(this.showCityList, 'district', this.city);
       // 选择当前添加active
       this.showCityList.map(a => a.selected = false);
       this.showCityList[index].selected = true;
     },
     citySelected() {
-      this.showProvince = false
-      this.showCity = true
-      this.showDistrict = false
+      this.showProvince = false;
+      this.showCity = true;
+      this.showDistrict = false;
     },
     getDistrictId(code, input, index) {
-      this.district = code
-      this.District = input
-      this.Addres.District = this.District
+      this.district = code;
+      this.District = input;
+      this.Addres.District = this.District;
       // 选择当前添加active
-      this.showDistrictList.map(a => a.selected = false)
-      this.showDistrictList[index].selected = true
+      this.showDistrictList.map(a => a.selected = false);
+      this.showDistrictList[index].selected = true;
       // 选取市区选项之后关闭弹层
       // this.addresStater = false;
-      console.log(this.Addres)
-      this.$emit('Addres', this.Addres)
+      console.log(this.Addres);
+      this.$emit('Addres', this.Addres);
     },
     districtSelected() {
-      this.showProvince = false
-      this.showCity = false
-      this.showDistrict = true
+      this.showProvince = false;
+      this.showCity = false;
+      this.showDistrict = true;
     }
   }
-}
+};
 </script>
 
 <style>
