@@ -13,9 +13,9 @@
         <div class="area" @click="districtSelected()" :class="District?'':'active'" v-show="City">{{District?District:'请选择'}}</div>
       </section>
       <ul>
-        <li class="addList" v-for="(v,k) in info" @click="getProvinceId(v.id, v.name, k)" v-show="showProvince" :class="v.selected ? 'active' : ''">{{v.name}}</li>
-        <li class="addList" v-for="(v,k) in showCityList" @click="getCityId(v.id, v.name, k)" v-show="showCity" :class="v.selected ? 'active' : ''">{{v.name}}</li>
-        <li class="addList" v-for="(v,k) in showDistrictList" @click="getDistrictId(v.id, v.name, k)" v-show="showDistrict" :class="v.selected ? 'active' : ''">{{v.name}}</li>
+        <li class="addList" v-for="(v,k) in info" @click="getProvinceId(v.id, v.name, k)" v-show="showProvince" :class="v.selected ? 'active' : ''" :key="k">{{v.name}}</li>
+        <li class="addList" v-for="(v,k) in showCityList" @click="getCityId(v.id, v.name, k)" v-show="showCity" :class="v.selected ? 'active' : ''" :key="k">{{v.name}}</li>
+        <li class="addList" v-for="(v,k) in showDistrictList" @click="getDistrictId(v.id, v.name, k)" v-show="showDistrict" :class="v.selected ? 'active' : ''" :key="k">{{v.name}}</li>
       </ul>
     </section>
   </section>
@@ -3726,7 +3726,7 @@ export default {
       // 选取市区选项之后关闭弹层
       // this.addresStater = false;
       console.log(this.Addres);
-      this.$emit('Addres', this.Addres);
+      this.$emit("Addres", this.Addres);
     },
     districtSelected() {
       this.showProvince = false;
@@ -3830,6 +3830,7 @@ export default {
   line-height: 0.88rem;
   margin-left: 0.42rem;
   color: #333;
+  padding: 0 !important;
 }
 .addList {
   width: 100%;
