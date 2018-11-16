@@ -33,6 +33,7 @@ import MyPlease from "./views/myPage/myPlease"; // 我的邀请
 import MyOrder from "./views/myPage/myOrder"; // 我的订单列表
 import Login from "./views/loginRegistered/login"; // 登录页面
 import Registered from "./views/loginRegistered/registered"; // 注册页面
+import OrderDetails from "./views/myPage/OrderDetails"; // 订单详情
 
 Vue.use(Router);
 
@@ -299,6 +300,14 @@ export default new Router({
       name: "Registered",
       meta: {
         title: "注册"
+      }
+    },
+    {
+      path: "/OrderDetails",
+      component: OrderDetails,
+      name: "OrderDetails",
+      meta: {
+        title: "订单详情"
       }
     }
   ]
