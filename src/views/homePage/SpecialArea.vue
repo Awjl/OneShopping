@@ -1,22 +1,32 @@
 <template>
   <div class="area">
     <div class="areaList">
-      <router-link tag="div" class="areaItem" to="/Home/AreaDratal">
-        <img src="../../assets/images/data/home/item1.png" alt="">
-      </router-link>
-      <router-link tag="div" class="areaItem" to="/Home/AreaDratal">
-        <img src="../../assets/images/data/home/item2.png" alt="">
-      </router-link>
-      <router-link tag="div" class="areaItem" to="/Home/AreaDratal">
-        <img src="../../assets/images/data/home/item3.png" alt="">
+      <router-link tag="div" class="areaItem" to="/Home/AreaDratal"  v-for="(block, index) in myList" :key="index">
+        <img :src="block.icon"  alt="">
       </router-link>
     </div>
   </div>
 </template>
 
 <script>
+import { getPreferential } from "@/api/home/home"
 export default {
-  name: "Area"
+  name: "Area",
+  data() {
+    return {
+      myList: []
+    }
+  },
+  created() {
+    // this.myOrderTab = this.$route.query.sp;
+    console.log(this.$route.query.sp)
+    getPreferential(this.$route.query.sp).then(res => {
+      if (res.code == 0) {
+        this.myList = res.data.records
+        console.log(this.myList)
+      }
+    })
+  }
 };
 </script>
 

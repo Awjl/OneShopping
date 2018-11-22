@@ -2,9 +2,9 @@
   <div class="home">
     <SeachBox></SeachBox>
     <wv-swipe :height="140" :autoplay="3000">
-      <wv-swipe-item v-for="(item, index) in imgData" :key="index">
+      <wv-swipe-item v-for="(item, index) in imgData.focus" :key="index">
         <div>
-          <img :src="item.img" alt="">
+          <img :src="item.mobileImg" alt="">
         </div>
       </wv-swipe-item>
     </wv-swipe>
@@ -13,146 +13,77 @@
         宠TA，我也宠你
       </div>
       <div class="homeLoveItem">
-        <router-link tag="div" class="love-left" to="/Home/SpecialArea">
+        <router-link tag="div" class="love-left" :to="{ path: '/Home/SpecialArea', query: { sp: 'HOME_SPECIAL_1'}}">
           <img src="../../assets/images/bg/home/love1.png" alt="">
         </router-link>
         <div class="love-right">
-          <router-link tag="div" to="/Home/SpecialArea">
+          <router-link tag="div" :to="{ path: '/Home/SpecialArea', query: { sp: 'HOME_SPECIAL_2'}}">
             <img src="../../assets/images/bg/home/love2.png" alt="">
           </router-link>
-          <router-link tag="div" class="last" to="/Home/SpecialArea">
+          <router-link tag="div" class="last" :to="{ path: '/Home/SpecialArea', query: { sp: 'HOME_SPECIAL_3'}}">
             <img src="../../assets/images/bg/home/love3.png" alt="">
           </router-link>
         </div>
       </div>
     </div>
-    <div class="homeItem">
-      <div class="homeItemTitle">- 又上新啦 -</div>
+    <div class="homeItem" v-for="(block, index) in blocks" :key="index">
+      <div class="homeItemTitle">- {{block.title}} -</div>
       <router-link tag="div" to="/Home/NoviceArea" class="homeItemImg">
-        <img src="../../assets/images/data/banner/banner2.png" alt="">
+        <img :src="block.icon" alt="">
       </router-link>
       <div class="listItem-img">
         <div class="Item-box">
           <div class="item">
-            <div class="item-img" @click="goDetails()">
-              <img src="../../assets/images/data/home/1.png" alt="">
-              <p class="item-name">小宠物玩具可调节</p>
-              <p class="item-money">￥58</p>
-              <p class="item-bean"><i class="iconmoney"></i> 宠物豆<span>+2</span></p>
-            </div>
-            <div class="item-img" @click="goDetails()">
-              <img src="../../assets/images/data/home/2.png" alt="">
-              <p class="item-name">小宠物玩具可调节</p>
-              <p class="item-money">￥58</p>
-              <p class="item-bean"><i class="iconmoney"></i> 宠物豆<span>+2</span></p>
-            </div>
-            <div class="item-img" @click="goDetails()">
-              <img src="../../assets/images/data/home/3.png" alt="">
-              <p class="item-name">小宠物玩具可调节</p>
-              <p class="item-money">￥58</p>
-              <p class="item-bean"><i class="iconmoney"></i> 宠物豆<span>+2</span></p>
-            </div>
-            <div class="item-img" @click="goDetails()">
-              <img src="../../assets/images/data/home/4.png" alt="">
-              <p class="item-name">小宠物玩具可调节</p>
-              <p class="item-money">￥58</p>
-              <p class="item-bean"><i class="iconmoney"></i> 宠物豆<span>+2</span></p>
+            <div class="item-img" @click="goDetails()" v-for="(item, index) in block.items" :key="index">
+              <img :src="item.catalog.mainImg" alt="">
+              <p class="item-name">{{item.catalog.name}}</p>
+              <p class="item-money">￥{{item.catalog.price | formatFee}}</p>
+              <p class="item-bean"><i class="iconmoney"></i> 宠物豆<span>+{{item.catalog.loveBean}}</span></p>
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="homeItem">
-      <div class="homeItemTitle">- 热卖专区 -</div>
-      <router-link tag="div" to="/Home/HotArea" class="homeItemImg">
-        <img src="../../assets/images/data/banner/banner3.png" alt="">
-      </router-link>
-      <div class="listItem-img">
-        <div class="Item-box">
-          <div class="item">
-            <div class="item-img" @click="goDetails()">
-              <img src="../../assets/images/data/home/1.png" alt="">
-              <p class="item-name">小宠物玩具可调节</p>
-              <p class="item-money">￥58</p>
-              <p class="item-bean"><i class="iconmoney"></i> 宠物豆<span>+2</span></p>
-            </div>
-            <div class="item-img" @click="goDetails()">
-              <img src="../../assets/images/data/home/2.png" alt="">
-              <p class="item-name">小宠物玩具可调节</p>
-              <p class="item-money">￥58</p>
-              <p class="item-bean"><i class="iconmoney"></i> 宠物豆<span>+2</span></p>
-            </div>
-            <div class="item-img" @click="goDetails()">
-              <img src="../../assets/images/data/home/3.png" alt="">
-              <p class="item-name">小宠物玩具可调节</p>
-              <p class="item-money">￥58</p>
-              <p class="item-bean"><i class="iconmoney"></i> 宠物豆<span>+2</span></p>
-            </div>
-            <div class="item-img" @click="goDetails()">
-              <img src="../../assets/images/data/home/4.png" alt="">
-              <p class="item-name">小宠物玩具可调节</p>
-              <p class="item-money">￥58</p>
-              <p class="item-bean"><i class="iconmoney"></i> 宠物豆<span>+2</span></p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="homeItem">
-      <div class="homeItemTitle">- 汪的盛宴 -</div>
-      <router-link tag="div" to="/Home/FoodArea" class="homeItemImg">
-        <img src="../../assets/images/data/banner/banner4.png" alt="">
-      </router-link>
-      <div class="listItem-img">
-        <div class="Item-box">
-          <div class="item">
-            <div class="item-img" @click="goDetails()">
-              <img src="../../assets/images/data/home/1.png" alt="">
-              <p class="item-name">小宠物玩具可调节</p>
-              <p class="item-money">￥58</p>
-              <p class="item-bean"><i class="iconmoney"></i> 宠物豆<span>+2</span></p>
-            </div>
-            <div class="item-img" @click="goDetails()">
-              <img src="../../assets/images/data/home/2.png" alt="">
-              <p class="item-name">小宠物玩具可调节</p>
-              <p class="item-money">￥58</p>
-              <p class="item-bean"><i class="iconmoney"></i> 宠物豆<span>+2</span></p>
-            </div>
-            <div class="item-img" @click="goDetails()">
-              <img src="../../assets/images/data/home/3.png" alt="">
-              <p class="item-name">小宠物玩具可调节</p>
-              <p class="item-money">￥58</p>
-              <p class="item-bean"><i class="iconmoney"></i> 宠物豆<span>+2</span></p>
-            </div>
-            <div class="item-img" @click="goDetails()">
-              <img src="../../assets/images/data/home/4.png" alt="">
-              <p class="item-name">小宠物玩具可调节</p>
-              <p class="item-money">￥58</p>
-              <p class="item-bean"><i class="iconmoney"></i> 宠物豆<span>+2</span></p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
+
   </div>
 </template>
 
 <script>
 import { Swipe, SwipeItem } from "we-vue";
 import SeachBox from "../../base/seachBox/seachBox";
+import { getBanner, getHomeList } from "@/api/home/home"
 
 export default {
   name: "home",
   data() {
     return {
-      imgData: [
-        { img: "/img/banner2.b1078cd6.png" },
-        { img: "/img/banner3.ff271174.png" },
-        { img: "/img/banner4.9e6c6797.png" }
-      ]
+      imgData: {},
+      blocks: []
     };
   },
+  created() {
+    this._getBanner()
+    this._getHomeList()
+  },
   methods: {
+    _getBanner() {
+      getBanner().then(res => {
+        if (res.code === 0) {
+          console.log("Banner=============")
+          console.log(res)
+          this.imgData = res.data
+        }
+      })
+    },
+    _getHomeList() {
+      getHomeList().then(res => {
+        if (res.code === 0) {
+          console.log("列表=============")
+          console.log(res)
+          this.blocks = res.data
+        }
+      })
+    },
     goDetails() {
       this.$router.push({
         path: "/Details"
@@ -240,8 +171,12 @@ export default {
             letter-spacing: 0.86px;
             margin: 15px 0;
             width: 100%;
-            height: 25px;
-            line-height: 25px;
+            height: 26px;
+            line-height: 26px;
+            overflow: hidden;
+            white-space: nowrap;
+            -ms-text-overflow: ellipsis;
+            text-overflow: ellipsis;
             overflow: hidden;
           }
           .item-money {

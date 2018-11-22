@@ -5,9 +5,9 @@ import Home from "./views/homePage/Home.vue"; // 首页
 import Love from "./views/lovePage/love.vue"; // 爱心页面
 import Shopping from "./views/shoppingPage/shopping.vue"; // 购物车页面
 import My from "./views/myPage/my.vue"; // 个人中心页面
-import SpecialArea from "./views/homePage/SpecialArea.vue"; // 专区页面
-import AreaDratal from "./views/homePage/SpecialAreaDetal.vue"; // 专区详情页
-import NoviceArea from "./views/homePage/NoviceArea.vue"; // 新手专区
+import SpecialArea from "./views/homePage/SpecialArea"; // 专区页面
+import AreaDratal from "./views/homePage/SpecialAreaDetal"; // 专区详情页
+import NoviceArea from "./views/homePage/NoviceArea"; // 新手专区
 import HotArea from "./views/homePage/HotArea.vue"; // 热卖专区
 import FoodArea from "./views/homePage/foodArea.vue"; // 食物专区
 import Details from "./views/homePage/details.vue"; // 商品详情页

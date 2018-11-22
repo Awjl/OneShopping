@@ -5,10 +5,10 @@
         <img src="../../assets/images/bg/login/logo.png" alt="">
       </div>
       <div class="loginRegisteredInp">
-        <input type="text" placeholder="请输入手机号">
+        <input type="text" placeholder="请输入手机号" v-model="iphoneNum">
       </div>
       <div class="loginRegisteredCode">
-        <input type="text" placeholder="请输入验证码"> <span>获取验证码</span>
+        <input type="text" placeholder="请输入验证码"> <span @click="getCode()">获取验证码</span>
       </div>
       <div class="loginBtn">
         注&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;册
@@ -21,9 +21,22 @@
 </template>
 
 <script>
+import { getcode } from "@/api/login/login"
 export default {
   name: "login",
+  data() {
+    return {
+      iphoneNum: ""
+    };
+  },
   methods: {
+    getCode() {
+      getcode(this.iphoneNum).then(res => {
+        if (res.code === 0) {
+          console.log(res)
+        }
+      })
+    },
     goLogin() {
       this.$router.push({
         path: "/Login"
