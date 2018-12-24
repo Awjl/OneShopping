@@ -2,7 +2,7 @@
   <div class="area">
     <div class="areaList">
       <router-link tag="div" class="areaItem" to="/Home/AreaDratal"  v-for="(block, index) in myList" :key="index">
-        <img :src="block.icon"  alt="">
+        <img v-if="block.icon" :src="block.icon | formatJpg" :bid="block.id" alt="" class="proName">
       </router-link>
     </div>
   </div>
