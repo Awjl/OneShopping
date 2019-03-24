@@ -1,39 +1,42 @@
 import Vue from "vue";
 import Router from "vue-router";
-import Tab from "./base/tab/tab.vue"; // 导航栏页面
-import Home from "./views/homePage/Home.vue"; // 首页
-import Love from "./views/lovePage/love.vue"; // 爱心页面
-import Shopping from "./views/shoppingPage/shopping.vue"; // 购物车页面
-import My from "./views/myPage/my.vue"; // 个人中心页面
-import SpecialArea from "./views/homePage/SpecialArea"; // 专区页面
-import AreaDratal from "./views/homePage/SpecialAreaDetal"; // 专区详情页
-import NoviceArea from "./views/homePage/NoviceArea"; // 新手专区
-import HotArea from "./views/homePage/HotArea.vue"; // 热卖专区
-import FoodArea from "./views/homePage/foodArea.vue"; // 食物专区
-import Details from "./views/homePage/details.vue"; // 商品详情页
-import lovePageDetailse from "./views/lovePage/lovePageDetails.vue"; // 公益详情页
-import BellObtain from "./views/lovePage/bellObtain"; // 获取铃铛
-import LoveHelp from "./views/lovePage/loveHelp"; // 求助页面
-import LoveVolunteer from "./views/lovePage/loveVolunteer"; // 志愿者页面
-import TrueOrder from "./views/shoppingPage/TrueOrder"; // 确认订单
-import PayOrder from "./views/shoppingPage/PayOrder"; // 支付订单
-import UseBell from "./views/shoppingPage/useBell"; // 使用铃铛
-import UseCoupon from "./views/shoppingPage/useCoupon"; // 使用优惠券
-import PerInformation from "./views/myPage/perInformation"; // 个人信息页面
-import MyNotice from "./views/myPage/myNotice"; // 我的通知
-import NoticeList from "./views/myPage/noticeList"; // 通知列表
-import LogisticsList from "./views/myPage/logisticsList"; // 物流列表
-import BellNum from "./views/myPage/bellNum"; // 铃铛数量
-import HelpNum from "./views/myPage/helpNum"; // 求助数量
-import MyCollection from "./views/myPage/myCollection"; // 我的收藏
-import MyAfterSale from "./views/myPage/myAfterSale"; // 我的售后
-import MyAddres from "./views/myPage/myAddres"; // 我的地址
-import AddAddres from "./views/myPage/addAddres"; // 添加地址
-import MyPlease from "./views/myPage/myPlease"; // 我的邀请
-import MyOrder from "./views/myPage/myOrder"; // 我的订单列表
-import Login from "./views/loginRegistered/login"; // 登录页面
-import Registered from "./views/loginRegistered/registered"; // 注册页面
-import OrderDetails from "./views/myPage/OrderDetails"; // 订单详情
+const Tab = () => import('./base/tab/tab.vue') // 导航栏页面
+const Home = () => import('./views/homePage/Home.vue') // 首页
+const Love = () => import('./views/lovePage/love.vue') // 爱心页面
+const Shopping = () => import('./views/shoppingPage/shopping.vue') // 购物车页面
+const My = () => import('./views/myPage/my.vue') // 个人中心页面
+const Service = () => import('./views/servicePage/service.vue') // 服务页面
+const SpecialArea = () => import('./views/homePage/SpecialArea') // 专区页面
+const AreaDratal = () => import('./views/homePage/SpecialAreaDetal') // 专区详情页
+const NoviceArea = () => import('./views/homePage/NoviceArea') // 新手专区
+const HotArea = () => import('./views/homePage/HotArea.vue') // 热卖专区
+const FoodArea = () => import('./views/homePage/foodArea.vue') // 食物专区
+const Details = () => import('./views/homePage/details.vue') // 商品详情页
+const lovePageDetailse = () => import('./views/lovePage/lovePageDetails.vue') // 公益详情页
+const BellObtain = () => import('./views/lovePage/bellObtain') // 获取铃铛
+const LoveHelp = () => import('./views/lovePage/loveHelp') // 求助页面
+const LoveVolunteer = () => import('./views/lovePage/loveVolunteer') // 志愿者页面
+const TrueOrder = () => import('./views/shoppingPage/TrueOrder') // 确认订单
+const PayOrder = () => import('./views/shoppingPage/PayOrder') // 支付订单
+const UseBell = () => import('./views/shoppingPage/useBell') // 使用铃铛
+const UseCoupon = () => import('./views/shoppingPage/useCoupon') // 使用优惠券
+const PerInformation = () => import('./views/myPage/perInformation') // 个人信息页面
+const MyNotice = () => import('./views/myPage/myNotice') // 我的通知
+const NoticeList = () => import('./views/myPage/noticeList') // 通知列表
+const LogisticsList = () => import('./views/myPage/logisticsList') // 物流列表
+const BellNum = () => import('./views/myPage/bellNum') // 铃铛数量
+const HelpNum = () => import('./views/myPage/helpNum') // 求助数量
+const MyCollection = () => import('./views/myPage/myCollection') // 我的收藏
+const MyAfterSale = () => import('./views/myPage/myAfterSale') // 我的售后
+const MyAddres = () => import('./views/myPage/myAddres') // 我的地址
+const AddAddres = () => import('./views/myPage/addAddres') // 添加地址
+const MyPlease = () => import('./views/myPage/myPlease') // 我的邀请
+const MyOrder = () => import('./views/myPage/myOrder') // 我的订单列表
+const Login = () => import('./views/loginRegistered/login') // 登录页面
+const Registered = () => import('./views/loginRegistered/registered') // 注册页面
+const OrderDetails = () => import('./views/myPage/OrderDetails') // 登录页面
+
+
 
 Vue.use(Router);
 
@@ -50,6 +53,14 @@ export default new Router({
           name: "Home",
           meta: {
             title: "首页"
+          }
+        }, 
+        {
+          path: "/Service",
+          component: Service,
+          name: "Service",
+          meta: {
+            title: "服务中心"
           }
         },
         {

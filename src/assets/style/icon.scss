@@ -2,9 +2,8 @@
 
 .tabIcon {
   display: block;
-  width: 40px;
-  height: 40px;
-  margin: 13px auto 9px;
+  width: 50px;
+  height: 50px;
   background-size: 100% 100%;
 }
 
@@ -15,7 +14,13 @@
 .home-acticon {
   background-image: url(../images/icon/homeAct.png);
 }
+.ser-icon {
+  background-image: url(../images/icon/ser.png);
+}
 
+.ser-acticon {
+  background-image: url(../images/icon/serAct.png);
+}
 .lover-icon {
   background-image: url(../images/icon/love.png);
 }

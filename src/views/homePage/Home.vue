@@ -10,7 +10,7 @@
     </wv-swipe>
     <div class="homeLove">
       <div class="homeLoverTitle">
-        宠TA，我也宠你
+        公益达人
       </div>
       <div class="homeLoveItem">
         <router-link tag="div" class="love-left" :to="{ path: '/Home/SpecialArea', query: { sp: 'HOME_SPECIAL_1'}}">

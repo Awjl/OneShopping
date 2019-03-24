@@ -16,9 +16,7 @@
       <input type="text" placeholder="详细地址（街道、楼牌号等）" v-model="data.address">
       <span>必填</span>
     </div>
-    <div class="addaddresbtn" @click="btn">
-      保存
-    </div>
+    <div class="addaddresbtn" @click="btn">保存</div>
     <Addres :addresStater="addresStater" v-on:Addres="Addres"></Addres>
   </div>
 </template>

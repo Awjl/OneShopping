@@ -51,9 +51,7 @@
       </div>
     </div>
     <div class="helpBtn">
-      <div>
-        发起求助
-      </div>
+      <div>发起求助</div>
     </div>
   </div>
 </template>

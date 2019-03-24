@@ -2,79 +2,65 @@
   <div class="bellNum">
     <div class="bellNumBox">
       <div>
-        <div class="bellincomeNum">
-          +30
-        </div>
+        <div class="bellincomeNum">+30</div>
         <p>收入</p>
       </div>
       <div>
-        <div class="bellAll">
-          30
-        </div>
+        <div class="bellAll">30</div>
         <p>可用铃铛</p>
       </div>
       <div>
-        <div class="bellincomeNum">
-          -2
-        </div>
+        <div class="bellincomeNum">-2</div>
         <p>支出</p>
       </div>
     </div>
     <div class="bellList">
       <div class="bellItem">
-        <div class="bellItemNum">
-          -10
-        </div>
+        <div class="bellItemNum">-10</div>
         <div class="bellItemConter">
           <div class="bellItemConterName">
-            <div><span>败家消耗</span>：皇家猫粮5KG装包邮</div>
+            <div>
+              <span>败家消耗</span>：皇家猫粮5KG装包邮
+            </div>
             <p>2件</p>
           </div>
-          <div class="bellItemConterTime">
-            11-29 07:12
-          </div>
+          <div class="bellItemConterTime">11-29 07:12</div>
         </div>
       </div>
       <div class="bellItem">
-        <div class="bellItemNum">
-          -5
-        </div>
+        <div class="bellItemNum">-5</div>
         <div class="bellItemConter">
           <div class="bellItemConterName">
-            <div><span>败家消耗</span>：皇家猫粮5KG装包邮</div>
+            <div>
+              <span>败家消耗</span>：皇家猫粮5KG装包邮
+            </div>
             <p>2件</p>
           </div>
-          <div class="bellItemConterTime">
-            11-29 07:12
-          </div>
+          <div class="bellItemConterTime">11-29 07:12</div>
         </div>
       </div>
       <div class="bellItem">
-        <div class="bellItemNum">
-          -5
-        </div>
+        <div class="bellItemNum">-5</div>
         <div class="bellItemConter">
           <div class="bellItemConterName">
-            <div><span>败家消耗</span>：皇家猫粮5KG装包邮</div>
+            <div>
+              <span>败家消耗</span>：皇家猫粮5KG装包邮
+            </div>
             <p>2件</p>
           </div>
-          <div class="bellItemConterTime">
-            11-29 07:12
-          </div>
+          <div class="bellItemConterTime">11-29 07:12</div>
         </div>
       </div>
       <div class="bellItem">
-        <div class="bellItemNum">
-          +5
-        </div>
+        <div class="bellItemNum">+5</div>
         <div class="bellItemConter">
           <div class="bellItemConterName">
-            <div><span>败家消耗</span>：皇家猫粮5KG装包邮</div>
+            <div>
+              <span>败家消耗</span>：皇家猫粮5KG装包邮
+            </div>
             <p>2件</p>
           </div>
-          <div class="bellItemConterTime">
-            11-29 07:12
-          </div>
+          <div class="bellItemConterTime">11-29 07:12</div>
         </div>
       </div>
     </div>

@@ -1,28 +1,23 @@
 <template>
   <div class="My">
     <div class="my-bg">
-      <img src="../../assets/images/data/my/my-bg.png" alt="">
+      <img src="../../assets/images/data/my/my-bg.png" alt>
       <div class="my-Notice" @click="goMyNotice">
-        <img src="../../assets/images/icon/notice.png" alt="">
+        <img src="../../assets/images/icon/notice.png" alt>
         <div class="NoticeNum">2</div>
       </div>
       <div class="my-tou">
-        <div class="myHeadportrait" @click="goPerInformation"> <img src="../../assets/images/data/my/my.png" alt="">
+        <div class="myHeadportrait" @click="goPerInformation">
+          <img src="../../assets/images/data/my/my.png" alt>
         </div>
-        <div class="my-name">
-          平板家的妹妹
-        </div>
+        <div class="my-name">平板家的妹妹</div>
         <div class="myBean-Btn" @click="goBellNum">
-          <img src="../../assets/images/icon/my-dou.png" alt="">12个
+          <img src="../../assets/images/icon/my-dou.png" alt>12个
         </div>
       </div>
       <div class="myTab">
-        <div :class="{myTabAct: show}" @click="myTab()">
-          Bai家记
-        </div>
-        <div :class="{myTabAct: !show}" @click="myTab()">
-          爱心记
-        </div>
+        <div :class="{myTabAct: show}" @click="myTab()">Bai家记</div>
+        <div :class="{myTabAct: !show}" @click="myTab()">爱心记</div>
       </div>
     </div>
     <div class="myList" v-if="show">
@@ -35,37 +30,29 @@
       <div class="myAllgoods">
         <div class="myAllgoodsItem" @click="goMyOrder(1)">
           <div class="myAllgoodsItemImg">
-            <img src="../../assets/images/icon/my1.png" alt="">
+            <img src="../../assets/images/icon/my1.png" alt>
             <div class="messgNum">2</div>
           </div>
-          <div class="myAllgoodsItemName">
-            待付款
-          </div>
+          <div class="myAllgoodsItemName">待付款</div>
         </div>
         <div class="myAllgoodsItem" @click="goMyOrder(2)">
           <div class="myAllgoodsItemImg">
-            <img src="../../assets/images/icon/my2.png" alt="">
+            <img src="../../assets/images/icon/my2.png" alt>
             <div class="messgNum">99</div>
           </div>
-          <div class="myAllgoodsItemName">
-            待发货
-          </div>
+          <div class="myAllgoodsItemName">待发货</div>
         </div>
         <div class="myAllgoodsItem" @click="goMyOrder(3)">
           <div class="myAllgoodsItemImg">
-            <img src="../../assets/images/icon/my3.png" alt="">
+            <img src="../../assets/images/icon/my3.png" alt>
           </div>
-          <div class="myAllgoodsItemName">
-            待收货
-          </div>
+          <div class="myAllgoodsItemName">待收货</div>
         </div>
         <div class="myAllgoodsItem" @click="goMyOrder(4)">
           <div class="myAllgoodsItemImg">
-            <img src="../../assets/images/icon/my4.png" alt="">
+            <img src="../../assets/images/icon/my4.png" alt>
           </div>
-          <div class="myAllgoodsItemName">
-            待评价
-          </div>
+          <div class="myAllgoodsItemName">待评价</div>
         </div>
       </div>
     </div>
@@ -125,40 +112,46 @@
       <div class="DiaryList">
         <div class="DiaryItem">
           <div class="DiaryItemImg">
-            <img src="../../assets/images/data/love/1.png" alt="">
-            <div class="DiaryItemTime">
-              还剩2天08 : 32 : 23
-            </div>
+            <img src="../../assets/images/data/love/1.png" alt>
+            <div class="DiaryItemTime">还剩2天08 : 32 : 23</div>
           </div>
           <div class="DiaryItemConter">
-            <p>爱心易物 | <span>给他们一个遮住风雨的地方</span></p>
-            <p>已捐：<span>¥2100</span></p>
+            <p>爱心易物 |
+              <span>给他们一个遮住风雨的地方</span>
+            </p>
+            <p>已捐：
+              <span>¥2100</span>
+            </p>
             <p>目标价值:8000元物资</p>
           </div>
         </div>
         <div class="DiaryItem">
           <div class="DiaryItemImg">
-            <img src="../../assets/images/data/love/2.png" alt="">
-            <div class="DiaryItemTime">
-              执行中
-            </div>
+            <img src="../../assets/images/data/love/2.png" alt>
+            <div class="DiaryItemTime">执行中</div>
           </div>
           <div class="DiaryItemConter">
-            <p>爱心易物 | <span>给他们一个遮住风雨的地方</span></p>
-            <p>已捐：<span>¥2100</span></p>
+            <p>爱心易物 |
+              <span>给他们一个遮住风雨的地方</span>
+            </p>
+            <p>已捐：
+              <span>¥2100</span>
+            </p>
             <p>目标价值:8000元物资</p>
           </div>
         </div>
         <div class="DiaryItem">
           <div class="DiaryItemImg">
-            <img src="../../assets/images/data/love/3.png" alt="">
-            <div class="DiaryItemTime">
-              以结束
-            </div>
+            <img src="../../assets/images/data/love/3.png" alt>
+            <div class="DiaryItemTime">以结束</div>
           </div>
           <div class="DiaryItemConter">
-            <p>爱心易物 | <span>给他们一个遮住风雨的地方</span></p>
-            <p>已捐：<span>¥2100</span></p>
+            <p>爱心易物 |
+              <span>给他们一个遮住风雨的地方</span>
+            </p>
+            <p>已捐：
+              <span>¥2100</span>
+            </p>
             <p>目标价值:8000元物资</p>
           </div>
         </div>

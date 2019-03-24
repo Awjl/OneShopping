@@ -7,12 +7,15 @@
       </div>
       <div class="noticeItemConter">
         <div class="noticeItemConterImg">
-          <img src="../../assets/images/data/shopping/1.png" alt="">
+          <img src="../../assets/images/data/shopping/1.png" alt>
         </div>
         <div class="noticeItemConterT">
           <p>可组合3色收纳抽屉</p>
           <p>颜色2，12x20mm</p>
-          <p><span>￥36</span> <span>X2</span></p>
+          <p>
+            <span>￥36</span>
+            <span>X2</span>
+          </p>
         </div>
       </div>
     </div>
