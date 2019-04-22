@@ -1,5 +1,4 @@
 import { login } from "@/api/login/login";
-import { setUtk } from "@/utils/auth";
 
 const user = {
   state: {
@@ -16,8 +15,6 @@ const user = {
       return new Promise((resolve, reject) => {
         login(userInfo)
           .then(res => {
-            console.log(res);
-            setUtk(res.utk);
             commit("SET_UTK", res.token);
           })
           .catch(error => {

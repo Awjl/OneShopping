@@ -1,33 +1,45 @@
 <template>
   <div>
     <div class="conductItem" @click="goWelfareDetails()">
-      <img src="../../assets/images/data/love/list2.png" alt="">
-      <div class="conductItemTime">
-        还剩2天08 : 32 : 23
-      </div>
+      <img src="../../assets/images/data/love/list2.png" alt>
+      <div class="conductItemTime">还剩{{donwData | downData}}</div>
       <div class="conductItemTitle">
-        <p class="conductItemName">爱心屋 | <span> 对！你可以让它们的冬天充满温暖</span></p>
-        <p class="conductItemji"> <i class="lovericon jine"></i> 猫粮500 狗粮800 <i class="lovericon addres"></i>上海金山</p>
+        <p class="conductItemName">
+          爱心屋 |
+          <span>对！你可以让它们的冬天充满温暖</span>
+        </p>
+        <p class="conductItemji">
+          <i class="lovericon jine"></i> 猫粮500 狗粮800
+          <i class="lovericon addres"></i>上海金山
+        </p>
       </div>
     </div>
     <div class="conductItem">
-      <img src="../../assets/images/data/love/list3.png" alt="">
-      <div class="conductItemTime">
-        还剩2天08 : 32 : 23
-      </div>
+      <img src="../../assets/images/data/love/list3.png" alt>
+      <div class="conductItemTime">还剩2天08 : 32 : 23</div>
       <div class="conductItemTitle">
-        <p class="conductItemName">爱心屋 | <span> 对！你可以让它们的冬天充满温暖</span></p>
-        <p class="conductItemji"> <i class="lovericon jine"></i> 猫粮500 狗粮800 <i class="lovericon addres"></i>上海金山</p>
+        <p class="conductItemName">
+          爱心屋 |
+          <span>对！你可以让它们的冬天充满温暖</span>
+        </p>
+        <p class="conductItemji">
+          <i class="lovericon jine"></i> 猫粮500 狗粮800
+          <i class="lovericon addres"></i>上海金山
+        </p>
       </div>
     </div>
     <div class="conductItem">
-      <img src="../../assets/images/data/love/list4.png" alt="">
-      <div class="conductItemTime">
-        还剩2天08 : 32 : 23
-      </div>
+      <img src="../../assets/images/data/love/list4.png" alt>
+      <div class="conductItemTime">还剩2天08 : 32 : 23</div>
       <div class="conductItemTitle">
-        <p class="conductItemName">爱心屋 | <span> 对！你可以让它们的冬天充满温暖</span></p>
-        <p class="conductItemji"> <i class="lovericon jine"></i> 猫粮500 狗粮800 <i class="lovericon addres"></i>上海金山</p>
+        <p class="conductItemName">
+          爱心屋 |
+          <span>对！你可以让它们的冬天充满温暖</span>
+        </p>
+        <p class="conductItemji">
+          <i class="lovericon jine"></i> 猫粮500 狗粮800
+          <i class="lovericon addres"></i>上海金山
+        </p>
       </div>
     </div>
   </div>
@@ -36,6 +48,14 @@
 <script>
 export default {
   name: "conductItem",
+  data() {
+    return {
+      donwData: 0
+    };
+  },
+  mounted() {
+    this.donwData = new Date('2019-04-22 10:00:00') - new Date();
+    },
   methods: {
     goWelfareDetails() {
       console.log("231");

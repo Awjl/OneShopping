@@ -4,24 +4,30 @@
     <wv-swipe :height="140" :autoplay="3000">
       <wv-swipe-item v-for="(item, index) in imgData.focus" :key="index">
         <div>
-          <img :src="item.mobileImg" alt="">
+          <img :src="item.mobileImg" alt>
         </div>
       </wv-swipe-item>
     </wv-swipe>
     <div class="homeLove">
-      <div class="homeLoverTitle">
-        公益达人
-      </div>
+      <div class="homeLoverTitle">公益达人</div>
       <div class="homeLoveItem">
-        <router-link tag="div" class="love-left" :to="{ path: '/Home/SpecialArea', query: { sp: 'HOME_SPECIAL_1'}}">
-          <img src="../../assets/images/bg/home/love1.png" alt="">
+        <router-link
+          tag="div"
+          class="love-left"
+          :to="{ path: '/Home/SpecialArea', query: { sp: 'HOME_SPECIAL_1'}}"
+        >
+          <img src="../../assets/images/bg/home/love1.png" alt>
         </router-link>
         <div class="love-right">
           <router-link tag="div" :to="{ path: '/Home/SpecialArea', query: { sp: 'HOME_SPECIAL_2'}}">
-            <img src="../../assets/images/bg/home/love2.png" alt="">
+            <img src="../../assets/images/bg/home/love2.png" alt>
           </router-link>
-          <router-link tag="div" class="last" :to="{ path: '/Home/SpecialArea', query: { sp: 'HOME_SPECIAL_3'}}">
-            <img src="../../assets/images/bg/home/love3.png" alt="">
+          <router-link
+            tag="div"
+            class="last"
+            :to="{ path: '/Home/SpecialArea', query: { sp: 'HOME_SPECIAL_3'}}"
+          >
+            <img src="../../assets/images/bg/home/love3.png" alt>
           </router-link>
         </div>
       </div>
@@ -29,29 +35,37 @@
     <div class="homeItem" v-for="(block, index) in blocks" :key="index">
       <div class="homeItemTitle">- {{block.title}} -</div>
       <router-link tag="div" to="/Home/NoviceArea" class="homeItemImg">
-        <img :src="block.icon" alt="">
+        <img :src="block.icon" alt>
       </router-link>
       <div class="listItem-img">
         <div class="Item-box">
           <div class="item">
-            <div class="item-img" @click="goDetails()" v-for="(item, index) in block.items" :key="index">
-              <img :src="item.catalog.mainImg" alt="">
+            <div
+              class="item-img"
+              @click="goDetails()"
+              v-for="(item, index) in block.items"
+              :key="index"
+            >
+              <img :src="item.catalog.mainImg" alt>
               <p class="item-name">{{item.catalog.name}}</p>
               <p class="item-money">￥{{item.catalog.price | formatFee}}</p>
-              <p class="item-bean"><i class="iconmoney"></i> 宠物豆<span>+{{item.catalog.loveBean}}</span></p>
+              <p class="item-bean">
+                <i class="iconmoney"></i> 宠物豆
+                <span>+{{item.catalog.loveBean}}</span>
+              </p>
             </div>
           </div>
         </div>
       </div>
     </div>
-
   </div>
 </template>
 
 <script>
 import { Swipe, SwipeItem } from "we-vue";
 import SeachBox from "../../base/seachBox/seachBox";
-import { getBanner, getHomeList } from "@/api/home/home"
+import { getBanner, getHomeList } from "@/api/home/home";
+import configData from "@/utils/config";
 
 export default {
   name: "home",
@@ -62,27 +76,35 @@ export default {
     };
   },
   created() {
-    this._getBanner()
-    this._getHomeList()
+    this._getBanner();
+    this._getHomeList();
   },
   methods: {
     _getBanner() {
-      getBanner().then(res => {
-        if (res.code === 0) {
-          console.log("Banner=============")
-          console.log(res)
-          this.imgData = res.data
-        }
-      })
+      getBanner()
+        .then(res => {
+          if (res.code === configData.codeState) {
+            console.log("Banner=============");
+            console.log(res);
+            this.imgData = res.data;
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     },
     _getHomeList() {
-      getHomeList().then(res => {
-        if (res.code === 0) {
-          console.log("列表=============")
-          console.log(res)
-          this.blocks = res.data
-        }
-      })
+      getHomeList()
+        .then(res => {
+          if (res.code === configData.codeState) {
+            console.log("列表=============");
+            console.log(res);
+            this.blocks = res.data;
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     },
     goDetails() {
       this.$router.push({
