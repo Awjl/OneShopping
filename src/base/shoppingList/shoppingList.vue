@@ -1,10 +1,30 @@
 <template>
   <div class="DataList">
     <div class="DataItem" v-for="(item, index) in listImg" :key="index" @click="goDetails()">
-      <img :src="item.img" alt="">
-      <p class="item-name">{{item.name}}</p>
-      <p class="item-money">暖心价：<span>￥{{item.price}}</span></p>
-      <p class="item-bean"><i class="iconmoney"></i> 宠物豆<span>+{{item.addNum}}</span></p>
+      <div v-if="item.catalog">
+        <img :src="item.catalog.mainImg | formatJpg" alt>
+        <p class="item-name">{{item.catalog.name}}</p>
+        <p class="item-money">
+          暖心价：
+          <span>￥{{item.catalog.price | formatFee}}</span>
+        </p>
+        <p class="item-bean">
+          <i class="iconmoney"></i> 宠物豆
+          <span>+{{item.catalog.loveBean}}</span>
+        </p>
+      </div>
+      <div v-else>
+        <img :src="item.mainImg | formatJpg" alt>
+        <p class="item-name">{{item.name}}</p>
+        <p class="item-money">
+          暖心价：
+          <span>￥{{item.price | formatFee}}</span>
+        </p>
+        <p class="item-bean">
+          <i class="iconmoney"></i> 宠物豆
+          <span>+{{item.loveBean}}</span>
+        </p>
+      </div>
     </div>
   </div>
 </template>

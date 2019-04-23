@@ -63,7 +63,7 @@ export default {
     };
   },
   created() {
-    console.log(this.commentData);
+    console.log(this.commentData, '评论');
   },
   methods: {
     showCommen() {

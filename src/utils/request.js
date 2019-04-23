@@ -1,6 +1,6 @@
 import axios from "axios";
 import store from "../store/index";
-import configData from '@/utils/config'
+import { configData } from '@/utils/config'
 
 // 创建axios实例
 const service = axios.create({

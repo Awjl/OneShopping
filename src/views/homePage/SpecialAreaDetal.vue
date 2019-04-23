@@ -1,14 +1,16 @@
 <template>
   <div class="areaDratal">
-    <div class="areaDratalImg">
-      <img src="../../assets/images/data/home/item1.png" alt="">
+    <div class="NovDratalImg">
+      <img v-if="listImg.icon" :src="listImg.icon | formatJpg">
     </div>
-    <ShoppingList :listImg="listImg"></ShoppingList>
+    <ShoppingList :listImg="listImg.items"></ShoppingList>
   </div>
 </template>
 
 <script>
 import ShoppingList from "@/base/shoppingList/shoppingList";
+import { geshopingList } from "@/api/home/home";
+import { configData } from "@/utils/config";
 
 export default {
   name: "AreaDratal",
@@ -42,6 +44,27 @@ export default {
       ]
     };
   },
+  created() {
+    this._geshopingList(this.$route.query.id);
+    this.menu();
+  },
+  methods: {
+    _geshopingList(id) {
+      geshopingList(id)
+        .then(res => {
+          if (res.code === configData.codeState) {
+            console.log("数据列表=============");
+            this.listImg = res.data;
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    menu() {
+      window.scrollTo(0, 0);
+    }
+  },
   components: {
     ShoppingList
   }
@@ -51,7 +74,7 @@ export default {
 <style lang="scss">
 .areaDratal {
   padding: 0 40px 100px;
-  .areaDratalImg {
+  .NovDratalImg {
     margin: 20px 0;
   }
 }

@@ -1,113 +1,90 @@
 <template>
   <div class="ShoppingDetails">
     <wv-swipe :height="260" :autoplay="3000">
-      <wv-swipe-item>
-        <img src="../../assets/images/data/home/detailsBanner.png" alt="">
-      </wv-swipe-item>
-      <wv-swipe-item>
-        <img src="../../assets/images/data/home/detailsBanner.png" alt="">
-      </wv-swipe-item>
-      <wv-swipe-item>
-        <img src="../../assets/images/data/home/detailsBanner.png" alt="">
+      <wv-swipe-item v-for="(item, index) in proInfo.imgs" :key="index">
+        <div>
+          <img :src="item | formatJpg" alt>
+        </div>
       </wv-swipe-item>
     </wv-swipe>
     <div class="ShoppingDetailsData">
-      <p class="ShoppingDetailsTiT">韩国秋冬宠物屋</p>
-      <p class="ShoppingDetailsPrice">¥48</p>
+      <p class="ShoppingDetailsTiT">{{catalog.name}}</p>
+      <p class="ShoppingDetailsPrice">¥{{catalog.price | formatFee}}</p>
       <div class="ShoppingDetailsBell">
-        <p class="BellLeft"><i class="iconmoney"></i>铃铛<span>+2</span></p>
-        <p class="BellLeft">铃铛是什么？ <i class="myicon righticon"></i></p>
+        <p class="BellLeft">
+          <i class="iconmoney"></i>铃铛
+          <span>+{{catalog.loveBean}}</span>
+        </p>
+        <p class="BellLeft">
+          铃铛是什么？
+          <i class="myicon righticon"></i>
+        </p>
       </div>
       <div class="ShoppingDetailsPostage">
-        邮费: <p>¥6</p>
+        邮费:
+        <p>¥{{catalog.postage | formatFee}}</p>
         <span>满¥199包邮</span>
       </div>
     </div>
     <div class="shoLine"></div>
     <div class="shoppingNav">
       <div class="shoppingNavBox">
-        <div :class="{shopingact: show}" @click="DetailsTab()">
-          图文详情
-        </div>
-        <div :class="{shopingact: !show}" @click="DetailsTab()">
-          TA们说
-        </div>
+        <div :class="{shopingact: show}" @click="DetailsTab()">图文详情</div>
+        <div :class="{shopingact: !show}" @click="DetailsTab()">TA们说</div>
       </div>
     </div>
     <div class="DetailsData" v-if="show">
-      <div>
-        <img src="../../assets/images/data/home/detItem1.png" alt="">
-      </div>
-      <div>
-        <img src="../../assets/images/data/home/detItem2.png" alt="">
-      </div>
-      <div>
-        <img src="../../assets/images/data/home/detItem3.png" alt="">
-      </div>
+      <div v-html="proInfo.richContentMobile"></div>
       <div class="PurchaseNotes">
-        <div class="NotesTitle">
-          购买须知
-        </div>
-        <div class="NoteProblem">
-          购买运费如何收取？
-        </div>
+        <div class="NotesTitle">购买须知</div>
+        <div class="NoteProblem">购买运费如何收取？</div>
         <div class="PurchaseNotesTET">
           单笔订单金额（不含运费）满199元免邮费；不满199元，每单收取6元运费。
           <br>(港澳台地区需满500元免邮费；不满500元，每单收取30元运费)
         </div>
-        <div class="NoteProblem">
-          订单如何配送？
-        </div>
+        <div class="NoteProblem">订单如何配送？</div>
         <div class="PurchaseNotesTET">
           一只商店会根据商品所在地、顾客所在地和商品的尺寸重量优选物流配送商，确保优质用户体验。
           <br>目前暂不支持自选快递，具体物流信息可在下单成功后“我的订单-物流详情”中查看。
         </div>
-        <div class="NoteProblem">
-          如何申请退换货？
-        </div>
+        <div class="NoteProblem">如何申请退换货？</div>
         <div class="PurchaseNotesTET">
-          1.自收到商品之日起7日内，顾客可申请无忧退货；如果是退货，退款将原路返还，不同的银行处理时间不同，预计1-5个工作日到账；<br>
-          2.退货流程：<br>
-          确认收货-申请退货-客服审核通过-用户寄回商品-仓库签收验货-退款审核-退款完成；<br>
-          3.换货流程：<br>
-          确认收货-申请换货-客服审核通过-用户寄回商品-仓库签收验货-客服确认-换货完成；
+          1.自收到商品之日起7日内，顾客可申请无忧退货；如果是退货，退款将原路返还，不同的银行处理时间不同，预计1-5个工作日到账；
+          <br>2.退货流程：
+          <br>确认收货-申请退货-客服审核通过-用户寄回商品-仓库签收验货-退款审核-退款完成；
+          <br>3.换货流程：
+          <br>确认收货-申请换货-客服审核通过-用户寄回商品-仓库签收验货-客服确认-换货完成；
         </div>
-
       </div>
     </div>
     <div class="DetailsComment" v-if="!show">
-      <div class="DetailsCommentTitle">
-        宝贝好评率97.8%
-      </div>
-      <Comment :commentData="commentData" v-on:cliShowBox="cliShowBox"></Comment>
+      <div class="DetailsCommentTitle">宝贝好评率97.8%</div>
+      <Comment :commentData="commentinfo" v-on:cliShowBox="cliShowBox"></Comment>
     </div>
     <div class="Other">
-      <div class="OtherTitel">
-        - 他们还宠幸了 -
-      </div>
-      <ShoppingList :listImg="listImg"></ShoppingList>
+      <div class="OtherTitel">- 他们还宠幸了 -</div>
+      <ShoppingList :listImg="moreinfo.items"></ShoppingList>
     </div>
     <div class="ShoppingBottom">
       <div class="BottomIcon">
-        <img src="../../assets/images/icon/service.png" alt="">
+        <img src="../../assets/images/icon/service.png" alt>
         <p>勾搭</p>
       </div>
       <div class="BottomIcon">
-        <img src="../../assets/images/icon/share.png" alt="">
+        <img src="../../assets/images/icon/share.png" alt>
         <p>分享</p>
       </div>
       <div class="BottomIcon">
-        <img src="../../assets/images/icon/shou.png" alt="">
+        <img src="../../assets/images/icon/shou.png" alt>
         <p>收藏</p>
       </div>
-      <div class="BottonBtn" @click="JoinShoppingCart()">
-        加入购物车
-      </div>
-      <div class="BottonBtn BottomAct" @click="Judge()">
-        立即购买
-      </div>
+      <div class="BottonBtn" @click="JoinShoppingCart()">加入购物车</div>
+      <div class="BottonBtn BottomAct" @click="Judge()">立即购买</div>
     </div>
-    <ShoppingCart :showShoppingCart="showShoppingCart" v-on:ClickHideShoppingCart="ClickHideShoppingCart"></ShoppingCart>
+    <ShoppingCart
+      :showShoppingCart="showShoppingCart"
+      v-on:ClickHideShoppingCart="ClickHideShoppingCart"
+    ></ShoppingCart>
     <Permission :showBox="showBox" v-on:childByValue="childByValue"></Permission>
     <CommentBox :showCommentBox="showCommentBox" v-on:hideBoxC="hideBoxC"></CommentBox>
   </div>
@@ -120,6 +97,13 @@ import Comment from "@/base/comment/comment"; // 评论列表
 import Permission from "@/base/Permission/permission"; // 权限提醒
 import CommentBox from "@/base/CommentBox/CommentBox"; // 评论框
 import ShoppingCart from "@/base/shoppingCart/shoppingCart"; // 购物车
+import {
+  geshopingDetails,
+  geshopingRecommendList,
+  geshopingCatalogs,
+  gesComment
+} from "@/api/home/home";
+import { configData, changetime2 } from "@/utils/config";
 
 export default {
   name: "shoppingDetails",
@@ -195,13 +179,84 @@ export default {
           price: "48",
           addNum: "2"
         }
-      ]
+      ],
+      proInfo: {}, //商品详情
+      ifShow: 0, //切换使用
+      pid: "", //产品id
+      pcolor: {}, //产品颜色
+      psize: "", //产品尺寸
+      selectnum: 1, //选择数量
+      shoustu: "", //是否收藏
+      ifcare: "", //收藏的显示问题
+      arr: [], //选择id组合
+      shopid: "", //店铺id
+      catalog: {}, //
+      moreinfo: {}, //他们还买了
+      changesku: "", //选择sku
+      skuPrice: 0,
+      skuImg: null,
+      commentinfo: {}, //评论信息,
+      pid: ""
     };
   },
+  created() {
+    this.pid = this.$route.query.pid;
+    this._geshopingDetails(this.pid);
+    this.menu();
+  },
   methods: {
+    _geshopingDetails(pid) {
+      geshopingDetails(pid)
+        .then(res => {
+          if (res.code === configData.codeState) {
+            console.log("详情=============");
+            this.proInfo = res.data;
+            this.shopid = res.data.shopId; //店铺id
+            this.catalog = res.data;
+            this._geshopingRecommendList(this.catalog.categoryId);
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    _gesComment(pid) {
+      gesComment(pid)
+        .then(res => {
+          if (res.code === configData.codeState) {
+            console.log("评论=============");
+            this.commentinfo = res.data;
+            let myinfo = res.data.items;
+            for (let i = 0; i < myinfo.length; i++) {
+              myinfo[i].createTime = changetime2(myinfo[i].createTime);
+            }
+            this.commentinfo = myinfo;
+            console.log(myinfo);
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    _geshopingRecommendList(categoryId) {
+      geshopingRecommendList(categoryId)
+        .then(res => {
+          if (res.code === configData.codeState) {
+            console.log("推荐=============");
+            console.log(res.data);
+            this.moreinfo = res.data;
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    _geshopingCatalogs() {},
     DetailsTab() {
       // 导航栏切换
+      console.log("31");
       this.show = !this.show;
+      this._gesComment(this.pid);
     },
     Judge() {
       // 显示权限框
@@ -224,6 +279,9 @@ export default {
     },
     ClickHideShoppingCart(hideCartBox) {
       this.showShoppingCart = hideCartBox;
+    },
+    menu() {
+      window.scrollTo(0, 0);
     }
   },
   components: {
@@ -234,6 +292,14 @@ export default {
     Permission,
     CommentBox,
     ShoppingCart
+  },
+  watch: {
+    // this.$route.path
+    "$route.query.pid": function(newVal, oldVal) {
+      this.menu();
+      this.pid = newVal;
+      this._geshopingDetails(this.pid);
+    }
   }
 };
 </script>

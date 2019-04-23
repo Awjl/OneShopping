@@ -4,7 +4,7 @@
     <wv-swipe :height="140" :autoplay="3000">
       <wv-swipe-item v-for="(item, index) in imgData.focus" :key="index">
         <div>
-          <img :src="item.mobileImg" alt>
+          <img :src="item.mobileImg | formatImg412x180" alt>
         </div>
       </wv-swipe-item>
     </wv-swipe>
@@ -34,19 +34,23 @@
     </div>
     <div class="homeItem" v-for="(block, index) in blocks" :key="index">
       <div class="homeItemTitle">- {{block.title}} -</div>
-      <router-link tag="div" to="/Home/NoviceArea" class="homeItemImg">
-        <img :src="block.icon" alt>
+      <router-link
+        tag="div"
+        :to="{ path: '/Home/NoviceArea', query: { id: block.id}}"
+        class="homeItemImg"
+      >
+        <img :src="block.icon| formatJpg" alt>
       </router-link>
       <div class="listItem-img">
         <div class="Item-box">
           <div class="item">
             <div
               class="item-img"
-              @click="goDetails()"
+              @click.stop="goDetails(item.catalogId)"
               v-for="(item, index) in block.items"
               :key="index"
             >
-              <img :src="item.catalog.mainImg" alt>
+              <img :src="item.catalog.mainImg | formatJpg" alt>
               <p class="item-name">{{item.catalog.name}}</p>
               <p class="item-money">￥{{item.catalog.price | formatFee}}</p>
               <p class="item-bean">
@@ -65,7 +69,7 @@
 import { Swipe, SwipeItem } from "we-vue";
 import SeachBox from "../../base/seachBox/seachBox";
 import { getBanner, getHomeList } from "@/api/home/home";
-import configData from "@/utils/config";
+import { configData } from "@/utils/config";
 
 export default {
   name: "home",
@@ -85,7 +89,6 @@ export default {
         .then(res => {
           if (res.code === configData.codeState) {
             console.log("Banner=============");
-            console.log(res);
             this.imgData = res.data;
           }
         })
@@ -98,7 +101,6 @@ export default {
         .then(res => {
           if (res.code === configData.codeState) {
             console.log("列表=============");
-            console.log(res);
             this.blocks = res.data;
           }
         })
@@ -106,9 +108,12 @@ export default {
           console.log(error);
         });
     },
-    goDetails() {
+    goDetails(pid) {
       this.$router.push({
-        path: "/Details"
+        path: "/Details",
+        query: {
+          pid: pid
+        }
       });
     }
   },
