@@ -1,6 +1,6 @@
 <template>
   <div class="DataList">
-    <div class="DataItem" v-for="(item, index) in listImg" :key="index" @click="goDetails()">
+    <div class="DataItem" v-for="(item, index) in listImg" :key="index" @click="goDetails(item)">
       <div v-if="item.catalog">
         <img :src="item.catalog.mainImg | formatJpg" alt>
         <p class="item-name">{{item.catalog.name}}</p>
@@ -37,10 +37,19 @@ export default {
     this.menu();
   },
   methods: {
-    goDetails() {
-      console.log("231");
+    goDetails(pid) {
+      // item.catalogId
+      let pidData = "";
+      if (pid.catalogId) {
+        pidData = pid.catalogId;
+      } else {
+        pidData = pid.id;
+      }
       this.$router.push({
-        path: "/Details"
+        path: "/Details",
+        query: {
+          pid: pidData
+        }
       });
     },
     menu() {

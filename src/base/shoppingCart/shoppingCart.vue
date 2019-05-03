@@ -2,64 +2,158 @@
   <div class="shoppingCart" v-if="showShoppingCart">
     <div class="shoppingCartBox">
       <div class="shoppingCartBoxImg">
-        <img src="../../assets/images/data/home/det.png" alt="">
+        <img :src="skuImg | formatImg412x180" alt v-if="skuImg">
+        <img :src="ShoppingCartData.skuImg | formatImg412x180" alt class="form-pic center" v-else>
       </div>
       <div class="shoppingCartClose">
         <i class="CartClose" @click="hideShoppingCart()"></i>
       </div>
-      <div class="shoppingCartPrice">
-        ¥36
-      </div>
+      <div class="shoppingCartPrice">¥{{skuPrice | formatFee}}</div>
       <div class="shoList">
-        <p class="shoListTitle">
-          选择款式
-        </p>
-        <div class="shoListItem">
-          <span class="shoListItemAct">卡其浅绿深灰</span>
-          <span>深灰深咖浅绿</span>
-          <span>深灰</span>
+        <div v-for="(prop,index) in ShoppingCartData.catalog" :key="index">
+          <p class="shoListTitle">{{prop.name.name}}</p>
+          <div class="shoListItem">
+            <span
+              v-for="(pv,itmeindex) in prop.values"
+              :key="itmeindex"
+              :class="{shoListItemAct: itmeindex == typeindex}"
+              @click="selectLeabe(itmeindex, pv.id)"
+            >{{pv.name}}</span>
+          </div>
         </div>
-        <p class="shoListTitle">
-          选择尺寸
-        </p>
-        <div class="shoListItem">
-          <span class="shoListItemAct">12x20mm</span>
-          <span>12x20mm</span>
-          <span>12x20mm</span>
-          <span>1.8x2mm</span>
-          <span>1.8x2mm</span>
-          <span>18x200mm</span>
-        </div>
-        <p class="shoListTitle">
-          选择数量
-        </p>
+
+        <p class="shoListTitle">选择数量</p>
         <div class="shoListNum">
-          <i class="shoppingicon iconreduce"></i>
-          <span>1</span>
-          <i class="shoppingicon iconAdd"></i>
+          <i class="shoppingicon iconreduce" @click="reduceCartNum"></i>
+          <span>{{selectnum}}</span>
+          <i class="shoppingicon iconAdd" @click="addCartNum"></i>
         </div>
       </div>
       <div class="shoppingTrue">
-        <div class="shoppingTrueBtn" @click="hideShoppingCart()">
-          确认
-        </div>
+        <div class="shoppingTrueBtn" @click="sureShoppingCart()">确认</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { getSkus, postshopping, postPrepare } from "@/api/home/home";
+import { configData } from "@/utils/config";
+
 export default {
   name: "shoppingCart",
-  props: ["showShoppingCart"],
+  props: ["showShoppingCart", "ShoppingCartData"],
   data() {
     return {
-      hideCartBox: false
+      hideCartBox: false,
+      typeindex: null,
+      skuImg: null,
+      selectnum: 1, //选择数量
+      skuPrice: 0,
+      skuId: "",
+      arr: [] //选择id组合
     };
   },
+  created() {
+    console.log(this.ShoppingCartData, "选项卡");
+  },
   methods: {
+    // 获取SKU
+    _getSkus(pid, arr) {
+      getSkus(pid, arr)
+        .then(res => {
+          if (res.code === configData.codeState) {
+            this.skuPrice = res.data.price; // 价格
+            this.skuImg = res.data.mainImg; // 图片
+            this.skuId = res.data.id; // skuid
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    // 添加至购物车
+    _postshopping() {
+      let data = {
+        //选取的商品信息
+        items: [
+          {
+            quantity: this.selectnum,
+            skuId: this.skuId
+          }
+        ],
+        shopId: this.ShoppingCartData.shopid
+      };
+      postshopping(data)
+        .then(res => {
+          if (res.code === configData.codeState) {
+            console.log("添加成功");
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    // 立即购买
+    _postPrepare() {
+      let data = {
+        //选取的商品信息
+        items: [
+          {
+            quantity: this.selectnum,
+            skuId: this.skuId
+          }
+        ],
+        shopId: this.ShoppingCartData.shopid
+      };
+      postPrepare(this.ShoppingCartData.pid, data)
+        .then(res => {
+          if (res.code === configData.codeState) {
+            // console.log('添加成功')
+            var mydata = JSON.stringify(res.data);
+            localStorage.prepareOrder = mydata;
+            // window.location.href = "sureForm.html";
+            console.log("去支付页面");
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    selectLeabe(itmeindex, id) {
+      this.arr = [];
+      if (itmeindex != this.typeindex) {
+        this.typeindex = itmeindex;
+        this.arr.push(id.toString());
+        if (this.arr.length == this.ShoppingCartData.catalog.length) {
+          this._getSkus(this.ShoppingCartData.pid, this.arr.join());
+        }
+      }
+    },
+    addCartNum() {
+      //点击加减数据
+      var selectnum = this.selectnum;
+      this.selectnum++;
+    },
+    reduceCartNum() {
+      //点击加减数据
+      var selectnum = this.selectnum;
+      if (selectnum <= 1) {
+        return false;
+      }
+      this.selectnum--;
+    },
     hideShoppingCart() {
       this.$emit("ClickHideShoppingCart", this.hideCartBox);
+    },
+    sureShoppingCart() {
+      console.log("点击事件");
+      if (this.ShoppingCartData.type == "cart") {
+        this._postshopping();
+      } else {
+        this._postPrepare();
+      }
+      // this.$emit("ClickHideShoppingCart", this.hideCartBox);
     }
   }
 };

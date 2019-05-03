@@ -57,4 +57,28 @@ export function gesComment(val) {
     url: `/mt/catalogs/${val}/comments?st=5&pn=1&ps=20`,
     method: 'get'
   });
-}   
+}
+//  获取商品Sku
+export function getSkus(pid, myarr) {
+  console.log(pid, myarr)
+  return request({
+    url: `/mt/catalogs/${pid}/skus/q?ids=${myarr}`,
+    method: 'get'
+  });
+}
+// 将商品加入购物车
+export function postshopping(data) {
+  return request({
+    url: `/td/quotes`,
+    method: 'post',
+    data: data
+  });
+}
+// 去支付页面 config.API_GATEWAY +'/td/catalogs/'+proSPecial.pid+'/prepare'
+export function postPrepare(pid, data) {
+  return request({
+    url: `/td/catalogs/${pid}/prepare`,
+    method: 'post',
+    data: data
+  });
+}  

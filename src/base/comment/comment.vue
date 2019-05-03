@@ -4,24 +4,24 @@
       <!-- {{item.comment}} -->
       <div class="commentItemLeft">
         <div class="commentItemImg">
-          <img :src="item.TouImg" alt="">
+          <img :src="item.avatar | formatImg160x160" alt="">
         </div>
       </div>
       <div class="commentItemRight">
         <div class="commentItemNeme">
-          <span>{{item.name}}</span>
+          <span>{{item.nickName}}</span>
           <div class="commentItemStar">
-            <img src="../../assets/images/icon/star.png" alt="" v-if="item.score >= 1">
-            <img src="../../assets/images/icon/star.png" alt="" v-if="item.score >= 2">
-            <img src="../../assets/images/icon/star.png" alt="" v-if="item.score >= 3">
-            <img src="../../assets/images/icon/star.png" alt="" v-if="item.score >= 4">
-            <img src="../../assets/images/icon/star.png" alt="" v-if="item.score >= 5">
+            <img src="../../assets/images/icon/star.png" alt="" v-if="item.star >= 1">
+            <img src="../../assets/images/icon/star.png" alt="" v-if="item.star >= 2">
+            <img src="../../assets/images/icon/star.png" alt="" v-if="item.star >= 3">
+            <img src="../../assets/images/icon/star.png" alt="" v-if="item.star >= 4">
+            <img src="../../assets/images/icon/star.png" alt="" v-if="item.star >= 5">
           </div>
         </div>
         <div class="commentItemConter">
-          {{item.comment}}
+          {{item.content}}
         </div>
-        <div class="commentItemListImg" v-if="item.dataImg.length > 0">
+        <!-- <div class="commentItemListImg" v-if="item.dataImg.length > 0">
           <div v-for="(img, index) in item.dataImg" :key="index">
             <img :src="img" alt="">
           </div>
@@ -31,10 +31,10 @@
           <div class="OtherCommentItem" v-for="(OtherItem, index) in item.ListComoent" :key="index">
             <span>{{OtherItem.name}}</span>：{{OtherItem.ItemCom}}
           </div>
-        </div>
+        </div> -->
         <div class="commentItemTime">
           <div class="commenTite">
-            {{item.time}}
+            {{item.createTime}}
           </div>
           <div class="commenLike">
             <span @click="showCommen">
@@ -63,7 +63,6 @@ export default {
     };
   },
   created() {
-    console.log(this.commentData, '评论');
   },
   methods: {
     showCommen() {

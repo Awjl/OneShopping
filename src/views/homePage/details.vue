@@ -83,6 +83,7 @@
     </div>
     <ShoppingCart
       :showShoppingCart="showShoppingCart"
+      :ShoppingCartData="ShoppingCartData"
       v-on:ClickHideShoppingCart="ClickHideShoppingCart"
     ></ShoppingCart>
     <Permission :showBox="showBox" v-on:childByValue="childByValue"></Permission>
@@ -113,89 +114,25 @@ export default {
       showBox: false,
       showCommentBox: false,
       showShoppingCart: false,
-      commentData: [
-        {
-          TouImg: "./img/1.c4c256bd.png",
-          name: "这个是我的名字",
-          score: 3,
-          comment: `买了2组，质量棒棒的！物流也很快～质量棒棒的！物流也很快质量棒棒的！物流也很快`,
-          time: "12:36",
-          commentNum: 0,
-          like: 26,
-          myLike: false,
-          ListComoent: [
-            {
-              name: `葫芦娃回复`,
-              ItemCom: `我和你收到的礼品是一样哎～超级开心啦！`
-            },
-            {
-              name: `葫芦娃回复`,
-              ItemCom: `我和你收到的礼品是一样哎～超级开心啦！`
-            }
-          ],
-          dataImg: [
-            "./img/1.c4c256bd.png",
-            "./img/1.c4c256bd.png",
-            "./img/1.c4c256bd.png",
-            "./img/1.c4c256bd.png",
-            "./img/1.c4c256bd.png"
-          ]
-        },
-        {
-          TouImg: "./img/1.c4c256bd.png",
-          name: "这个是我的名字",
-          score: 5,
-          comment: `买了2组，质量棒棒的！物流也很快～质量棒棒的！物流也很快质量棒棒的！物流也很快质量棒棒的！物流也很快质量棒棒的！物流也很快质量棒棒的！物流也很快质量棒棒的！`,
-          time: "12:36",
-          commentNum: 0,
-          like: 26,
-          myLike: true,
-          ListComoent: [],
-          dataImg: []
-        }
-      ],
-      listImg: [
-        {
-          img: "./img/1.c4c256bd.png",
-          name: "韩国秋冬宠物屋",
-          price: "48",
-          addNum: "2"
-        },
-        {
-          img: "./img/2.04132dd9.png",
-          name: "韩国秋冬宠物屋",
-          price: "48",
-          addNum: "2"
-        },
-        {
-          img: "./img/3.dd074d9a.png",
-          name: "韩国秋冬宠物屋",
-          price: "48",
-          addNum: "2"
-        },
-        {
-          img: "./img/4.98b6271f.png",
-          name: "韩国秋冬宠物屋",
-          price: "48",
-          addNum: "2"
-        }
-      ],
+      ShoppingCartData: {
+        skuImg: null,
+        mobileMainImg: "",
+        selectnum: 1,
+        catalog: [],
+        pid: "",
+        type: '',
+        shopid: '' //店铺id
+      },
+      catalog: [],
       proInfo: {}, //商品详情
       ifShow: 0, //切换使用
-      pid: "", //产品id
       pcolor: {}, //产品颜色
       psize: "", //产品尺寸
-      selectnum: 1, //选择数量
       shoustu: "", //是否收藏
       ifcare: "", //收藏的显示问题
-      arr: [], //选择id组合
-      shopid: "", //店铺id
-      catalog: {}, //
       moreinfo: {}, //他们还买了
       changesku: "", //选择sku
-      skuPrice: 0,
-      skuImg: null,
-      commentinfo: {}, //评论信息,
+      commentinfo: [], //评论信息,
       pid: ""
     };
   },
@@ -205,13 +142,14 @@ export default {
     this.menu();
   },
   methods: {
+    // 获取详情
     _geshopingDetails(pid) {
       geshopingDetails(pid)
         .then(res => {
           if (res.code === configData.codeState) {
             console.log("详情=============");
             this.proInfo = res.data;
-            this.shopid = res.data.shopId; //店铺id
+            this.ShoppingCartData.shopid = res.data.shopId; //店铺id
             this.catalog = res.data;
             this._geshopingRecommendList(this.catalog.categoryId);
           }
@@ -220,24 +158,26 @@ export default {
           console.log(error);
         });
     },
+    // 评论
     _gesComment(pid) {
       gesComment(pid)
         .then(res => {
           if (res.code === configData.codeState) {
             console.log("评论=============");
-            this.commentinfo = res.data;
+            // this.commentinfo = res.data;
             let myinfo = res.data.items;
             for (let i = 0; i < myinfo.length; i++) {
               myinfo[i].createTime = changetime2(myinfo[i].createTime);
             }
             this.commentinfo = myinfo;
-            console.log(myinfo);
+            console.log(this.commentinfo, "处理数据");
           }
         })
         .catch(function(error) {
           console.log(error);
         });
     },
+    // 获取推荐
     _geshopingRecommendList(categoryId) {
       geshopingRecommendList(categoryId)
         .then(res => {
@@ -251,7 +191,6 @@ export default {
           console.log(error);
         });
     },
-    _geshopingCatalogs() {},
     DetailsTab() {
       // 导航栏切换
       console.log("31");
@@ -261,6 +200,7 @@ export default {
     Judge() {
       // 显示权限框
       this.showBox = true;
+      this.ShoppingCartData.type = 'buy'
     },
     childByValue(childValue) {
       // 隐藏权限框
@@ -276,6 +216,10 @@ export default {
     },
     JoinShoppingCart() {
       this.showShoppingCart = true;
+      this.ShoppingCartData.skuImg = this.proInfo.mobileMainImg;
+      this.ShoppingCartData.catalog = this.catalog.props;
+      this.ShoppingCartData.pid = this.pid;
+      this.ShoppingCartData.type = 'cart'
     },
     ClickHideShoppingCart(hideCartBox) {
       this.showShoppingCart = hideCartBox;
