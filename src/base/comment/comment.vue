@@ -1,26 +1,25 @@
 <template>
   <div class="comment">
+    <div class="comment-proper">暂无留言</div>
     <div class="commentItem" v-for="(item, index) in commentData" :key="index">
       <!-- {{item.comment}} -->
       <div class="commentItemLeft">
         <div class="commentItemImg">
-          <img :src="item.avatar | formatImg160x160" alt="">
+          <img :src="item.avatar | formatImg160x160" alt />
         </div>
       </div>
       <div class="commentItemRight">
         <div class="commentItemNeme">
           <span>{{item.nickName}}</span>
           <div class="commentItemStar">
-            <img src="../../assets/images/icon/star.png" alt="" v-if="item.star >= 1">
-            <img src="../../assets/images/icon/star.png" alt="" v-if="item.star >= 2">
-            <img src="../../assets/images/icon/star.png" alt="" v-if="item.star >= 3">
-            <img src="../../assets/images/icon/star.png" alt="" v-if="item.star >= 4">
-            <img src="../../assets/images/icon/star.png" alt="" v-if="item.star >= 5">
+            <img src="../../assets/images/icon/star.png" alt v-if="item.star >= 1" />
+            <img src="../../assets/images/icon/star.png" alt v-if="item.star >= 2" />
+            <img src="../../assets/images/icon/star.png" alt v-if="item.star >= 3" />
+            <img src="../../assets/images/icon/star.png" alt v-if="item.star >= 4" />
+            <img src="../../assets/images/icon/star.png" alt v-if="item.star >= 5" />
           </div>
         </div>
-        <div class="commentItemConter">
-          {{item.content}}
-        </div>
+        <div class="commentItemConter">{{item.content}}</div>
         <!-- <div class="commentItemListImg" v-if="item.dataImg.length > 0">
           <div v-for="(img, index) in item.dataImg" :key="index">
             <img :src="img" alt="">
@@ -31,20 +30,21 @@
           <div class="OtherCommentItem" v-for="(OtherItem, index) in item.ListComoent" :key="index">
             <span>{{OtherItem.name}}</span>：{{OtherItem.ItemCom}}
           </div>
-        </div> -->
+        </div>-->
         <div class="commentItemTime">
-          <div class="commenTite">
-            {{item.createTime}}
-          </div>
+          <div class="commenTite">{{item.createTime}}</div>
           <div class="commenLike">
             <span @click="showCommen">
-              <img src="../../assets/images/icon/comment.png" alt=""> {{item.score}}
+              <img src="../../assets/images/icon/comment.png" alt />
+              {{item.score}}
             </span>
             <span v-if="item.myLike">
-              <img src="../../assets/images/icon/like.png" alt=""> {{item.like}}
+              <img src="../../assets/images/icon/like.png" alt />
+              {{item.like}}
             </span>
             <span v-if="!item.myLike">
-              <img src="../../assets/images/icon/likeAct.png" alt=""> {{item.like}}
+              <img src="../../assets/images/icon/likeAct.png" alt />
+              {{item.like}}
             </span>
           </div>
         </div>
@@ -62,8 +62,7 @@ export default {
       showBoxcom: true
     };
   },
-  created() {
-  },
+  created() {},
   methods: {
     showCommen() {
       this.$emit("cliShowBox", this.showBoxcom);
@@ -73,6 +72,15 @@ export default {
 </script>
 
 <style lang="scss">
+.comment-proper {
+  width: 100%;
+  text-align: center;
+  height: 93px;
+  line-height: 93px;
+  font-size: 24px;
+  color: #999999;
+  letter-spacing: 0.86px;
+}
 .commentItem {
   display: flex;
   justify-content: space-between;

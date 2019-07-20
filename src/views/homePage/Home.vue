@@ -1,6 +1,7 @@
 <template>
   <div class="home">
-    <SeachBox></SeachBox>
+    <!-- 搜索 -->
+    <!-- <SeachBox></SeachBox> -->
     <wv-swipe :height="140" :autoplay="3000">
       <wv-swipe-item v-for="(item, index) in imgData.focus" :key="index">
         <div>

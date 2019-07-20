@@ -58,10 +58,10 @@ export default {
     },
   methods: {
     goWelfareDetails() {
-      console.log("231");
-      this.$router.push({
-        path: "/lovePageDetailse"
-      });
+      // console.log("231");
+      // this.$router.push({
+      //   path: "/lovePageDetailse"
+      // });
     }
   }
 };

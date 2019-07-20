@@ -10,14 +10,14 @@
         <i class="tabIcon home-acticon"></i>
         <span class="tab-link_active">溜个弯</span>
       </router-link>
-      <router-link tag="div" class="tab-item" to="/Service" v-if="$route.path.indexOf('Service') === -1">
+      <!-- <router-link tag="div" class="tab-item" to="/Service" v-if="$route.path.indexOf('Service') === -1">
         <i class="tabIcon ser-icon"></i>
         <span class="tab-link">服务</span>
       </router-link>
       <router-link tag="div" class="tab-item" to="/Service" v-else>
         <i class="tabIcon ser-acticon"></i>
         <span class="tab-link_active">服务</span>
-      </router-link>
+      </router-link> -->
       <router-link tag="div" class="tab-item" to="/Love" v-if="$route.path.indexOf('Love') === -1">
         <i class="tabIcon lover-icon"></i>
         <span class="tab-link">好好爱</span>

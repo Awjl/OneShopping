@@ -58,7 +58,8 @@
       </div>
     </div>
     <div class="DetailsComment" v-if="!show">
-      <div class="DetailsCommentTitle">宝贝好评率97.8%</div>
+      <!-- 好评率 -->
+      <!-- <div class="DetailsCommentTitle">宝贝好评率97.8%</div> -->
       <Comment :commentData="commentinfo" v-on:cliShowBox="cliShowBox"></Comment>
     </div>
     <div class="Other">
@@ -66,10 +67,11 @@
       <ShoppingList :listImg="moreinfo.items"></ShoppingList>
     </div>
     <div class="ShoppingBottom">
-      <div class="BottomIcon">
+      <!-- 客服 -->
+      <!-- <div class="BottomIcon">
         <img src="../../assets/images/icon/service.png" alt>
         <p>勾搭</p>
-      </div>
+      </div> -->
       <div class="BottomIcon">
         <img src="../../assets/images/icon/share.png" alt>
         <p>分享</p>
@@ -396,6 +398,7 @@ export default {
   }
 }
 .DetailsData {
+  padding-top: 40px;
   .PurchaseNotes {
     width: calc(100%-60px);
     margin: 60px 30px 40px;
