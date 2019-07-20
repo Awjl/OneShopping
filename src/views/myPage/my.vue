@@ -7,12 +7,17 @@
         <div class="NoticeNum">2</div>
       </div>
       <div class="my-tou">
-        <div class="myHeadportrait" @click="goPerInformation">
-          <img src="../../assets/images/data/my/my.png" alt>
+        <div v-if="utk">
+          <div class="myHeadportrait" @click="goPerInformation">
+            <img src="../../assets/images/data/my/my.png" alt>
+          </div>
+          <div class="my-name">平板家的妹妹</div>
+          <div class="myBean-Btn" @click="goBellNum">
+            <img src="../../assets/images/icon/my-dou.png" alt>12个
+          </div>
         </div>
-        <div class="my-name">平板家的妹妹</div>
-        <div class="myBean-Btn" @click="goBellNum">
-          <img src="../../assets/images/icon/my-dou.png" alt>12个
+        <div v-else>
+          <div class="toLoing" @click="goLogin">去登陆</div>
         </div>
       </div>
       <div class="myTab">
@@ -116,10 +121,12 @@
             <div class="DiaryItemTime">还剩2天08 : 32 : 23</div>
           </div>
           <div class="DiaryItemConter">
-            <p>爱心易物 |
+            <p>
+              爱心易物 |
               <span>给他们一个遮住风雨的地方</span>
             </p>
-            <p>已捐：
+            <p>
+              已捐：
               <span>¥2100</span>
             </p>
             <p>目标价值:8000元物资</p>
@@ -131,10 +138,12 @@
             <div class="DiaryItemTime">执行中</div>
           </div>
           <div class="DiaryItemConter">
-            <p>爱心易物 |
+            <p>
+              爱心易物 |
               <span>给他们一个遮住风雨的地方</span>
             </p>
-            <p>已捐：
+            <p>
+              已捐：
               <span>¥2100</span>
             </p>
             <p>目标价值:8000元物资</p>
@@ -146,10 +155,12 @@
             <div class="DiaryItemTime">以结束</div>
           </div>
           <div class="DiaryItemConter">
-            <p>爱心易物 |
+            <p>
+              爱心易物 |
               <span>给他们一个遮住风雨的地方</span>
             </p>
-            <p>已捐：
+            <p>
+              已捐：
               <span>¥2100</span>
             </p>
             <p>目标价值:8000元物资</p>
@@ -165,8 +176,12 @@ export default {
   name: "My",
   data() {
     return {
-      show: true
+      show: true,
+      utk: null
     };
+  },
+  created() {
+    let utk = window.sessionStorage.getItem("utk");
   },
   methods: {
     myTab() {
@@ -185,6 +200,11 @@ export default {
     goBellNum() {
       this.$router.push({
         path: "/BellNum"
+      });
+    },
+    goLogin() {
+      this.$router.push({
+        path: "/Login"
       });
     },
     goHelpNum() {
@@ -273,6 +293,17 @@ export default {
         width: 20px;
         margin-right: 5px;
       }
+    }
+    .toLoing {
+      width: 200px;
+      height: 60px;
+      margin: 50px auto;
+      text-align: center;
+      line-height: 60px;
+      font-size: 20px;
+      background: #60d4ba;
+      color: #fff;
+      border-radius: 20px;
     }
   }
   .myTab {

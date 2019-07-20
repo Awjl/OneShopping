@@ -74,7 +74,7 @@ export function postshopping(data) {
     data: data
   });
 }
-// 去支付页面 config.API_GATEWAY +'/td/catalogs/'+proSPecial.pid+'/prepare'
+// 去支付页面
 export function postPrepare(pid, data) {
   return request({
     url: `/td/catalogs/${pid}/prepare`,

@@ -6,7 +6,8 @@ import { configData } from '@/utils/config'
 const service = axios.create({
   appId: configData.APP_ID,
   atk: configData.APP_ID,
-  baseURL: "./api", // api的base_url
+  baseURL: "./api", // api的base_url，
+  // baseURL: configData.API_GATEWAY, // 服务器端
   timeout: configData.timeout // 请求超时时间
 });
 
