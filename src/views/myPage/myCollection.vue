@@ -4,22 +4,32 @@
       <span>编辑</span>
     </div>
     <div class="DataList">
-      <div class="DataItem" v-for="(item, index) in listImg" :key="index" @click="goDetails()">
+      <div
+        class="DataItem"
+        v-for="(item, index) in careinfo"
+        :key="index"
+        @click="goDetails(item.id)"
+      >
         <div class="DataItemImg">
-          <img :src="item.img" alt="">
-          <div class="DataItemImgSub">
-
-          </div>
+          <img :src="item.mainImg | formatImg165x167" alt />
+          <div class="DataItemImgSub"></div>
         </div>
         <p class="item-name">{{item.name}}</p>
-        <p class="item-money"><span>￥{{item.price}}</span></p>
-        <p class="item-bean"><i class="iconmoney"></i> 宠物豆<span>+{{item.addNum}}</span></p>
+        <p class="item-money">
+          <span>￥{{item.price | formatFee}}</span>
+        </p>
+        <p class="item-bean">
+          <i class="iconmoney"></i> 宠物豆
+          <span>+{{item.loveBean}}</span>
+        </p>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { getFavoriate } from "@/api/user/user";
+import { configData } from "@/utils/config";
 export default {
   name: "myCollection",
   data() {
@@ -49,17 +59,38 @@ export default {
           price: "48",
           addNum: "2"
         }
-      ]
+      ],
+      careinfo: []
     };
   },
   created() {
     this.menu();
   },
+  mounted() {
+    this.getFavoriate();
+  },
   methods: {
-    goDetails() {
-      console.log("231");
+    // 获取收藏列表
+    getFavoriate() {
+      getFavoriate()
+        .then(({ code, data, message }) => {
+          if (code === configData.codeState) {
+            console.log("收藏列表=====================");
+            console.log(data);
+            this.careinfo = data.items;
+            // Object.assign(this.useInfo, data);
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    goDetails(pid) {
       this.$router.push({
-        path: "/Details"
+        path: "/Details",
+        query: {
+          pid: pid
+        }
       });
     },
     menu() {

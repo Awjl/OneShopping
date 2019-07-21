@@ -1,19 +1,21 @@
 <template>
   <div class="My">
     <div class="my-bg">
-      <img src="../../assets/images/data/my/my-bg.png" alt>
-      <div class="my-Notice" @click="goMyNotice">
-        <img src="../../assets/images/icon/notice.png" alt>
+      <img src="../../assets/images/data/my/my-bg.png" alt />
+      <!-- 站内信 -->
+      <!-- <div class="my-Notice" @click="goMyNotice">
+        <img src="../../assets/images/icon/notice.png" alt />
         <div class="NoticeNum">2</div>
-      </div>
+      </div> -->
       <div class="my-tou">
-        <div v-if="utk">
+        <div v-if="userData.uid">
           <div class="myHeadportrait" @click="goPerInformation">
-            <img src="../../assets/images/data/my/my.png" alt>
+            <img :src="userData.av" alt />
           </div>
-          <div class="my-name">平板家的妹妹</div>
+          <div class="my-name">{{userData.nn}}</div>
           <div class="myBean-Btn" @click="goBellNum">
-            <img src="../../assets/images/icon/my-dou.png" alt>12个
+            <img src="../../assets/images/icon/my-dou.png" alt />
+            {{useInfo.lovemoneyCount}}个
           </div>
         </div>
         <div v-else>
@@ -35,27 +37,29 @@
       <div class="myAllgoods">
         <div class="myAllgoodsItem" @click="goMyOrder(1)">
           <div class="myAllgoodsItemImg">
-            <img src="../../assets/images/icon/my1.png" alt>
-            <div class="messgNum">2</div>
+            <img src="../../assets/images/icon/my1.png" alt />
+            <div class="messgNum">{{ordersummery.newNum}}</div>
           </div>
           <div class="myAllgoodsItemName">待付款</div>
         </div>
         <div class="myAllgoodsItem" @click="goMyOrder(2)">
           <div class="myAllgoodsItemImg">
-            <img src="../../assets/images/icon/my2.png" alt>
-            <div class="messgNum">99</div>
+            <img src="../../assets/images/icon/my2.png" alt />
+            <div class="messgNum">{{ordersummery.payNum}}</div>
           </div>
           <div class="myAllgoodsItemName">待发货</div>
         </div>
         <div class="myAllgoodsItem" @click="goMyOrder(3)">
           <div class="myAllgoodsItemImg">
-            <img src="../../assets/images/icon/my3.png" alt>
+            <img src="../../assets/images/icon/my3.png" alt />
+            <div class="messgNum">{{ordersummery.deliveryNum}}</div>
           </div>
           <div class="myAllgoodsItemName">待收货</div>
         </div>
         <div class="myAllgoodsItem" @click="goMyOrder(4)">
           <div class="myAllgoodsItemImg">
-            <img src="../../assets/images/icon/my4.png" alt>
+            <img src="../../assets/images/icon/my4.png" alt />
+            <div class="messgNum">{{ordersummery.receiveNum}}</div>
           </div>
           <div class="myAllgoodsItemName">待评价</div>
         </div>
@@ -98,43 +102,49 @@
     <div class="myDiary" v-if="!show">
       <div class="myDiaryNum">
         <div class="NumLeft">
-          <span>28</span>
+          <span>{{useInfo.lovemoneyCount}}</span>
           <p>铃铛／个</p>
         </div>
         <div class="NumRight">
-          <span>12</span>
+          <span>{{useInfo.donCount}}</span>
           <p>已捐赠／个</p>
         </div>
       </div>
       <div class="DiaryHe"></div>
       <div class="myitem myorder" @click="goHelpNum">
         <div class="myitemLeft">
-          <i class="myicon myico1"></i> 申请救助记录 18
+          <i class="myicon myico1"></i>
+          申请救助记录 {{myJoinLove.records}}
         </div>
         <i class="myicon righticon"></i>
       </div>
       <div class="DiaryHe"></div>
       <div class="DiaryList">
-        <div class="DiaryItem">
+        <div class="DiaryItem" v-for="(item, index) in myJoinLove.items" :key="index">
           <div class="DiaryItemImg">
-            <img src="../../assets/images/data/love/1.png" alt>
-            <div class="DiaryItemTime">还剩2天08 : 32 : 23</div>
+            <img :src="item.cover | formatImg160x160" alt />
+            <div class="DiaryItemTime">还剩{{item.endTime | downData}}</div>
           </div>
-          <div class="DiaryItemConter">
-            <p>
-              爱心易物 |
-              <span>给他们一个遮住风雨的地方</span>
-            </p>
+          <div class="DiaryItemConter" v-if="item.type == 2">
+            <p>{{item.title}}</p>
             <p>
               已捐：
-              <span>¥2100</span>
+              <span>¥{{item.pasRes}}</span>
             </p>
-            <p>目标价值:8000元物资</p>
+            <p>目标价值:{{item.tarRes || 0}}元物资</p>
+          </div>
+          <div class="DiaryItemConter" v-if="item.type == 1">
+            <p>{{item.title}}</p>
+            <p>
+              已捐：
+              <span>¥{{item.pasMoney}}</span>
+            </p>
+            <p>目标价值:{{item.tarMoney || 0}}元物资</p>
           </div>
         </div>
-        <div class="DiaryItem">
+        <!-- <div class="DiaryItem">
           <div class="DiaryItemImg">
-            <img src="../../assets/images/data/love/2.png" alt>
+            <img src="../../assets/images/data/love/2.png" alt />
             <div class="DiaryItemTime">执行中</div>
           </div>
           <div class="DiaryItemConter">
@@ -148,10 +158,10 @@
             </p>
             <p>目标价值:8000元物资</p>
           </div>
-        </div>
-        <div class="DiaryItem">
+        </div>-->
+        <!-- <div class="DiaryItem">
           <div class="DiaryItemImg">
-            <img src="../../assets/images/data/love/3.png" alt>
+            <img src="../../assets/images/data/love/3.png" alt />
             <div class="DiaryItemTime">以结束</div>
           </div>
           <div class="DiaryItemConter">
@@ -165,25 +175,104 @@
             </p>
             <p>目标价值:8000元物资</p>
           </div>
-        </div>
+        </div>-->
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import { getSerinfoes, getPloves, getSummary } from "@/api/user/user";
+import { configData } from "@/utils/config";
 export default {
   name: "My",
   data() {
     return {
       show: true,
-      utk: null
+      uid: null,
+      userData: {
+        utk: "",
+        uid: "",
+        nn: "",
+        av: "",
+        wxuid: ""
+      },
+      useInfo: {
+        lovemoneyCount: 0,
+        donCount: 0
+      }, //用户信息
+      //我参加的公益信息
+      myJoinLove: {
+        records: 0,
+        total: 0,
+        page: 1,
+        rows: 20,
+        items: []
+      },
+      //订单摘要
+      ordersummery: {
+        deliveryNum: 0,
+        newNum: 0,
+        payNum: 0,
+        receiveNum: 0
+      }
     };
   },
   created() {
-    let utk = window.sessionStorage.getItem("utk");
+    this.userData = JSON.parse(window.sessionStorage.getItem("userData"));
+  },
+  mounted() {
+    if (this.userData.uid) {
+      this.getSerinfoes();
+      this.getPloves();
+      this.getSummary();
+    }
   },
   methods: {
+    // 获取用户公益信息
+    getSerinfoes() {
+      getSerinfoes()
+        .then(({ code, data, message }) => {
+          if (code === configData.codeState) {
+            console.log("公益=====================");
+            console.log(data);
+            this.useInfo = data;
+            // Object.assign(this.useInfo, data);
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    //获取我参加过的公益
+    getPloves() {
+      getPloves()
+        .then(({ code, data, message }) => {
+          if (code === configData.codeState) {
+            console.log("参加公益=====================");
+            console.log(data);
+            // Object.assign(this.myJoinLove, data);
+            this.myJoinLove = data;
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    // 获取订单摘要
+    getSummary() {
+      getSummary()
+        .then(({ code, data, message }) => {
+          if (code === configData.codeState) {
+            console.log("获取订单摘要=====================");
+            console.log(data);
+            this.ordersummery = data;
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
     myTab() {
       this.show = !this.show;
     },
@@ -241,7 +330,7 @@ export default {
       this.$router.push({
         path: "/MyOrder",
         query: {
-          id: val
+          type: val
         }
       });
     }

@@ -8,88 +8,137 @@
       <span :class="{OrderTabAct: myOrderTab == 4}" @click="clickOrderTab(4)">待评价</span>
     </div>
     <div class="OrderList">
-      <div class="OrderItem" @click="goOrderDetails()">
-        <div class="OrderId">
-          订单号：2019328549904
+      <div class='OrderList-title' v-if="allinfo.items.length === 0">- 暂无订单 -</div>
+      <div
+        class="OrderItem"
+        @click="goOrderDetails()"
+        v-for="(item, index) in allinfo.items"
+        :key="index"
+      >
+        <div class="OrderId">订单号：{{item.id}}</div>
+        <div class="OrderConter" v-for="(line, ind) in item.lineItems" :key="ind">
+          <div class="OrderConterImg">
+            <img :src="line.mainImg | formatJpg" alt />
+          </div>
+          <div class="OrderConterTitle">
+            <p>{{line.name}}</p>
+            <p>{{line.skuName}}</p>
+            <p>
+              <span>￥{{line.price | formatFee}}</span>
+              <span>X {{line.quantity}}</span>
+            </p>
+          </div>
         </div>
+        <div class="OrderAmount">
+          应付总额：¥{{item.paymentFee | formatFee}}
+          <span>（含运费¥{{item.postage | formatFee}}）</span>
+        </div>
+        <div class="OrderBtnBox">
+          <div class="OrderBtn OrderBtnAct" v-if="item.status == 0">去支付</div>
+          <div class="OrderBtn" v-if="item.status == 300">到哪了</div>
+          <div class="OrderBtn OrderBtnAct" v-if="item.status == 300">收到了</div>
+          <div class="OrderBtn OrderBtnAct" v-if="item.status == 400">说两句</div>
+        </div>
+      </div>
+      <!-- <div class="OrderItem" @click="goOrderDetails()">
+        <div class="OrderId">订单号：2019328549904</div>
         <div class="OrderConter">
           <div class="OrderConterImg">
-            <img src="../../assets/images/data/shopping/1.png" alt="">
+            <img src="../../assets/images/data/shopping/1.png" alt />
           </div>
           <div class="OrderConterTitle">
             <p>可组合3色收纳抽屉</p>
             <p>颜色2，12x20mm</p>
-            <p><span>￥36</span><span>X 2</span></p>
+            <p>
+              <span>￥36</span>
+              <span>X 2</span>
+            </p>
           </div>
         </div>
         <div class="OrderAmount">
-          应付总额：¥206<span>（含运费¥6）</span>
+          应付总额：¥206
+          <span>（含运费¥6）</span>
         </div>
         <div class="OrderBtnBox">
-          <div class="OrderBtn">
-            到哪了
-          </div>
-          <!-- <div class="OrderBtn OrderBtnAct">
-            收到了
-          </div> -->
+          <div class="OrderBtn">到哪了</div>
+          <div class="OrderBtn OrderBtnAct">收到了</div>
           <div class="OrderBtn OrderBtnAct">
             说两句
           </div>
         </div>
-      </div>
-      <div class="OrderItem" @click="goOrderDetails()">
-        <div class="OrderId">
-          订单号：2019328549904
-        </div>
-        <div class="OrderConter">
-          <div class="OrderConterImg">
-            <img src="../../assets/images/data/shopping/1.png" alt="">
-          </div>
-          <div class="OrderConterTitle">
-            <p>可组合3色收纳抽屉</p>
-            <p>颜色2，12x20mm</p>
-            <p><span>￥36</span><span>X 2</span></p>
-          </div>
-        </div>
-        <div class="OrderAmount">
-          应付总额：¥206<span>（含运费¥6）</span>
-        </div>
-        <div class="OrderBtnBox">
-          <div class="OrderBtn">
-            到哪了
-          </div>
-          <div class="OrderBtn OrderBtnAct">
-            收到了
-          </div>
-          <!-- <div class="OrderBtn OrderBtnAct">
-            说两句
-          </div> -->
-        </div>
-      </div>
+      </div>-->
     </div>
   </div>
 </template>
 
 <script>
+import { getOrders } from "@/api/user/user";
+import { configData } from "@/utils/config";
+
 export default {
   name: "myOrder",
   data() {
     return {
-      myOrderTab: ""
+      myOrderTab: "",
+      type: "",
+      allinfo: {
+        items: [],
+        page: 1,
+        records: 1,
+        rows: 0,
+        total: 1
+      } //订单列表
     };
   },
   created() {
-    this.myOrderTab = this.$route.query.id;
-    console.log(this.myOrderTab);
+    this.myOrderTab = this.$route.query.type;
   },
+  mounted() {
+    this.typeList();
+    this.getOrders();
+  },
+  // watch: {
+  //   $route(newValue, oldValue) {}
+  // },
   methods: {
+    // 获取订单列表
+    getOrders() {
+      // this.type
+      getOrders(this.type)
+        .then(({ code, data, message }) => {
+          if (code === configData.codeState) {
+            console.log("订单列表=====================");
+            console.log(data);
+            this.allinfo = data;
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
     clickOrderTab(val) {
       this.myOrderTab = val;
+      this.typeList();
+      this.getOrders();
+    },
+    // 判断类型
+    typeList() {
+      if (this.myOrderTab === 0) {
+        this.type = "";
+      } else if (this.myOrderTab === 1) {
+        this.type = "st=0&";
+      } else if (this.myOrderTab === 2) {
+        this.type = "st=200&";
+      } else if (this.myOrderTab === 3) {
+        this.type = "st=300&";
+      } else if (this.myOrderTab === 4) {
+        this.type = "st=400&";
+      }
     },
     goOrderDetails() {
       this.$router.push({
         path: "/OrderDetails"
-      })
+      });
     }
   }
 };
@@ -129,6 +178,12 @@ export default {
     }
   }
   .OrderList {
+    .OrderList-title {
+      height: 200px;
+      line-height: 200px;
+      text-align: center;
+      color: #ccc;
+    }
     .OrderItem {
       background: #fff;
       padding: 30px;

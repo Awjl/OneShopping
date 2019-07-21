@@ -52,7 +52,6 @@ export default {
         });
     },
     // 绑定用户
-    // 696777
     login() {
       let data = {
         code: this.code,

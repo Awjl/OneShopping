@@ -62,7 +62,28 @@ Vue.filter('formatSex', function (value) {
   }
 });
 
-
+// // 时间转换
+// Vue.filter('formatDateTime', function (value) {
+//   if (value) {
+//     if (value > 0) {
+//       function checkTime(m) { return m < 10 ? '0' + m : m };
+//       let days = parseInt(value / 1000 / 60 / 60 / 24, 10); //计算剩余的天数 
+//       let hours = parseInt(value / 1000 / 60 / 60 % 24, 10); //计算剩余的小时 
+//       let minutes = parseInt(value / 1000 / 60 % 60, 10);//计算剩余的分钟 
+//       let seconds = parseInt(value / 1000 % 60, 10);//计算剩余的秒数 
+//       days = checkTime(days);
+//       hours = checkTime(hours);
+//       minutes = checkTime(minutes);
+//       seconds = checkTime(seconds);
+//       return days + "天" + hours + ":" + minutes + ":" + seconds + "秒"
+//     }
+//     else {
+//       return '0天'
+//     }
+//   } else {
+//     return value
+//   }
+// })
 
 // 图片
 function formatImg(val, width, height) {
