@@ -1,5 +1,12 @@
 import request from "@/utils/request";
 
+// 获取微信授权
+export function getwxID(code, state) {
+  return request({
+    url: `/us/wx/mp/login?code=${code}&sate=${state}`,
+    method: 'get'
+  });
+}
 // 登录
 export function login(phone, password) {
   return request({

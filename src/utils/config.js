@@ -34,3 +34,12 @@ export function changetime1(shijianchuo) { //时间戳转换成时间
     var s = time.getSeconds();
     return y + '-' + add0(m) + '-' + add0(d);
 }
+
+export function getUrlParam(key) { //获取地址栏参数
+    var reg = new RegExp("(^|&)" + key + "=([^&]*)(&|$)");
+    var r = window.location.search.substr(1).match(reg);
+    if (r != null) {
+        return unescape(r[2]);
+    }
+    return null;
+}
