@@ -1,12 +1,13 @@
 export const configData = {
+    IS_DEBUG: true,// 是否调试模式,线上为 false,
     secret: '27b511b52ccc0787c54ffd44a28f39d5', // 密钥
     codeState: 0, // 请求状态
     APP_ID: 10000, // 类型 前端
     timeout: 15000, // 超时
-    API_GATEWAY: 'http://47.93.246.150/pet',  // 公共ip
+    API_GATEWAY: 'http://www.mayeinfo.com/pet',  // 公共ip
     ALI_OSS_GATEWAY: 'http://alioss.mildland.cn', // 公共镜像oss
     atk: 'p1P4fNO7eQjnx1pjNjGREHVxqg4j28h3lAc3WYbPdJcn/6BdxIqXOn/98+EaLW7vrtstIvWK6lzPm5brwyWcSQ==', // atonk
-    utk: 'wUkMhTchUyqBA+gO5NSQwdVVDOJ9Kdv2D7qF0PHjITbeUmP7zR/L7OrM0NVmpRTC' // utk
+    utk: 'wUkMhTchUyqBA+gO5NSQwdVVDOJ9Kdv2D7qF0PHjITbeUmP7zR/L7OrM0NVmpRTC', // utk
 };
 
 export function changetime2(shijianchuo) {//mm-dd hh:mm

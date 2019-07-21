@@ -8,14 +8,11 @@ export function getwxID(code, state) {
   });
 }
 // 登录
-export function login(phone, password) {
+export function login(data) {
   return request({
-    url: "/us/admin/login",
+    url: "/us/3td/bind",
     method: "post",
-    data: {
-      phone,
-      password
-    }
+    data: data
   });
 }
 // 获取验证码
@@ -23,14 +20,5 @@ export function getcode(phone) {
   return request({
     url: `/us/users/register/code?phone=${phone}`,
     method: "post"
-  });
-}
-
-// 注册
-export function getRegistered(data) {
-  return request({
-    url: `/us/users/register`,
-    method: "post",
-    data
   });
 }

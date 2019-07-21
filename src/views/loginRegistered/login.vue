@@ -2,32 +2,84 @@
   <div class="loginRegistered">
     <div class="loginRegisteredBox">
       <div class="loginRegisteredLogo">
-        <img src="../../assets/images/bg/login/logo.png" alt="">
+        <img src="../../assets/images/bg/login/logo.png" alt />
       </div>
       <div class="loginRegisteredInp">
-        <input type="text" placeholder="请输入手机号">
+        <input type="text" placeholder="请输入手机号" v-model="phone" />
       </div>
       <div class="loginRegisteredCode">
-        <input type="text" placeholder="请输入验证码"> <span>获取验证码</span>
+        <input type="text" placeholder="请输入验证码" v-model="code" />
+        <span @click="getcode">获取验证码</span>
       </div>
-      <div class="loginBtn">
-        登&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;录
-      </div>
-      <div class="goTab">
+      <div class="loginBtn" @click="login">绑&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;定</div>
+      <!-- <div class="goTab">
         还没有账号？<span @click="goRegistered">去注册</span>
-      </div>
+      </div>-->
     </div>
   </div>
 </template>
 
 <script>
+import { getcode, login } from "@/api/login/login";
+import { configData, getUrlParam } from "@/utils/config";
+
 export default {
   name: "login",
+  data() {
+    return {
+      phone: "",
+      code: "",
+      userData: {
+        utk: "",
+        uid: "",
+        nn: "",
+        av: "",
+        wxuid: ""
+      }
+    };
+  },
   methods: {
-    goRegistered() {
-      this.$router.push({
-        path: "/Registered"
-      });
+    // 获取验证码
+    getcode() {
+      getcode(this.phone)
+        .then(({ code, data, message }) => {
+          if (code === configData.codeState) {
+            console.log(data);
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    // 绑定用户
+    // 696777
+    login() {
+      let data = {
+        code: this.code,
+        phone: this.phone,
+        wxUserId: window.sessionStorage.getItem("wxuid")
+      };
+      login(data)
+        .then(({ code, data, message }) => {
+          if (code === configData.codeState) {
+            console.log(data);
+            this.userData.utk = data.token;
+            this.userData.uid = data.id;
+            this.userData.nn = data.nickName;
+            this.userData.av = data.avatar;
+            this.userData.wxuid = data.wxUserId;
+            window.sessionStorage.setItem(
+              "userData",
+              JSON.stringify(this.userData)
+            );
+            this.$router.push({
+              path: "/"
+            });
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     }
   }
 };

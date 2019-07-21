@@ -13,11 +13,13 @@ export default {
   name: "App",
   data() {
     return {
-      wxuid: ""
+      wxuid: "200"
     };
   },
   created() {
-    this.getwxID()
+    // this.getwxID()
+    window.sessionStorage.setItem('wxuid', '200')
+    console.log(window.sessionStorage.getItem('wxuid'))
   },
   methods: {
     getwxID() {
@@ -62,7 +64,7 @@ export default {
             }
           } else {
             // 授权失败，重新调用授权
-            var ruri = "http://www.mayeinfo.com/#/Home"; // 微信公众号授权成功后回调页
+            var ruri = "http://www.mayeinfo.com"; // 微信公众号授权成功后回调页
             var url =
               "https://open.weixin.qq.com/connect/oauth2/authorize?appid=wxa88fd2810fd475a6" +
               "&redirect_uri=" +
