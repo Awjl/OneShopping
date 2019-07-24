@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="conductItem" @click="goWelfareDetails()">
+    <!-- <div class="conductItem" @click="goWelfareDetails()">
       <img src="../../assets/images/data/love/list2.png" alt>
       <div class="conductItemTime">还剩{{donwData | downData}}</div>
       <div class="conductItemTitle">
@@ -13,32 +13,21 @@
           <i class="lovericon addres"></i>上海金山
         </p>
       </div>
-    </div>
-    <div class="conductItem">
-      <img src="../../assets/images/data/love/list3.png" alt>
-      <div class="conductItemTime">还剩2天08 : 32 : 23</div>
+    </div>-->
+    <div class="conductItem" v-for="(item, $index) in lovedata" :key="$index" v-show="item.loveStatus==0 || item.loveStatus==1">
+      <img :src="item.cover | formatJpg" alt />
+      <div class="conductItemTime" v-if="item.loveStatus==0">还剩{{item.endTime | formatEndTime}}</div>
+      <div class="conductItemTime" v-if="item.loveStatus==1">反馈中</div>
       <div class="conductItemTitle">
-        <p class="conductItemName">
-          爱心屋 |
-          <span>对！你可以让它们的冬天充满温暖</span>
-        </p>
+        <p class="conductItemName">{{item.title}}</p>
         <p class="conductItemji">
-          <i class="lovericon jine"></i> 猫粮500 狗粮800
-          <i class="lovericon addres"></i>上海金山
-        </p>
-      </div>
-    </div>
-    <div class="conductItem">
-      <img src="../../assets/images/data/love/list4.png" alt>
-      <div class="conductItemTime">还剩2天08 : 32 : 23</div>
-      <div class="conductItemTitle">
-        <p class="conductItemName">
-          爱心屋 |
-          <span>对！你可以让它们的冬天充满温暖</span>
-        </p>
-        <p class="conductItemji">
-          <i class="lovericon jine"></i> 猫粮500 狗粮800
-          <i class="lovericon addres"></i>上海金山
+          <i class="lovericon jine"></i> 已捐：
+          <span v-if="item.type == 1">¥{{item.pasMoney}}</span>
+          &nbsp;&nbsp;&nbsp;
+          目标:
+          <span v-if="item.type == 1">¥{{item.tarMoney}}</span>元
+          <i class="lovericon addres"></i>
+          {{item.areaName}}
         </p>
       </div>
     </div>
@@ -48,14 +37,25 @@
 <script>
 export default {
   name: "conductItem",
+  props: {
+    lovedata: {
+      type: Array,
+      default: []
+    }
+  },
   data() {
     return {
       donwData: 0
     };
   },
   mounted() {
-    this.donwData = new Date('2019-04-22 10:00:00') - new Date();
-    },
+    this.donwData = new Date("2019-04-22 10:00:00") - new Date();
+  },
+  watch: {
+    lovedata(newValue, oldValue) {
+      console.log(newValue);
+    }
+  },
   methods: {
     goWelfareDetails() {
       // console.log("231");

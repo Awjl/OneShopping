@@ -1,25 +1,25 @@
 <template>
   <div>
     <div>
-      <div class="loverItem">
+      <div class="loverItem" v-for="(item, $index) in lovedata" :key="$index" v-show="item.loveStatus == 2">
         <div class="loverItemimg">
-          <img src="../../assets/images/data/love/1.png" alt="">
+          <img :src="item.cover | formatJpg" alt >
           <div class="loverItemimgTime">
             已结束
           </div>
         </div>
         <div class="loverItemData">
-          <p class="loverItemDataName">爱心易物 | <span>是否愿意给他们送去充饥的食粮</span> </p>
-          <p class="charitableNum">已捐：<span>￥693</span></p>
-          <p class="loverItemDatatarget">目标价值:693元物资</p>
-          <p class="loverItemDataAdd"><i class="lovericon addAct"></i>安徽</p>
+          <p class="loverItemDataName">{{item.title}} </p>
+          <p class="charitableNum">已捐：<span>￥{{item.pasMoney}}</span></p>
+          <p class="loverItemDatatarget">目标价值:{{item.tarMoney}}元物资</p>
+          <p class="loverItemDataAdd"><i class="lovericon addAct"></i>{{item.areaName}}</p>
         </div>
         <div class="loverItemOver">
         </div>
       </div>
       <div class="love-he"></div>
     </div>
-    <div>
+    <!-- <div>
       <div class="loverItem">
         <div class="loverItemimg">
           <img src="../../assets/images/data/love/2.png" alt="">
@@ -55,13 +55,19 @@
         <div class="loverItemOver">
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
 <script>
 export default {
-  name: "loveItem"
+  name: "loveItem",
+  props: {
+    lovedata: {
+      type: Array,
+      default: []
+    }
+  },
 };
 </script>
 

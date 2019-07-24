@@ -1,15 +1,15 @@
 <template>
   <div class="myAddres">
     <ul>
-      <li class="myadd-item " v-for="(item,index) in list " data-type="0" :key="index">
+      <li class="myadd-item " v-for="(item,index) in addressInfo " data-type="0" :key="index">
         <div class="myadd-box" @touchstart.capture="touchStart" @touchend.capture="touchEnd" @click="skip(item.id)">
           <div class="myadd-content">
             <div class="myadd-left">
               <div class="myaddtitle">
-                <span>{{item.name}}</span>
+                <span>{{item.contacter}}</span>
                 <span>{{item.mobile}}</span>
               </div>
-              <p>{{item.city}}{{item.address}}</p>
+              <p>{{item.provinceName}}{{item.cityName}}{{item.areaName}}{{item.street}}</p>
             </div>
             <div class="myadd-right" @click.stop="addAddres(item.id)">
               修改<i class="myicon righticon"></i>
@@ -26,6 +26,9 @@
 </template>
 
 <script>
+import { getAddresses } from "@/api/user/user";
+import { configData } from "@/utils/config";
+
 export default {
   data() {
     return {
@@ -45,11 +48,30 @@ export default {
           id: 1
         }
       ],
+      addressInfo: [],
       startX: 0,
       endX: 0
     };
   },
+  mounted() {
+    this.getAddresses();
+  },
   methods: {
+    // 获取地址列表
+    getAddresses() {
+      getAddresses()
+        .then(({ code, data, message }) => {
+          if (code === configData.codeState) {
+            console.log("地址列表=====================");
+            console.log(data);
+            this.addressInfo = data;
+            // Object.assign(this.useInfo, data);
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
     // 跳转
     skip() {
       if (this.checkSlide()) {
@@ -113,7 +135,7 @@ export default {
       this.list.splice(index, 1);
       this._deleteAddressById(id);
     },
-    addAddres() {
+    addAddres(id) {
       this.$router.push({
         path: "/AddAddres"
       });

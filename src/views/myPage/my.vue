@@ -219,7 +219,7 @@ export default {
     };
   },
   created() {
-    this.userData = JSON.parse(window.sessionStorage.getItem("userData"));
+    this.userData = JSON.parse(window.sessionStorage.getItem("userData"))? JSON.parse(window.sessionStorage.getItem("userData")) : '';
   },
   mounted() {
     if (this.userData.uid) {

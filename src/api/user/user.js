@@ -46,3 +46,11 @@ export function getOrders(tyoe) {
         method: 'get'
     });
 }
+
+// 我的地址 /us/users/addresses
+export function getAddresses() {
+    return request({
+        url: `/us/users/addresses`,
+        method: 'get'
+    });
+}

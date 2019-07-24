@@ -7,32 +7,30 @@
     <div class="love-he" v-if="!show"></div>
     <div class="conduct" v-if="show">
       <div class="conductExplain">
-        <img src="../../assets/images/data/love/list1.png" alt="">
-        <div class="conductExplainText">
-          1 个宠物豆 = 人民币 1 元
-        </div>
+        <img src="../../assets/images/data/love/list1.png" alt />
+        <div class="conductExplainText">1 个宠物豆 = 人民币 1 元</div>
       </div>
-      <ConducItem></ConducItem>
+      <ConducItem :lovedata="love.items"></ConducItem>
     </div>
     <div class="loverList" v-if="!show">
-      <LoveItem></LoveItem>
+      <LoveItem :lovedata="love.items"></LoveItem>
     </div>
     <div class="loveMoer">
-      <div class="loverMoerBnt">
-        更多活动
-      </div>
+      <div class="loverMoerBnt">更多活动</div>
     </div>
     <div class="loverActivity">
       <div class="loverActivityItem" @click="goHelp">
-        <img src="../../assets/images/data/love/activity1.png" alt="">
+        <img src="../../assets/images/data/love/activity1.png" alt />
         <div class="loverActivityTeT">
-          <p class="loverActivityTeTname">TA在哪里？<br>
-            TA怎么了？需要帮助吗？</p>
+          <p class="loverActivityTeTname">
+            TA在哪里？
+            <br />TA怎么了？需要帮助吗？
+          </p>
           <p class="loverActivityTecon">请告诉我们您需要求助的内容</p>
         </div>
       </div>
       <div class="loverActivityItem" @click="goVolunteer">
-        <img src="../../assets/images/data/love/activit2.png" alt="">
+        <img src="../../assets/images/data/love/activit2.png" alt />
         <div class="loverActivityTeT">
           <p class="loverActivityTeTname">志愿者，约吗？</p>
           <p class="loverActivityTecon">爱屋及乌，温暖宠物世界</p>
@@ -45,17 +43,61 @@
 <script>
 import ConducItem from "@/base/conductItem/conductItem";
 import LoveItem from "@/base/loverItem/loverItem";
+import { getPloves } from "@/api/love/love";
+import { configData } from "@/utils/config";
 
 export default {
   name: "love",
   data() {
     return {
-      show: true
+      show: true,
+      userData: {
+        utk: "",
+        uid: "",
+        nn: "",
+        av: "",
+        wxuid: ""
+      },
+      love: {
+        records: 0,
+        total: 0,
+        page: 1,
+        rows: 20,
+        items: []
+      },
     };
   },
+  created() {
+    this.userData = JSON.parse(window.sessionStorage.getItem("userData"))
+      ? JSON.parse(window.sessionStorage.getItem("userData"))
+      : "";
+  },
+  mounted() {
+    if (this.userData.uid) {
+      this.getPloves();
+    }
+  },
   methods: {
+    //获取我参加过的公益
+    getPloves() {
+      getPloves()
+        .then(({ code, data, message }) => {
+          if (code === configData.codeState) {
+            console.log("参加公益=====================");
+            console.log(data);
+            // Object.assign(this.myJoinLove, data);
+            // this.myJoinLove = data;
+            this.love = data;
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
     showThis() {
       this.show = !this.show;
+      this.love.items = [];
+      this.getPloves()
     },
     goHelp() {
       this.$router.push({
