@@ -1,8 +1,13 @@
 <template>
   <div class="myAddres">
     <ul>
-      <li class="myadd-item " v-for="(item,index) in addressInfo " data-type="0" :key="index">
-        <div class="myadd-box" @touchstart.capture="touchStart" @touchend.capture="touchEnd" @click="skip(item.id)">
+      <li class="myadd-item" v-for="(item,index) in addressInfo " data-type="0" :key="index">
+        <div
+          class="myadd-box"
+          @touchstart.capture="touchStart"
+          @touchend.capture="touchEnd"
+          @click="skip(item.id)"
+        >
           <div class="myadd-content">
             <div class="myadd-left">
               <div class="myaddtitle">
@@ -12,16 +17,15 @@
               <p>{{item.provinceName}}{{item.cityName}}{{item.areaName}}{{item.street}}</p>
             </div>
             <div class="myadd-right" @click.stop="addAddres(item.id)">
-              修改<i class="myicon righticon"></i>
+              修改
+              <i class="myicon righticon"></i>
             </div>
           </div>
         </div>
         <div class="delete" @click="deleteItem(index, item.id)" :data-index="index">删除</div>
       </li>
     </ul>
-    <div class="addAddres" @click="addAddres(null)">
-      +添加收货信息
-    </div>
+    <div class="addAddres" @click="addAddres(null)">+添加收货信息</div>
   </div>
 </template>
 
@@ -137,7 +141,10 @@ export default {
     },
     addAddres(id) {
       this.$router.push({
-        path: "/AddAddres"
+        path: "/AddAddres",
+        query: {
+          id: id
+        }
       });
     }
   }

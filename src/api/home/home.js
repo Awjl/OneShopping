@@ -60,7 +60,6 @@ export function gesComment(val) {
 }
 //  获取商品Sku
 export function getSkus(pid, myarr) {
-  console.log(pid, myarr)
   return request({
     url: `/mt/catalogs/${pid}/skus/q?ids=${myarr}`,
     method: 'get'
@@ -81,4 +80,29 @@ export function postPrepare(pid, data) {
     method: 'post',
     data: data
   });
-}  
+}
+
+// 购物车列表
+export function getQuotes() {
+  return request({
+    url: `/td/quotes`,
+    method: 'get'
+  });
+}
+
+// 计算购物车
+export function setQuotes(id, data) {
+  return request({
+    url: `/td/quotes/${id}/items/fee`,
+    method: 'put',
+    data: data
+  });
+}
+// 删除购物车
+export function removeQuotes(carId, itemId) {
+  // return console.log(itemId, '异步');
+  return request({
+    url: `/td/quotes/${carId}/items/${itemId}`,
+    method: 'delete',
+  });
+}

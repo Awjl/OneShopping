@@ -47,10 +47,19 @@ export function getOrders(tyoe) {
     });
 }
 
-// 我的地址 /us/users/addresses
-export function getAddresses() {
+// 我的地址
+export function getAddresses(id) {
     return request({
-        url: `/us/users/addresses`,
+        url: `/us/users/addresses/${id}`,
         method: 'get'
     });
 }
+
+// 保存地址
+export function addresses(data) {
+    return request({
+      url: "/us/users/addresses",
+      method: "post",
+      data: data
+    });
+  }

@@ -1,11 +1,11 @@
 <template>
   <div class="addaddres">
     <div class="addaddreslist-inp">
-      <input type="text" placeholder="收货人姓名" v-model="data.name">
+      <input type="text" placeholder="收货人姓名" v-model="data.name" />
       <span>必填</span>
     </div>
     <div class="addaddreslist-inp">
-      <input type="text" placeholder="手机号码" v-model="data.mobile" @blur="OnBlur()">
+      <input type="text" placeholder="手机号码" v-model="data.mobile" @blur="OnBlur()" />
       <span>{{content}}</span>
     </div>
     <div class="addaddreslist-inp" @click="setAddres()">
@@ -13,16 +13,18 @@
       <span>必填</span>
     </div>
     <div class="addaddreslist-inp">
-      <input type="text" placeholder="详细地址（街道、楼牌号等）" v-model="data.address">
+      <input type="text" placeholder="详细地址（街道、楼牌号等）" v-model="data.address" />
       <span>必填</span>
     </div>
     <div class="addaddresbtn" @click="btn">保存</div>
-    <Addres :addresStater="addresStater" v-on:Addres="Addres"></Addres>
+    <Addres :addresStater="addresStater" @Addres="Addres"></Addres>
   </div>
 </template>
 
 <script>
 import Addres from "@/base/addres/addres";
+import { getAddresses, addresses } from "@/api/user/user";
+import { configData } from "@/utils/config";
 
 let phoneReg = /(^1[3|4|5|7|8]\d{9}$)|(^09\d{8}$)/;
 
@@ -39,22 +41,66 @@ export default {
         zipCode: 0,
         city: "请选择省份、城市、县区",
         id: ""
-      }
+      },
+      id: ""
     };
   },
+  created() {
+    this.id = this.$route.query.id;
+  },
+  mounted() {
+    if (this.id) {
+      this.getAddresses(this.id);
+    }
+  },
   methods: {
+    // 获取地址列表
+    getAddresses(id) {
+      getAddresses(id)
+        .then(({ code, data, message }) => {
+          if (code === configData.codeState) {
+            console.log("详细地址=====================");
+            console.log(data);
+            this.data.city = `${data[0].provinceName}-${data[0].cityName}-${data[0].areaName}`;
+            this.data.address = data[0].street;
+            this.data.mobile = data[0].mobile;
+            this.data.name = data[0].contacter;
+            this.data.userId = data[0].userId;
+            this.data.id = data[0].id;
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
     Addres(Addres) {
       // childValue就是子组件传过来的值
       this.addresStater = false;
       if (!Addres) {
         this.data.city = "请选择省份、城市、县区";
       } else {
+        console.log(Addres);
         this.data.city = `${Addres.Province}-${Addres.City}-${Addres.District}`;
       }
       // this.myList = childValue
     },
     setAddres() {
       this.addresStater = true;
+    },
+     // 添加地址
+    addresses() {
+      addresses(this.data)
+        .then(({ code, data, message }) => {
+          if (code === configData.codeState) {
+            console.log("地址列表=====================");
+            console.log(data);
+            this.addressInfo = data;
+            // Object.assign(this.useInfo, data);
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     },
     OnBlur() {
       if (this.data.mobile) {
@@ -68,7 +114,8 @@ export default {
       }
     },
     btn() {
-      if (this.$route.params.id === "null") {
+      if (this.$route.query.id === "null") {
+        this.addresses()
         //   if (this.content == "必填" && this.data.mobile != "" && this.data.name != "" && this.data.address != "" && this.data.address != "") {
         //   }
         // } else {

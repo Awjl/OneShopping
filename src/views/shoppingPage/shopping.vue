@@ -8,272 +8,203 @@
       <i class="shoppingicon iconEdit"></i>
       完成
     </div>
-    <div class="shoppingList">
-      <div class="shoppingItem">
-        <div class="shoppingItemSelect" @click="selectAct">
-          <div v-if="!select">
-            <img src="../../assets/images/icon/select.png" alt="">
+    <div class="shoppingList" v-if="shopinfo.lineItems.length > 0">
+      <div class="shoppingItem" v-for="(item, index) in shopinfo.lineItems[0].value" :key="index">
+        <div class="shoppingItemSelect" @click="selectAct(index)">
+          <div v-if="select.indexOf(index) === -1">
+            <img src="../../assets/images/icon/select.png" alt />
           </div>
-          <div v-if="select">
-            <img src="../../assets/images/icon/selectAct.png" alt="">
+          <div v-if="select.indexOf(index) !== -1">
+            <img src="../../assets/images/icon/selectAct.png" alt />
           </div>
         </div>
         <div class="shoppingItemContent">
           <div class="shoppingItemContentImg">
-            <img src="../../assets/images/data/shopping/1.png" alt="">
+            <img :src="item.mainImg | formatJpg" alt />
           </div>
-          <div class="shoppingItemNoEdit" v-if="editTab">
-            <p>可组合3色收纳抽屉</p>
-            <p>颜色2，12x20mm</p>
-            <p><span class="col">￥38</span> <span>x2</span></p>
+          <div class="shoppingItemNoEdit">
+            <p>{{item.catalogName}}</p>
+            <p>{{item.name}}</p>
+            <p>
+              <span class="col">￥{{item.price | formatFee}}</span>
+              <span>x{{item.quantity}}</span>
+            </p>
           </div>
-          <div class="shoppingItemContentNum" v-if="!editTab">
+          <!-- <div class="shoppingItemContentNum" v-if="!editTab">
             ￥38
-          </div>
-          <div class="shoppingItemContentData" v-if="!editTab">
+          </div>-->
+          <!-- <div class="shoppingItemContentData" v-if="!editTab">
             <p @click="JoinShoppingCart()">已选已选择：颜色3，12x20mm <i class="shoppingicon shoppinbot"></i></p>
             <p>
               <i class="shoppingicon iconreduce"></i>
               <span>1</span>
               <i class="shoppingicon iconAdd"></i>
             </p>
-          </div>
-        </div>
-      </div>
-      <div class="shoppingItem">
-        <div class="shoppingItemSelect" @click="selectAct">
-          <div v-if="!select">
-            <img src="../../assets/images/icon/select.png" alt="">
-          </div>
-          <div v-if="select">
-            <img src="../../assets/images/icon/selectAct.png" alt="">
-          </div>
-        </div>
-        <div class="shoppingItemContent">
-          <div class="shoppingItemContentImg">
-            <img src="../../assets/images/data/shopping/1.png" alt="">
-          </div>
-          <div class="shoppingItemNoEdit" v-if="editTab">
-            <p>可组合3色收纳抽屉</p>
-            <p>颜色2，12x20mm</p>
-            <p><span class="col">￥38</span> <span>x2</span></p>
-          </div>
-          <div class="shoppingItemContentNum" v-if="!editTab">
-            ￥38
-          </div>
-          <div class="shoppingItemContentData" v-if="!editTab">
-            <p @click="JoinShoppingCart()">已选已选择：颜色3，12x20mm <i class="shoppingicon shoppinbot"></i></p>
-            <p>
-              <i class="shoppingicon iconreduce"></i>
-              <span>1</span>
-              <i class="shoppingicon iconAdd"></i>
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="shoppingItem">
-        <div class="shoppingItemSelect" @click="selectAct">
-          <div v-if="!select">
-            <img src="../../assets/images/icon/select.png" alt="">
-          </div>
-          <div v-if="select">
-            <img src="../../assets/images/icon/selectAct.png" alt="">
-          </div>
-        </div>
-        <div class="shoppingItemContent">
-          <div class="shoppingItemContentImg">
-            <img src="../../assets/images/data/shopping/1.png" alt="">
-          </div>
-          <div class="shoppingItemNoEdit" v-if="editTab">
-            <p>可组合3色收纳抽屉</p>
-            <p>颜色2，12x20mm</p>
-            <p><span class="col">￥38</span> <span>x2</span></p>
-          </div>
-          <div class="shoppingItemContentNum" v-if="!editTab">
-            ￥38
-          </div>
-          <div class="shoppingItemContentData" v-if="!editTab">
-            <p @click="JoinShoppingCart()">已选已选择：颜色3，12x20mm <i class="shoppingicon shoppinbot"></i></p>
-            <p>
-              <i class="shoppingicon iconreduce"></i>
-              <span>1</span>
-              <i class="shoppingicon iconAdd"></i>
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="shoppingItem">
-        <div class="shoppingItemSelect" @click="selectAct">
-          <div v-if="!select">
-            <img src="../../assets/images/icon/select.png" alt="">
-          </div>
-          <div v-if="select">
-            <img src="../../assets/images/icon/selectAct.png" alt="">
-          </div>
-        </div>
-        <div class="shoppingItemContent">
-          <div class="shoppingItemContentImg">
-            <img src="../../assets/images/data/shopping/1.png" alt="">
-          </div>
-          <div class="shoppingItemNoEdit" v-if="editTab">
-            <p>可组合3色收纳抽屉</p>
-            <p>颜色2，12x20mm</p>
-            <p><span class="col">￥38</span> <span>x2</span></p>
-          </div>
-          <div class="shoppingItemContentNum" v-if="!editTab">
-            ￥38
-          </div>
-          <div class="shoppingItemContentData" v-if="!editTab">
-            <p @click="JoinShoppingCart()">已选已选择：颜色3，12x20mm <i class="shoppingicon shoppinbot"></i></p>
-            <p>
-              <i class="shoppingicon iconreduce"></i>
-              <span>1</span>
-              <i class="shoppingicon iconAdd"></i>
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="shoppingItem">
-        <div class="shoppingItemSelect" @click="selectAct">
-          <div v-if="!select">
-            <img src="../../assets/images/icon/select.png" alt="">
-          </div>
-          <div v-if="select">
-            <img src="../../assets/images/icon/selectAct.png" alt="">
-          </div>
-        </div>
-        <div class="shoppingItemContent">
-          <div class="shoppingItemContentImg">
-            <img src="../../assets/images/data/shopping/1.png" alt="">
-          </div>
-          <div class="shoppingItemNoEdit" v-if="editTab">
-            <p>可组合3色收纳抽屉</p>
-            <p>颜色2，12x20mm</p>
-            <p><span class="col">￥38</span> <span>x2</span></p>
-          </div>
-          <div class="shoppingItemContentNum" v-if="!editTab">
-            ￥38
-          </div>
-          <div class="shoppingItemContentData" v-if="!editTab">
-            <p @click="JoinShoppingCart()">已选已选择：颜色3，12x20mm <i class="shoppingicon shoppinbot"></i></p>
-            <p>
-              <i class="shoppingicon iconreduce"></i>
-              <span>1</span>
-              <i class="shoppingicon iconAdd"></i>
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="shoppingItem">
-        <div class="shoppingItemSelect" @click="selectAct">
-          <div v-if="!select">
-            <img src="../../assets/images/icon/select.png" alt="">
-          </div>
-          <div v-if="select">
-            <img src="../../assets/images/icon/selectAct.png" alt="">
-          </div>
-        </div>
-        <div class="shoppingItemContent">
-          <div class="shoppingItemContentImg">
-            <img src="../../assets/images/data/shopping/1.png" alt="">
-          </div>
-          <div class="shoppingItemNoEdit" v-if="editTab">
-            <p>可组合3色收纳抽屉</p>
-            <p>颜色2，12x20mm</p>
-            <p><span class="col">￥38</span> <span>x2</span></p>
-          </div>
-          <div class="shoppingItemContentNum" v-if="!editTab">
-            ￥38
-          </div>
-          <div class="shoppingItemContentData" v-if="!editTab">
-            <p @click="JoinShoppingCart()">已选已选择：颜色3，12x20mm <i class="shoppingicon shoppinbot"></i></p>
-            <p>
-              <i class="shoppingicon iconreduce"></i>
-              <span>1</span>
-              <i class="shoppingicon iconAdd"></i>
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="shoppingItem">
-        <div class="shoppingItemSelect" @click="selectAct">
-          <div v-if="!select">
-            <img src="../../assets/images/icon/select.png" alt="">
-          </div>
-          <div v-if="select">
-            <img src="../../assets/images/icon/selectAct.png" alt="">
-          </div>
-        </div>
-        <div class="shoppingItemContent">
-          <div class="shoppingItemContentImg">
-            <img src="../../assets/images/data/shopping/1.png" alt="">
-          </div>
-          <div class="shoppingItemNoEdit" v-if="editTab">
-            <p>可组合3色收纳抽屉</p>
-            <p>颜色2，12x20mm</p>
-            <p><span class="col">￥38</span> <span>x2</span></p>
-          </div>
-          <div class="shoppingItemContentNum" v-if="!editTab">
-            ￥38
-          </div>
-          <div class="shoppingItemContentData" v-if="!editTab">
-            <p @click="JoinShoppingCart()">已选已选择：颜色3，12x20mm <i class="shoppingicon shoppinbot"></i></p>
-            <p>
-              <i class="shoppingicon iconreduce"></i>
-              <span>1</span>
-              <i class="shoppingicon iconAdd"></i>
-            </p>
-          </div>
+          </div>-->
         </div>
       </div>
     </div>
     <div class="buyBtn">
-      <div class="buyBtnAll">
-        <div v-if="!select">
-          <img src="../../assets/images/icon/select.png" alt="">
+      <div class="buyBtnAll" @click="AllNone">
+        <div v-if="!selectAll">
+          <img src="../../assets/images/icon/select.png" alt />
         </div>
-        <div v-if="select">
-          <img src="../../assets/images/icon/selectAct.png" alt="">
+        <div v-if="selectAll">
+          <img src="../../assets/images/icon/selectAct.png" alt />
         </div>
         <p>全选</p>
       </div>
-      <p class="buyTotal">总价：￥114</p>
-      <div class="buyBtnBox" v-if="editTab" @click="goTrueOrdeer">
-        买咯
-      </div>
-      <div class="buyBtnBoxDel" v-if="!editTab">
-        删除
-      </div>
+      <p class="buyTotal">总价：{{fee.fee | formatFee}}</p>
+      <div class="buyBtnBox" v-if="editTab" @click="goTrueOrdeer">买咯</div>
+      <div class="buyBtnBoxDel" v-if="!editTab" @click="deleteCard">删除</div>
     </div>
-    <ShoppingCart :showShoppingCart="showShoppingCart" v-on:ClickHideShoppingCart="ClickHideShoppingCart"></ShoppingCart>
+    <!-- <ShoppingCart :showShoppingCart="showShoppingCart" v-on:ClickHideShoppingCart="ClickHideShoppingCart"></ShoppingCart> -->
   </div>
 </template>
 
 <script>
-import ShoppingCart from "@/base/shoppingCart/shoppingCart"; // 购物车
+// import ShoppingCart from "@/base/shoppingCart/shoppingCart"; // 购物车
+import { getQuotes, setQuotes, removeQuotes } from "@/api/home/home";
+import { configData } from "@/utils/config";
 
 export default {
   name: "shopping",
   data() {
     return {
       editTab: true,
-      select: true,
-      showShoppingCart: false
+      select: [],
+      selectAll: false,
+      // selectAct:[],
+      showShoppingCart: false,
+      userData: {
+        utk: "",
+        uid: "",
+        nn: "",
+        av: "",
+        wxuid: ""
+      },
+      shopinfo: {
+        lineItems: []
+      },
+      fee: {
+        fee: 0
+      }
     };
   },
+  created() {
+    this.userData = JSON.parse(window.sessionStorage.getItem("userData"))
+      ? JSON.parse(window.sessionStorage.getItem("userData"))
+      : "";
+  },
+  mounted() {
+    if (this.userData.uid) {
+      this.getQuotes();
+    }
+  },
   methods: {
+    //获取购物车列表
+    getQuotes() {
+      getQuotes()
+        .then(({ code, data, message }) => {
+          if (code === configData.codeState) {
+            console.log("购物车=====================");
+            console.log(data);
+            Object.assign(this.shopinfo, data);
+            console.log(this.shopinfo);
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
     editTabBox() {
       this.editTab = !this.editTab;
     },
-    selectAct() {
-      this.select = !this.select;
+    selectAct(index) {
+      if (this.select.indexOf(index) !== -1) {
+        this.select.splice(this.select.indexOf(index), 1);
+      } else {
+        this.select.push(index);
+        this.select = Array.from(new Set(this.select));
+      }
+      this.computeFee();
     },
-    JoinShoppingCart() {
-      this.showShoppingCart = true;
+    // 全选全部选
+    AllNone() {
+      if (this.selectAll) {
+        this.select = [];
+      } else {
+        this.select = [];
+        for (let i = 0; i < this.shopinfo.lineItems[0].value.length; i += 1) {
+          this.select.push(i);
+        }
+      }
+      this.computeFee();
     },
-    ClickHideShoppingCart(hideCartBox) {
-      // 隐藏编辑
-      this.showShoppingCart = hideCartBox;
+    //计算
+    computeFee() {
+      let that = this;
+      let items = [];
+      this.select.forEach(item => {
+        items.push(that.shopinfo.lineItems[0].value[item]);
+      });
+      if (this.select.length === this.shopinfo.lineItems[0].value.length) {
+        this.selectAll = true;
+      } else {
+        this.selectAll = false;
+      }
+      let data = {
+        //下单前提交购物车的信息
+        items: [
+          {
+            key: {
+              id:
+                this.shopinfo.lineItems.length > 0
+                  ? this.shopinfo.lineItems[0].key.id
+                  : 0
+            },
+            value: items
+          }
+        ]
+      };
+      if (items.length == 0) {
+        //计算费用
+        this.fee.fee = 0;
+      } else {
+        this.setQuotes(this.shopinfo.id, data);
+      }
+    },
+    // setQuotes
+    setQuotes(id, data) {
+      setQuotes(id, data)
+        .then(({ code, data, message }) => {
+          if (code === configData.codeState) {
+            console.log("计算=====================");
+            console.log(data);
+            Object.assign(this.fee, data);
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    deleteCard() {
+      for (let i = 0; i < this.select.length; i += 1) {
+        this.removeQuotes(this.shopinfo.lineItems[0].value[i].id);
+      }
+      this.getQuotes();
+    },
+    async removeQuotes(itemId) {
+      await removeQuotes(this.shopinfo.id, itemId)
+        .then(({ code, data, message }) => {
+          if (code === configData.codeState) {
+            console.log("删除成功=====================");
+            console.log(data);
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
     },
     goTrueOrdeer() {
       this.$router.push({
@@ -282,7 +213,7 @@ export default {
     }
   },
   components: {
-    ShoppingCart
+    // ShoppingCart
   }
 };
 </script>
