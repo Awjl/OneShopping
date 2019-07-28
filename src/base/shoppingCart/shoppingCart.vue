@@ -2,8 +2,8 @@
   <div class="shoppingCart" v-if="showShoppingCart">
     <div class="shoppingCartBox">
       <div class="shoppingCartBoxImg">
-        <img :src="skuImg | formatImg412x180" alt v-if="skuImg">
-        <img :src="ShoppingCartData.skuImg | formatImg412x180" alt class="form-pic center" v-else>
+        <img :src="skuImg | formatImg412x180" alt v-if="skuImg" />
+        <img :src="ShoppingCartData.skuImg | formatImg412x180" alt class="form-pic center" v-else />
       </div>
       <div class="shoppingCartClose">
         <i class="CartClose" @click="hideShoppingCart()"></i>
@@ -84,10 +84,14 @@ export default {
         ],
         shopId: this.ShoppingCartData.shopid
       };
+      let that = this;
       postshopping(data)
         .then(res => {
           if (res.code === configData.codeState) {
-            console.log("添加成功");
+            // console.log("添加成功");
+            that.$emit("successCart", true);
+          } else {
+            that.$emit("successCart", false);
           }
         })
         .catch(function(error) {

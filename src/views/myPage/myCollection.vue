@@ -8,7 +8,7 @@
         class="DataItem"
         v-for="(item, index) in careinfo"
         :key="index"
-        @click="goDetails(item.id)"
+        @click="goDetails(item.catalogId)"
       >
         <div class="DataItemImg">
           <img :src="item.mainImg | formatImg165x167" alt />

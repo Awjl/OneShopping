@@ -45,12 +45,28 @@ export function geshopingRecommendList(val) {
   });
 }
 // 获取是否收藏
-export function geshopingCatalogs(val) {
+export function geshopingCatalogs(val) {  
   return request({
     url: `/us/catalogs/${val}/favoriate`,
     method: 'get'
   });
 }
+// 添加收藏
+export function putGeshopingCatalogs(pid) {
+  return request({
+    url: `/us/catalogs/${pid}/favoriate`,
+    method: 'put'
+  });
+}
+// 取消关注
+export function delGeshopingCatalogs(pid) {
+  return request({
+    url: `/us/catalogs/favoriate/${pid}`,
+    method: 'delete'
+  });
+}
+
+
 // 获取评论信息
 export function gesComment(val) {
   return request({

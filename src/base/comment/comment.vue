@@ -34,10 +34,10 @@
         <div class="commentItemTime">
           <div class="commenTite">{{item.createTime}}</div>
           <div class="commenLike">
-            <span @click="showCommen">
+            <!-- <span @click="showCommen">
               <img src="../../assets/images/icon/comment.png" alt />
               {{item.score}}
-            </span>
+            </span> -->
             <span v-if="item.myLike">
               <img src="../../assets/images/icon/like.png" alt />
               {{item.like}}

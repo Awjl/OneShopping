@@ -3,7 +3,7 @@
     <wv-swipe :height="260" :autoplay="3000">
       <wv-swipe-item v-for="(item, index) in proInfo.imgs" :key="index">
         <div>
-          <img :src="item | formatJpg" alt>
+          <img :src="item | formatJpg" alt />
         </div>
       </wv-swipe-item>
     </wv-swipe>
@@ -40,20 +40,20 @@
         <div class="NoteProblem">购买运费如何收取？</div>
         <div class="PurchaseNotesTET">
           单笔订单金额（不含运费）满199元免邮费；不满199元，每单收取6元运费。
-          <br>(港澳台地区需满500元免邮费；不满500元，每单收取30元运费)
+          <br />(港澳台地区需满500元免邮费；不满500元，每单收取30元运费)
         </div>
         <div class="NoteProblem">订单如何配送？</div>
         <div class="PurchaseNotesTET">
           一只商店会根据商品所在地、顾客所在地和商品的尺寸重量优选物流配送商，确保优质用户体验。
-          <br>目前暂不支持自选快递，具体物流信息可在下单成功后“我的订单-物流详情”中查看。
+          <br />目前暂不支持自选快递，具体物流信息可在下单成功后“我的订单-物流详情”中查看。
         </div>
         <div class="NoteProblem">如何申请退换货？</div>
         <div class="PurchaseNotesTET">
           1.自收到商品之日起7日内，顾客可申请无忧退货；如果是退货，退款将原路返还，不同的银行处理时间不同，预计1-5个工作日到账；
-          <br>2.退货流程：
-          <br>确认收货-申请退货-客服审核通过-用户寄回商品-仓库签收验货-退款审核-退款完成；
-          <br>3.换货流程：
-          <br>确认收货-申请换货-客服审核通过-用户寄回商品-仓库签收验货-客服确认-换货完成；
+          <br />2.退货流程：
+          <br />确认收货-申请退货-客服审核通过-用户寄回商品-仓库签收验货-退款审核-退款完成；
+          <br />3.换货流程：
+          <br />确认收货-申请换货-客服审核通过-用户寄回商品-仓库签收验货-客服确认-换货完成；
         </div>
       </div>
     </div>
@@ -71,14 +71,18 @@
       <!-- <div class="BottomIcon">
         <img src="../../assets/images/icon/service.png" alt>
         <p>勾搭</p>
-      </div> -->
+      </div>-->
       <div class="BottomIcon">
-        <img src="../../assets/images/icon/share.png" alt>
+        <img src="../../assets/images/icon/share.png" alt />
         <p>分享</p>
       </div>
-      <div class="BottomIcon">
-        <img src="../../assets/images/icon/shou.png" alt>
+      <div class="BottomIcon" v-if="ifcare==='1'" @click="myfavoriate">
+        <img src="../../assets/images/icon/shou.png" alt />
         <p>收藏</p>
+      </div>
+      <div class="BottomIcon" v-if="ifcare==='2'" @click="cancelfoucus">
+        <img src="../../assets/images/icon/shouAct.png" alt />
+        <p>取消</p>
       </div>
       <div class="BottonBtn" @click="JoinShoppingCart()">加入购物车</div>
       <div class="BottonBtn BottomAct" @click="Judge()">立即购买</div>
@@ -86,7 +90,8 @@
     <ShoppingCart
       :showShoppingCart="showShoppingCart"
       :ShoppingCartData="ShoppingCartData"
-      v-on:ClickHideShoppingCart="ClickHideShoppingCart"
+      @ClickHideShoppingCart="ClickHideShoppingCart"
+      @successCart="successCart"
     ></ShoppingCart>
     <Permission :showBox="showBox" v-on:childByValue="childByValue"></Permission>
     <CommentBox :showCommentBox="showCommentBox" v-on:hideBoxC="hideBoxC"></CommentBox>
@@ -94,7 +99,7 @@
 </template>
 
 <script>
-import { Swipe, SwipeItem } from "we-vue";
+import { Swipe, SwipeItem, Toast } from "we-vue";
 import ShoppingList from "@/base/shoppingList/shoppingList"; // 商品列表
 import Comment from "@/base/comment/comment"; // 评论列表
 import Permission from "@/base/Permission/permission"; // 权限提醒
@@ -103,8 +108,10 @@ import ShoppingCart from "@/base/shoppingCart/shoppingCart"; // 购物车
 import {
   geshopingDetails,
   geshopingRecommendList,
-  geshopingCatalogs,
-  gesComment
+  geshopingCatalogs, // 获取是否收藏
+  gesComment,
+  putGeshopingCatalogs, // 添加收藏
+  delGeshopingCatalogs // 取消收藏
 } from "@/api/home/home";
 import { configData, changetime2 } from "@/utils/config";
 
@@ -122,8 +129,8 @@ export default {
         selectnum: 1,
         catalog: [],
         pid: "",
-        type: '',
-        shopid: '' //店铺id
+        type: "",
+        shopid: "" //店铺id
       },
       catalog: [],
       proInfo: {}, //商品详情
@@ -131,7 +138,7 @@ export default {
       pcolor: {}, //产品颜色
       psize: "", //产品尺寸
       shoustu: "", //是否收藏
-      ifcare: "", //收藏的显示问题
+      ifcare: "1", //收藏的显示问题
       moreinfo: {}, //他们还买了
       changesku: "", //选择sku
       commentinfo: [], //评论信息,
@@ -140,10 +147,27 @@ export default {
   },
   created() {
     this.pid = this.$route.query.pid;
+    this._geshopingCatalogs(this.pid);
     this._geshopingDetails(this.pid);
     this.menu();
   },
   methods: {
+    _geshopingCatalogs(pid) {
+      geshopingCatalogs(pid)
+        .then(res => {
+          if (res.code === configData.codeState) {
+            if (res.data == null) {
+              this.ifcare = "1";
+            } else {
+              this.ifcare = "2";
+            }
+            // this.ifcare = 2;
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
     // 获取详情
     _geshopingDetails(pid) {
       geshopingDetails(pid)
@@ -160,7 +184,32 @@ export default {
           console.log(error);
         });
     },
-    // 评论
+    // 添加关注
+    myfavoriate() {
+      putGeshopingCatalogs(this.pid)
+        .then(res => {
+          if (res.code === configData.codeState) {
+            this.ifcare = "2";
+            // this.ifcare = 2;
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    // 取消关注
+    cancelfoucus() {
+      delGeshopingCatalogs(this.pid)
+        .then(res => {
+          if (res.code === configData.codeState) {
+            this.ifcare = "1";
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    // 获取评论
     _gesComment(pid) {
       gesComment(pid)
         .then(res => {
@@ -195,14 +244,15 @@ export default {
     },
     DetailsTab() {
       // 导航栏切换
-      console.log("31");
       this.show = !this.show;
-      this._gesComment(this.pid);
+      if (!this.show) {
+        this._gesComment(this.pid);
+      }
     },
     Judge() {
       // 显示权限框
       this.showBox = true;
-      this.ShoppingCartData.type = 'buy'
+      this.ShoppingCartData.type = "buy";
     },
     childByValue(childValue) {
       // 隐藏权限框
@@ -221,10 +271,18 @@ export default {
       this.ShoppingCartData.skuImg = this.proInfo.mobileMainImg;
       this.ShoppingCartData.catalog = this.catalog.props;
       this.ShoppingCartData.pid = this.pid;
-      this.ShoppingCartData.type = 'cart'
+      this.ShoppingCartData.type = "cart";
     },
     ClickHideShoppingCart(hideCartBox) {
       this.showShoppingCart = hideCartBox;
+    },
+    successCart(val) {
+      this.showShoppingCart = false;
+      if (val) {
+        Toast.success("添加购物车成功");
+      } else {
+        Toast.fail("添加购物车失败");
+      }
     },
     menu() {
       window.scrollTo(0, 0);
