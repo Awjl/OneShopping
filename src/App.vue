@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <!-- <keep-alive> -->
-      <router-view v-wechat-title="$route.meta.title"></router-view>
+    <router-view v-wechat-title="$route.meta.title"></router-view>
     <!-- </keep-alive> -->
   </div>
 </template>
@@ -13,13 +13,13 @@ export default {
   name: "App",
   data() {
     return {
-      wxuid: "200"
+      wxuid: ""
     };
   },
   created() {
-    // this.getwxID()
-    window.sessionStorage.setItem('wxuid', '200')
-    console.log(window.sessionStorage.getItem('wxuid'))
+    this.getwxID()
+    // window.sessionStorage.setItem("wxuid", "200");
+    // console.log(window.sessionStorage.getItem("wxuid"));
   },
   methods: {
     getwxID() {
@@ -30,37 +30,20 @@ export default {
           if (res.code === configData.codeState) {
             var wx = res.data;
             if (wx.login) {
-              console.log(wx.login, "获取用户");
               // //公众号已经绑定手机号
-              // $.cookie("utk", wx.login.token, {
-              //   domain: config.COOKIE_DOMAIN,
-              //   expires: 30,
-              //   path: "/"
-              // });
-              // $.cookie("uid", wx.login.id, {
-              //   domain: config.COOKIE_DOMAIN,
-              //   expires: 30,
-              //   path: "/"
-              // });
-              // $.cookie("nn", wx.login.nickName, {
-              //   domain: config.COOKIE_DOMAIN,
-              //   expires: 30,
-              //   path: "/"
-              // });
-              // $.cookie("av", wx.login.avatar, {
-              //   domain: config.COOKIE_DOMAIN,
-              //   expires: 30,
-              //   path: "/"
-              // });
-              // $.cookie("wxuid", wx.login.wxUserId, {
-              //   domain: config.COOKIE_DOMAIN,
-              //   expires: 30,
-              //   path: "/"
-              // });
-              // window.location.href = "firstpage.html";
+              this.userData.utk = wx.login.token;
+              this.userData.uid = wx.login.id;
+              this.userData.nn = wx.login.nickName;
+              this.userData.av = wx.login.avatar;
+              this.userData.wxuid = wx.login.wxUserId;
+              window.sessionStorage.setItem(
+                "userData",
+                JSON.stringify(this.userData)
+              );
             } else {
               //引导用户绑定手机号
               this.wxuid = wx.id;
+              window.sessionStorage.setItem("wxuid", this.wxuid);
             }
           } else {
             // 授权失败，重新调用授权

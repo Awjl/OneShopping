@@ -1,5 +1,5 @@
 export const configData = {
-    IS_DEBUG: true,// 是否调试模式,线上为 false,
+    IS_DEBUG: false,// 是否调试模式,线上为 false,
     secret: '27b511b52ccc0787c54ffd44a28f39d5', // 密钥
     codeState: 0, // 请求状态
     APP_ID: 10000, // 类型 前端
