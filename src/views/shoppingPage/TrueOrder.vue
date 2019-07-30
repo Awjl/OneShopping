@@ -1,7 +1,7 @@
 <template>
   <div class="TrueOrder">
-    <div class="OrderAddres" v-if="addState">+ 添加收货地址</div>
-    <div class="OrderAddresall" v-if="!addState">
+    <div class="OrderAddres" v-if="addState" @click="putDefault()">+ 添加收货地址</div>
+    <div class="OrderAddresall" v-if="!addState" @click="putDefault()">
       <div class="myaddtitle">
         <span>收货人:{{addressinfo.contacter}}</span>
         <span>{{addressinfo.mobile}}</span>
@@ -155,6 +155,15 @@ export default {
         .catch(function(error) {
           console.log(error);
         });
+    },
+    // putDefault
+    putDefault() {
+      this.$router.push({
+        path: "/myAddres",
+        query: {
+          type: "put"
+        }
+      });
     },
     // 事实获取费用
     PutQuickFee(data) {

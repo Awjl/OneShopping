@@ -1,7 +1,13 @@
 <template>
   <div class="myAddres">
     <ul>
-      <li class="myadd-item" v-for="(item,index) in addressInfo " data-type="0" :key="index">
+      <li
+        class="myadd-item"
+        v-for="(item,index) in addressInfo "
+        data-type="0"
+        :key="index"
+        @click="defaultaddress(item.id)"
+      >
         <div
           class="myadd-box"
           @touchstart.capture="touchStart"
@@ -30,7 +36,7 @@
 </template>
 
 <script>
-import { getAddresses } from "@/api/user/user";
+import { getAddresses, putDefault } from "@/api/user/user";
 import { configData } from "@/utils/config";
 
 export default {
@@ -146,6 +152,23 @@ export default {
           id: id
         }
       });
+    },
+    //设置默认
+    defaultaddress(id) {
+      // console.log(this.$router.query)
+      if (this.$route.query.type === "put") {
+        putDefault(id)
+          .then(({ code, data, message }) => {
+            if (code === configData.codeState) {
+              this.$router.push({
+                path: "/TrueOrder"
+              });
+            }
+          })
+          .catch(function(error) {
+            console.log(error);
+          });
+      }
     }
   }
 };
@@ -156,9 +179,7 @@ export default {
   padding-top: 20px;
 }
 ul {
-  // width: 100%;
   overflow: hidden;
-  margin: 0 30px;
   li {
     margin-bottom: 20px;
   }

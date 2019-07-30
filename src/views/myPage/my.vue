@@ -6,7 +6,7 @@
       <!-- <div class="my-Notice" @click="goMyNotice">
         <img src="../../assets/images/icon/notice.png" alt />
         <div class="NoticeNum">2</div>
-      </div> -->
+      </div>-->
       <div class="my-tou">
         <div v-if="userData.uid">
           <div class="myHeadportrait" @click="goPerInformation">
@@ -219,7 +219,9 @@ export default {
     };
   },
   created() {
-    this.userData = JSON.parse(window.sessionStorage.getItem("userData"))? JSON.parse(window.sessionStorage.getItem("userData")) : '';
+    this.userData = JSON.parse(window.sessionStorage.getItem("userData"))
+      ? JSON.parse(window.sessionStorage.getItem("userData"))
+      : "";
   },
   mounted() {
     if (this.userData.uid) {
@@ -318,7 +320,10 @@ export default {
     },
     goMyAddres() {
       this.$router.push({
-        path: "/MyAddres"
+        path: "/MyAddres",
+        query: {
+          type: "MyAddres"
+        }
       });
     },
     goMyPlace() {

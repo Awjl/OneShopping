@@ -1,20 +1,20 @@
 <template>
   <div class="addaddres">
     <div class="addaddreslist-inp">
-      <input type="text" placeholder="收货人姓名" v-model="data.contacter" />
-      <span>必填</span>
+      <input type="text" placeholder="收货人姓名" v-model="UpForm.contacter" />
+      <!-- <span>必填</span> -->
     </div>
     <div class="addaddreslist-inp">
-      <input type="text" placeholder="手机号码" v-model="data.mobile" @blur="OnBlur()" />
-      <span>{{content}}</span>
+      <input type="text" placeholder="手机号码" v-model="UpForm.mobile" />
+      <!-- <span>{{content}}</span> -->
     </div>
     <div class="addaddreslist-inp" @click="setAddres()">
       {{selectedRegion}}
-      <span>必填</span>
+      <!-- <span>必填</span> -->
     </div>
     <div class="addaddreslist-inp">
-      <input type="text" placeholder="详细地址（街道、楼牌号等）" v-model="data.street" />
-      <span>必填</span>
+      <input type="text" placeholder="详细地址（街道、楼牌号等）" v-model="UpForm.street" />
+      <!-- <span>必填</span> -->
     </div>
     <div class="addaddresbtn" @click="btn">保存</div>
     <Addres :addresStater="addresStater" @Addres="Addres"></Addres>
@@ -35,7 +35,7 @@ export default {
     return {
       addresStater: false,
       content: "必填",
-      data: {},
+      // data: {},
       selectedRegion: "请选择省份、城市、县区",
       UpForm: {
         areaId: "",
@@ -63,7 +63,7 @@ export default {
             console.log("详细地址=====================");
             console.log(data);
             this.selectedRegion = `${data.provinceName}-${data.cityName}-${data.areaName}`;
-            this.data = data;
+            this.UpForm = data;
             // this.data.address = data.street;
             // this.data.mobile = data.mobile;
             // this.data.name = data.contacter;
@@ -83,8 +83,8 @@ export default {
       } else {
         console.log(Addres);
         this.selectedRegion = `${Addres.Province}-${Addres.City}-${Addres.District}`;
-        console.log(Addres.DistrictCode, '地区编码');
-        this.areaId  = Addres.DistrictCode;
+        console.log(Addres.DistrictCode, "地区编码");
+        this.UpForm.areaId = Addres.DistrictCode;
       }
       // this.myList = childValue
     },
@@ -93,44 +93,42 @@ export default {
     },
     // 添加地址
     addresses() {
-      addresses(this.data)
+      // console.log(this.UpForm);
+      // return;
+      addresses(this.UpForm)
         .then(({ code, data, message }) => {
           if (code === configData.codeState) {
-            console.log("保存成功=====================");
-            // console.log(data);
-            // this.addressInfo = data;
-            // Object.assign(this.useInfo, data);
+            this.$router.push({
+              path: "/myAddres"
+            });
           }
         })
         .catch(function(error) {
           console.log(error);
         });
     },
-    OnBlur() {
-      if (this.data.mobile) {
-        if (phoneReg.test(this.data.mobile)) {
-          this.content = "必填";
-        } else {
-          this.content = "格式不正确";
-        }
-      } else {
-        this.content = "必填";
-      }
-    },
+    // OnBlur() {
+    //   if (this.UpForm.mobile) {
+    //     if (phoneReg.test(this.UpForm.mobile)) {
+    //       this.content = "必填";
+    //     } else {
+    //       this.content = "格式不正确";
+    //     }
+    //   } else {
+    //     this.content = "必填";
+    //   }
+    // },
     btn() {
-      if (!this.data.areaId || !this.data.street || !this.data.mobile) {
+      if (!this.UpForm.areaId || !this.UpForm.street || !this.UpForm.mobile) {
         Toast.text("请完善收货信息");
         return;
+      } else {
+        if (!phoneReg.test(this.UpForm.mobile)) {
+          Toast.text("手机格式不正确");
+          return;
+        }
       }
       this.addresses();
-      // if (this.$route.query.id === "null") {
-      //   this.addresses();
-      //   //   if (this.content == "必填" && this.data.mobile != "" && this.data.name != "" && this.data.address != "" && this.data.address != "") {
-      //   //   }
-      //   // } else {
-      //   //   if (this.content == "必填" && this.data.mobile != "" && this.data.name != "" && this.data.address != "" && this.data.address != "") {
-      //   //   }
-      // }
     }
   },
   components: {

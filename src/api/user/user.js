@@ -71,3 +71,12 @@ export function addresses(data) {
       data: data
     });
   }
+
+  
+// 点击设置默认地址并跳转到确认订单页
+export function putDefault(id) {
+    return request({
+      url: `/us/users/addresses/${id}/default`,
+      method: "put"
+    });
+  }
