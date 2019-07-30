@@ -93,7 +93,6 @@
       @ClickHideShoppingCart="ClickHideShoppingCart"
       @successCart="successCart"
     ></ShoppingCart>
-    <Permission :showBox="showBox" v-on:childByValue="childByValue"></Permission>
     <CommentBox :showCommentBox="showCommentBox" v-on:hideBoxC="hideBoxC"></CommentBox>
   </div>
 </template>
@@ -102,7 +101,6 @@
 import { Swipe, SwipeItem, Toast } from "we-vue";
 import ShoppingList from "@/base/shoppingList/shoppingList"; // 商品列表
 import Comment from "@/base/comment/comment"; // 评论列表
-import Permission from "@/base/Permission/permission"; // 权限提醒
 import CommentBox from "@/base/CommentBox/CommentBox"; // 评论框
 import ShoppingCart from "@/base/shoppingCart/shoppingCart"; // 购物车
 import {
@@ -120,7 +118,6 @@ export default {
   data() {
     return {
       show: true,
-      showBox: false,
       showCommentBox: false,
       showShoppingCart: false,
       ShoppingCartData: {
@@ -250,14 +247,14 @@ export default {
       }
     },
     Judge() {
-      // 显示权限框
-      this.showBox = true;
+      // this.showBox = true;
+      this.showShoppingCart = true;
+      this.ShoppingCartData.skuImg = this.proInfo.mobileMainImg;
+      this.ShoppingCartData.catalog = this.catalog.props;
+      this.ShoppingCartData.pid = this.pid;
       this.ShoppingCartData.type = "buy";
     },
-    childByValue(childValue) {
-      // 隐藏权限框
-      this.showBox = childValue;
-    },
+
     cliShowBox(showBoxcom) {
       // 显示评论框
       this.showCommentBox = showBoxcom;
@@ -279,9 +276,9 @@ export default {
     successCart(val) {
       this.showShoppingCart = false;
       if (val) {
-        Toast.success("添加购物车成功");
+        Toast.text("添加购物车成功");
       } else {
-        Toast.fail("添加购物车失败");
+        Toast.text("添加购物车失败");
       }
     },
     menu() {
@@ -293,7 +290,6 @@ export default {
     SwipeItem,
     ShoppingList,
     Comment,
-    Permission,
     CommentBox,
     ShoppingCart
   },

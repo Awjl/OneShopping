@@ -156,8 +156,9 @@ export default {
   padding-top: 20px;
 }
 ul {
-  width: 100%;
+  // width: 100%;
   overflow: hidden;
+  margin: 0 30px;
   li {
     margin-bottom: 20px;
   }

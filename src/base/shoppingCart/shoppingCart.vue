@@ -33,18 +33,22 @@
         <div class="shoppingTrueBtn" @click="sureShoppingCart()">确认</div>
       </div>
     </div>
+    <Permission :showBox="showBox" @childByValue="childByValue" @toBuy="toBuy"></Permission>
   </div>
 </template>
 
 <script>
+import { Toast } from "we-vue";
 import { getSkus, postshopping, postPrepare } from "@/api/home/home";
 import { configData } from "@/utils/config";
+import Permission from "@/base/Permission/permission"; // 权限提醒
 
 export default {
   name: "shoppingCart",
   props: ["showShoppingCart", "ShoppingCartData"],
   data() {
     return {
+      showBox: false,
       hideCartBox: false,
       typeindex: null,
       skuImg: null,
@@ -53,6 +57,9 @@ export default {
       skuId: "",
       arr: [] //选择id组合
     };
+  },
+  components: {
+    Permission
   },
   created() {
     console.log(this.ShoppingCartData, "选项卡");
@@ -71,6 +78,17 @@ export default {
         .catch(function(error) {
           console.log(error);
         });
+    },
+    childByValue(childValue) {
+      // 隐藏权限框
+      this.showBox = childValue;
+      // 保存到购物车
+      this._postshopping();
+    },
+    // 去购买
+    toBuy(childValue) {
+      this.showBox = childValue;
+      this._postPrepare();
     },
     // 添加至购物车
     _postshopping() {
@@ -110,14 +128,16 @@ export default {
         ],
         shopId: this.ShoppingCartData.shopid
       };
+      let that = this;
       postPrepare(this.ShoppingCartData.pid, data)
         .then(res => {
           if (res.code === configData.codeState) {
-            // console.log('添加成功')
-            var mydata = JSON.stringify(res.data);
-            localStorage.prepareOrder = mydata;
-            // window.location.href = "sureForm.html";
-            console.log("去支付页面");
+            let mydata = JSON.stringify(res.data);
+            window.sessionStorage.setItem("prepareOrder", mydata);
+            // localStorage.prepareOrder = mydata;
+            that.$router.push({
+              path: "/TrueOrder"
+            });
           }
         })
         .catch(function(error) {
@@ -152,10 +172,15 @@ export default {
     },
     sureShoppingCart() {
       console.log("点击事件");
+      if (!this.skuId) {
+        Toast.text("请选择商品属性");
+        return;
+      }
       if (this.ShoppingCartData.type == "cart") {
         this._postshopping();
       } else {
-        this._postPrepare();
+        this.showBox = true;
+        //   // this._postPrepare();
       }
       // this.$emit("ClickHideShoppingCart", this.hideCartBox);
     }

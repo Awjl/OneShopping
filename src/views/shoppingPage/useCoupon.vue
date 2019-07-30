@@ -1,154 +1,21 @@
 <template>
   <div class="useCouponBox">
     <div class="useCouponBoxList">
-      <div class="useCouponBoxItem" @click="TabUseSel">
+      <div class="useCouponBoxItem" @click="TabUseSel(item.id, item)" v-for="(item, index) in couponList" :key="index">
         <div class="useCouponBoxItemNum">
-          <p>￥<span>10</span></p>
-          <p>满99使用</p>
+          <p>￥<span>{{item.fee | formatFee1}}</span></p>
+          <p>{{item.title}}</p>
         </div>
         <div class="useCouponBoxItemConter">
-          <p>一只商店新人败家券</p>
-          <p>全场通用</p>
-          <p>有效期至：2018-11-02</p>
+          <p>{{item.name}}</p>
+          <p>{{item.title}}</p>
+          <p>有效期至：{{item.effectTime | getData1}}</p>
         </div>
-        <div class="useCouponBoxItemSel">
-          <div v-if="!useSelAct">
+        <div class="useCouponBoxItemSel" v-if="orderType === 'order'">
+          <div v-if="useSelAct !== item.id">
             <img src="../../assets/images/icon/sel.png" alt="">
           </div>
-          <div v-if="useSelAct">
-            <img src="../../assets/images/icon/selectAct.png" alt="">
-          </div>
-        </div>
-      </div>
-      <div class="useCouponBoxItem" @click="TabUseSel">
-        <div class="useCouponBoxItemNum">
-          <p>￥<span>10</span></p>
-          <p>满99使用</p>
-        </div>
-        <div class="useCouponBoxItemConter">
-          <p>一只商店新人败家券</p>
-          <p>全场通用</p>
-          <p>有效期至：2018-11-02</p>
-        </div>
-        <div class="useCouponBoxItemSel">
-          <div v-if="!useSelAct">
-            <img src="../../assets/images/icon/sel.png" alt="">
-          </div>
-          <div v-if="useSelAct">
-            <img src="../../assets/images/icon/selectAct.png" alt="">
-          </div>
-        </div>
-      </div>
-      <div class="useCouponBoxItem" @click="TabUseSel">
-        <div class="useCouponBoxItemNum">
-          <p>￥<span>10</span></p>
-          <p>满99使用</p>
-        </div>
-        <div class="useCouponBoxItemConter">
-          <p>一只商店新人败家券</p>
-          <p>全场通用</p>
-          <p>有效期至：2018-11-02</p>
-        </div>
-        <div class="useCouponBoxItemSel">
-          <div v-if="!useSelAct">
-            <img src="../../assets/images/icon/sel.png" alt="">
-          </div>
-          <div v-if="useSelAct">
-            <img src="../../assets/images/icon/selectAct.png" alt="">
-          </div>
-        </div>
-      </div>
-      <div class="useCouponBoxItem" @click="TabUseSel">
-        <div class="useCouponBoxItemNum">
-          <p>￥<span>10</span></p>
-          <p>满99使用</p>
-        </div>
-        <div class="useCouponBoxItemConter">
-          <p>一只商店新人败家券</p>
-          <p>全场通用</p>
-          <p>有效期至：2018-11-02</p>
-        </div>
-        <div class="useCouponBoxItemSel">
-          <div v-if="!useSelAct">
-            <img src="../../assets/images/icon/sel.png" alt="">
-          </div>
-          <div v-if="useSelAct">
-            <img src="../../assets/images/icon/selectAct.png" alt="">
-          </div>
-        </div>
-      </div>
-      <div class="useCouponBoxItem" @click="TabUseSel">
-        <div class="useCouponBoxItemNum">
-          <p>￥<span>10</span></p>
-          <p>满99使用</p>
-        </div>
-        <div class="useCouponBoxItemConter">
-          <p>一只商店新人败家券</p>
-          <p>全场通用</p>
-          <p>有效期至：2018-11-02</p>
-        </div>
-        <div class="useCouponBoxItemSel">
-          <div v-if="!useSelAct">
-            <img src="../../assets/images/icon/sel.png" alt="">
-          </div>
-          <div v-if="useSelAct">
-            <img src="../../assets/images/icon/selectAct.png" alt="">
-          </div>
-        </div>
-      </div>
-      <div class="useCouponBoxItem" @click="TabUseSel">
-        <div class="useCouponBoxItemNum">
-          <p>￥<span>10</span></p>
-          <p>满99使用</p>
-        </div>
-        <div class="useCouponBoxItemConter">
-          <p>一只商店新人败家券</p>
-          <p>全场通用</p>
-          <p>有效期至：2018-11-02</p>
-        </div>
-        <div class="useCouponBoxItemSel">
-          <div v-if="!useSelAct">
-            <img src="../../assets/images/icon/sel.png" alt="">
-          </div>
-          <div v-if="useSelAct">
-            <img src="../../assets/images/icon/selectAct.png" alt="">
-          </div>
-        </div>
-      </div>
-      <div class="useCouponBoxItem" @click="TabUseSel">
-        <div class="useCouponBoxItemNum">
-          <p>￥<span>10</span></p>
-          <p>满99使用</p>
-        </div>
-        <div class="useCouponBoxItemConter">
-          <p>一只商店新人败家券</p>
-          <p>全场通用</p>
-          <p>有效期至：2018-11-02</p>
-        </div>
-        <div class="useCouponBoxItemSel">
-          <div v-if="!useSelAct">
-            <img src="../../assets/images/icon/sel.png" alt="">
-          </div>
-          <div v-if="useSelAct">
-            <img src="../../assets/images/icon/selectAct.png" alt="">
-          </div>
-        </div>
-      </div>
-      <div class="useCouponBoxItem" @click="TabUseSel">
-        <div class="useCouponBoxItemNum">
-          <p>￥<span>10</span></p>
-          <p>满99使用</p>
-        </div>
-        <div class="useCouponBoxItemConter">
-          <p>一只商店新人败家券</p>
-          <p>全场通用</p>
-          <p>有效期至：2018-11-02</p>
-        </div>
-        <div class="useCouponBoxItemSel">
-          <div v-if="!useSelAct">
-            <img src="../../assets/images/icon/sel.png" alt="">
-          </div>
-          <div v-if="useSelAct">
+          <div v-if="useSelAct === item.id">
             <img src="../../assets/images/icon/selectAct.png" alt="">
           </div>
         </div>
@@ -162,12 +29,29 @@ export default {
   name: "useCoupon",
   data() {
     return {
-      useSelAct: true
+      useSelAct: "",
+      orderType:'',
+      couponList: []
     };
   },
+  created () {
+    this.orderType = this.$route.query.type;
+  },
+  mounted() {
+    if (this.orderType === 'order') {
+      // this.couponList = JSON.parse(window.sessionStorage.getItem("prepareOrder"));
+      console.log(JSON.parse(window.sessionStorage.getItem("prepareOrder")).lineItems[0].key.myCoupons);
+      this.couponList = JSON.parse(window.sessionStorage.getItem("prepareOrder")).lineItems[0].key.myCoupons;
+    }
+    console.log(this.couponList, '优惠券列表')
+  },
   methods: {
-    TabUseSel() {
-      this.useSelAct = !this.useSelAct;
+    TabUseSel(num, coupon) {
+      this.useSelAct = num;
+      // localStorage.coupon
+      let stringList = JSON.stringify(coupon)
+      console.log(stringList);
+      window.sessionStorage.setItem("coupon", stringList);
     }
   }
 };

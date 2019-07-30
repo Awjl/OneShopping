@@ -9,6 +9,14 @@ Vue.filter('formatFee', function (value) {
     return value;
   }
 });
+// 不精准
+Vue.filter('formatFee1', function (value) {
+  if (value) {
+    return (value / 100);
+  } else {
+    return value;
+  }
+});
 
 // 时间转换年月日时分秒
 Vue.filter('getData', function (value) {
@@ -23,6 +31,21 @@ Vue.filter('getData', function (value) {
     let mm = time.getMinutes();
     let s = time.getSeconds();
     return y + '-' + checkTime(m) + '-' + checkTime(d) + ' ' + checkTime(h) + '-' + checkTime(mm) + '-' + checkTime(s);
+  } else {
+    return value
+  }
+})
+
+// 时间转换年月日
+Vue.filter('getData1', function (value) {
+  if (value) {
+    function checkTime(m) { return m < 10 ? '0' + m : m };
+    //shijianchuo是整数，否则要parseInt转换  
+    let time = new Date(value);
+    let y = time.getFullYear();
+    let m = time.getMonth() + 1;
+    let d = time.getDate();
+    return y + '-' + checkTime(m) + '-' + checkTime(d);
   } else {
     return value
   }
@@ -165,22 +188,30 @@ Vue.filter("formatJpg", function (value) {
   }
 });
 
-Vue.filter("formatEndTime", function(endTime) {
+Vue.filter("formatEndTime", function (endTime) {
   console.log(endTime)
   var minus = endTime - new Date().getTime();
   console.log(minus);
   if (minus <= 0) {
-      return "00：00：00";
+    return "00：00：00";
   } else {
-      minus = minus/1000;
-      var day = parseInt(minus/(24*60*60));
-      var hour = parseInt(minus % (24*60*60)/(60*60));
-      var minute = parseInt(minus % (24 * 60)/ 60);
-      var second = parseInt(minus % (60)/ 60);
-      if (day > 0) {
-          return day + "天" + " " + (hour > 9 ? hour : "0" + hour) + ":" + (minute > 9 ? minute: "0" + minute) + ":" + (second > 9 ? second : "0" + second);
-      } else {
-          return (hour > 9 ? hour : "0" + hour) + ":" + (minute > 9 ? minute: "0" + minute) + ":" + (second > 9 ? second : "0" + second);
-      }
+    minus = minus / 1000;
+    var day = parseInt(minus / (24 * 60 * 60));
+    var hour = parseInt(minus % (24 * 60 * 60) / (60 * 60));
+    var minute = parseInt(minus % (24 * 60) / 60);
+    var second = parseInt(minus % (60) / 60);
+    if (day > 0) {
+      return day + "天" + " " + (hour > 9 ? hour : "0" + hour) + ":" + (minute > 9 ? minute : "0" + minute) + ":" + (second > 9 ? second : "0" + second);
+    } else {
+      return (hour > 9 ? hour : "0" + hour) + ":" + (minute > 9 ? minute : "0" + minute) + ":" + (second > 9 ? second : "0" + second);
+    }
   }
 })
+
+Vue.filter("pickerValueFilter", function (value) {
+  if (Array.isArray(value)) {
+    return value.toString()
+  } else {
+    return '请选择'
+  }
+});

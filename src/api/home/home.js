@@ -122,3 +122,13 @@ export function removeQuotes(carId, itemId) {
     method: 'delete',
   });
 }
+
+// 获取购物车订单
+export function postCart(id, data) {
+  // return console.log(itemId, '异步');
+  return request({
+    url: `/td/quotes/${id}/prepare`,
+    method: 'post',
+    data: data
+  });
+}

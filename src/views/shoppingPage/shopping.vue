@@ -64,7 +64,8 @@
 
 <script>
 // import ShoppingCart from "@/base/shoppingCart/shoppingCart"; // 购物车
-import { getQuotes, setQuotes, removeQuotes } from "@/api/home/home";
+import { Toast } from "we-vue";
+import { getQuotes, setQuotes, removeQuotes, postCart } from "@/api/home/home";
 import { configData } from "@/utils/config";
 
 export default {
@@ -206,10 +207,53 @@ export default {
           console.log(error);
         });
     },
-    goTrueOrdeer() {
-      this.$router.push({
-        path: "/TrueOrder"
+    // 去支付
+    postCart() {
+      // postCart
+      let that = this;
+      let items = [];
+      this.select.forEach(item => {
+        items.push(that.shopinfo.lineItems[0].value[item]);
       });
+      let data = {
+        //下单前提交购物车的信息
+        items: [
+          {
+            key: {
+              id:
+                this.shopinfo.lineItems.length > 0
+                  ? this.shopinfo.lineItems[0].key.id
+                  : 0
+            },
+            value: items
+          }
+        ]
+      };
+      postCart(this.shopinfo.id, data)
+        .then(({ code, data, message }) => {
+          if (code === configData.codeState) {
+            console.log("获取支付订单数据=====================");
+            console.log(data);
+            let mydata = JSON.stringify(data);
+            window.sessionStorage.setItem("prepareOrder", mydata);
+            this.$router.push({
+              path: "/TrueOrder"
+            });
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
+    goTrueOrdeer() {
+      if (this.select.length === 0) {
+        Toast.text("请选择商品");
+      } else {
+        this.postCart();
+        // this.$router.push({
+        //   path: "/TrueOrder"
+        // });
+      }
     }
   },
   components: {

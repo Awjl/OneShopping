@@ -13,9 +13,9 @@
         <div class="area" @click="districtSelected()" :class="District?'':'active'" v-show="City">{{District?District:'请选择'}}</div>
       </section>
       <ul>
-        <li class="addList" v-for="(v,k) in info" @click="getProvinceId(v.id, v.name, k)" v-show="showProvince" :class="v.selected ? 'active' : ''" :key="k">{{v.name}}</li>
-        <li class="addList" v-for="(v,k) in showCityList" @click="getCityId(v.id, v.name, k)" v-show="showCity" :class="v.selected ? 'active' : ''" :key="k">{{v.name}}</li>
-        <li class="addList" v-for="(v,k) in showDistrictList" @click="getDistrictId(v.id, v.name, k)" v-show="showDistrict" :class="v.selected ? 'active' : ''" :key="k">{{v.name}}</li>
+        <li class="addList" v-for="(v,k1) in info" @click="getProvinceId(v.id, v.name, k1)" v-show="showProvince" :class="v.selected ? 'active' : ''" :key="k1">{{v.name}}</li>
+        <li class="addList" v-for="(v,k2) in showCityList" @click="getCityId(v.id, v.name, k2)" v-show="showCity" :class="v.selected ? 'active' : ''" :key="k2">{{v.name}}</li>
+        <li class="addList" v-for="(v,k3) in showDistrictList" @click="getDistrictId(v.id, v.name, k3)" v-show="showDistrict" :class="v.selected ? 'active' : ''" :key="k3">{{v.name}}</li>
       </ul>
     </section>
   </section>
@@ -39,6 +39,9 @@ export default {
       Province: false,
       City: false,
       Addres: {
+        ProvinceCode: '',
+        CityCode: '',
+        DistrictCode: '',
         Province: '',
         City: '',
         District: ''
@@ -3679,6 +3682,10 @@ export default {
       this.province = code;
       this.Province = input;
       this.Addres.Province = this.Province;
+      this.Addres.ProvinceCode = this.province;
+      // province: 1,
+      // city: 3,
+      // district: 57,
       this.showProvince = false;
       this.showCity = true;
       this.showDistrict = false;
@@ -3703,6 +3710,7 @@ export default {
       this.city = code;
       this.City = input;
       this.Addres.City = this.City;
+      this.Addres.CityCode = this.city;
       this.showProvince = false;
       this.showCity = false;
       this.showDistrict = true;
@@ -3720,6 +3728,7 @@ export default {
       this.district = code;
       this.District = input;
       this.Addres.District = this.District;
+      this.Addres.DistrictCode = this.district;
       // 选择当前添加active
       this.showDistrictList.map(a => a.selected = false);
       this.showDistrictList[index].selected = true;

@@ -3,11 +3,11 @@
     <div class="PermissionBox">
       <div class="PermissionBoxS"></div>
       <div class="PermissionBoxC" @click="childClick"></div>
-      <p class="PermissionSory">抱歉，您的段数还不能参加此专区活动哦~</p>
-      <p>您现在的捐赠次数为0。</p>
+      <p class="PermissionSory">会员本次购买可以减省30元哦~</p>
+      <p>是否去会员专区转转呢？</p>
       <div class="PermissionBoxBtn">
-        <div @click="childClick">我瞅瞅先</div>
-        <div class="PermissionBoxBtnAct">我修炼去</div>
+        <div @click="childClick">去瞅瞅</div>
+        <div class="PermissionBoxBtnAct" @click="clickBuy">去购买</div>
       </div>
     </div>
   </div>
@@ -25,6 +25,9 @@ export default {
   methods: {
     childClick() {
       this.$emit("childByValue", this.childValue);
+    },
+    clickBuy() {
+      this.$emit("toBuy", this.childValue);
     }
   }
 };
