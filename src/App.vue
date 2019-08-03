@@ -13,11 +13,18 @@ export default {
   name: "App",
   data() {
     return {
-      wxuid: ""
+      wxuid: "",
+      userData: {
+        utk: "",
+        uid: "",
+        nn: "",
+        av: "",
+        wxuid: ""
+      }
     };
   },
   created() {
-    this.getwxID()
+    this.getwxID();
     // window.sessionStorage.setItem("wxuid", "200");
     // console.log(window.sessionStorage.getItem("wxuid"));
   },
