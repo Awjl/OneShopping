@@ -14,7 +14,12 @@
         </p>
       </div>
     </div>-->
-    <div class="conductItem" v-for="(item, $index) in lovedata" :key="$index" v-show="item.loveStatus==0 || item.loveStatus==1">
+    <div
+      class="conductItem"
+      v-for="(item, $index) in lovedata"
+      :key="$index"
+      v-show="item.loveStatus==0 || item.loveStatus==1"
+    >
       <img :src="item.cover | formatJpg" alt />
       <div class="conductItemTime" v-if="item.loveStatus==0">还剩{{item.endTime | formatEndTime}}</div>
       <div class="conductItemTime" v-if="item.loveStatus==1">反馈中</div>
@@ -39,8 +44,7 @@ export default {
   name: "conductItem",
   props: {
     lovedata: {
-      type: Array,
-      default: []
+      type: Array
     }
   },
   data() {

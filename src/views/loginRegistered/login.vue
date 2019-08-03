@@ -9,7 +9,7 @@
       </div>
       <div class="loginRegisteredCode">
         <input type="text" placeholder="请输入验证码" v-model="code" />
-        <span @click="getcode">获取验证码</span>
+        <span @click="getcode">{{name}}</span>
       </div>
       <div class="loginBtn" @click="login">绑&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;定</div>
       <!-- <div class="goTab">
@@ -20,8 +20,11 @@
 </template>
 
 <script>
+import { Toast } from "we-vue";
+
 import { getcode, login } from "@/api/login/login";
 import { configData, getUrlParam } from "@/utils/config";
+let phoneReg = /(^1[3|4|5|7|8]\d{9}$)|(^09\d{8}$)/;
 
 export default {
   name: "login",
@@ -29,6 +32,7 @@ export default {
     return {
       phone: "",
       code: "",
+      name: "获取验证码",
       userData: {
         utk: "",
         uid: "",
@@ -41,10 +45,21 @@ export default {
   methods: {
     // 获取验证码
     getcode() {
+      if (!this.phone) {
+        Toast.text("请输入手机号");
+        return;
+      }
+      if (!phoneReg.test(this.phone)) {
+        Toast.text("手机格式不正确");
+        return;
+      }
       getcode(this.phone)
         .then(({ code, data, message }) => {
           if (code === configData.codeState) {
             console.log(data);
+            this.name = "已发送";
+          } else {
+            this.name = "重新发送";
           }
         })
         .catch(function(error) {
@@ -53,6 +68,18 @@ export default {
     },
     // 绑定用户
     login() {
+      if (!this.phone) {
+        Toast.text("请输入手机号");
+        return;
+      }
+      if (!phoneReg.test(this.phone)) {
+        Toast.text("手机格式不正确");
+        return;
+      }
+      if (!this.code) {
+        Toast.text("请输入验证码");
+        return;
+      }
       let data = {
         code: this.code,
         phone: this.phone,

@@ -19,7 +19,7 @@ service.interceptors.request.use(
     if (configData.IS_DEBUG) {
       config.headers["utk"] = configData.utk;
     } else {
-      config.headers["utk"] = JSON.parse(window.sessionStorage.getItem('userData')).utk || null
+      config.headers["utk"] = JSON.parse(window.sessionStorage.getItem('userData')) ? JSON.parse(window.sessionStorage.getItem('userData')).utk : null
     }
     return config;
   },

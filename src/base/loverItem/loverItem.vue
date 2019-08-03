@@ -1,21 +1,29 @@
 <template>
   <div>
     <div>
-      <div class="loverItem" v-for="(item, $index) in lovedata" :key="$index" v-show="item.loveStatus == 2">
+      <div
+        class="loverItem"
+        v-for="(item, $index) in lovedata"
+        :key="$index"
+        v-show="item.loveStatus == 2"
+      >
         <div class="loverItemimg">
-          <img :src="item.cover | formatJpg" alt >
-          <div class="loverItemimgTime">
-            已结束
-          </div>
+          <img :src="item.cover | formatJpg" alt />
+          <div class="loverItemimgTime">已结束</div>
         </div>
         <div class="loverItemData">
-          <p class="loverItemDataName">{{item.title}} </p>
-          <p class="charitableNum">已捐：<span>￥{{item.pasMoney}}</span></p>
+          <p class="loverItemDataName">{{item.title}}</p>
+          <p class="charitableNum">
+            已捐：
+            <span>￥{{item.pasMoney}}</span>
+          </p>
           <p class="loverItemDatatarget">目标价值:{{item.tarMoney}}元物资</p>
-          <p class="loverItemDataAdd"><i class="lovericon addAct"></i>{{item.areaName}}</p>
+          <p class="loverItemDataAdd">
+            <i class="lovericon addAct"></i>
+            {{item.areaName}}
+          </p>
         </div>
-        <div class="loverItemOver">
-        </div>
+        <div class="loverItemOver"></div>
       </div>
       <div class="love-he"></div>
     </div>
@@ -55,7 +63,7 @@
         <div class="loverItemOver">
         </div>
       </div>
-    </div> -->
+    </div>-->
   </div>
 </template>
 
@@ -64,10 +72,9 @@ export default {
   name: "loveItem",
   props: {
     lovedata: {
-      type: Array,
-      default: []
+      type: Array
     }
-  },
+  }
 };
 </script>
 

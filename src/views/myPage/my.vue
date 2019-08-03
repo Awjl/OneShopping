@@ -178,6 +178,7 @@
         </div>-->
       </div>
     </div>
+    <div class="my-footer">- 到底了 -</div>
   </div>
 </template>
 
@@ -349,10 +350,17 @@ export default {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 1246px;
-  padding-bottom: 110px;
+  height: 1230px;
+  padding-bottom: 150px;
   background: #f2f2f2;
   overflow-y: auto;
+  .my-footer {
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    color: #ccc;
+    font-size: 20px;
+  }
 }
 .my-bg {
   position: relative;
