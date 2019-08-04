@@ -24,8 +24,8 @@ export default {
     };
   },
   created() {
-    this.getwxID();
-    // window.sessionStorage.setItem("wxuid", "200");
+    // this.getwxID();
+    window.sessionStorage.setItem("wxuid", "205");
     // console.log(window.sessionStorage.getItem("wxuid"));
   },
   methods: {

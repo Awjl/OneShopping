@@ -36,6 +36,7 @@ const Login = () => import('./views/loginRegistered/login') // 登录页面
 const Registered = () => import('./views/loginRegistered/registered') // 注册页面
 const OrderDetails = () => import('./views/myPage/OrderDetails') // 登录页面
 
+const MyVip = () => import('./views/myPage/vipList') // 登录页面
 
 
 Vue.use(Router);
@@ -54,7 +55,7 @@ export default new Router({
           meta: {
             title: "首页"
           }
-        }, 
+        },
         {
           path: "/Service",
           component: Service,
@@ -295,6 +296,14 @@ export default new Router({
       name: "MyOrder",
       meta: {
         title: "我的订单"
+      }
+    },
+    {
+      path: "/MyVip",
+      component: MyVip,
+      name: "MyVip",
+      meta: {
+        title: "VIP商城"
       }
     },
     {

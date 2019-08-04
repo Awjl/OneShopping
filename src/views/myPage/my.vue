@@ -27,6 +27,11 @@
         <div :class="{myTabAct: !show}" @click="myTab()">爱心记</div>
       </div>
     </div>
+    <div class="my-vip">
+      <div class="my-vip-titel">- VIP特权 -</div>
+      <div class="my-vip-list"></div>
+      <div class="vip-button" @click="goMyVip">开通VIP</div>
+    </div>
     <div class="myList" v-if="show">
       <div class="myitem myorder" @click="goMyOrder(0)">
         <div class="myitemLeft">
@@ -225,11 +230,11 @@ export default {
       : "";
   },
   mounted() {
-    if (this.userData.uid) {
-      this.getSerinfoes();
-      this.getPloves();
-      this.getSummary();
-    }
+    // if (this.userData.uid) {
+    this.getSerinfoes();
+    this.getPloves();
+    this.getSummary();
+    // }
   },
   methods: {
     // 获取用户公益信息
@@ -278,6 +283,11 @@ export default {
     },
     myTab() {
       this.show = !this.show;
+    },
+    goMyVip() {
+      this.$router.push({
+        path: "/MyVip"
+      });
     },
     goPerInformation() {
       this.$router.push({
@@ -350,8 +360,8 @@ export default {
   top: 0;
   left: 0;
   width: 100vw;
-  height: 1230px;
-  padding-bottom: 150px;
+  height: calc(100vh - 110px);
+  // padding-bottom: 150px;
   background: #f2f2f2;
   overflow-y: auto;
   .my-footer {
@@ -451,6 +461,48 @@ export default {
     }
   }
 }
+.my-vip {
+  width: 100%;
+  // height: 586px;
+  background: #fff;
+  padding: 30px 0px;
+  box-sizing: border-box;
+  margin-bottom: 20px;
+  .my-vip-titel {
+    width: 100%;
+    text-align: center;
+    font-size: 28px;
+    color: #4a4a4a;
+    letter-spacing: 1.56px;
+  }
+  .my-vip-list {
+    width: 100%;
+    height: 400px;
+    // display: flex;
+    // flex-wrap: wrap;
+    // justify-content: space-between;
+    // .my-vip-item {
+    //   width: 100px;
+    //   .vipIcon {
+    //     display: block;
+    //     width: 100px;
+    //     height: 100px;
+    //   }
+    // }
+  }
+  .vip-button {
+    width: 440px;
+    height: 70px;
+    text-align: center;
+    line-height: 70px;
+    background: #e2b24f;
+    border-radius: 100px;
+    font-size: 28px;
+    color: #ffffff;
+    letter-spacing: 1px;
+    margin: 0 auto;
+  }
+}
 .myList {
   width: 100%;
   padding: 0 40px;
@@ -540,7 +592,7 @@ export default {
     }
   }
   .myitem {
-    width: calc(100%-80px);
+    width: 100%;
     padding: 0 40px;
     height: 88px;
     box-sizing: border-box;

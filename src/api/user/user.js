@@ -66,17 +66,36 @@ export function getAddressesOne(id) {
 // 保存地址
 export function addresses(data) {
     return request({
-      url: "/us/users/addresses",
-      method: "post",
-      data: data
+        url: "/us/users/addresses",
+        method: "post",
+        data: data
     });
-  }
+}
 
-  
+
 // 点击设置默认地址并跳转到确认订单页
 export function putDefault(id) {
     return request({
-      url: `/us/users/addresses/${id}/default`,
-      method: "put"
+        url: `/us/users/addresses/${id}/default`,
+        method: "put"
     });
-  }
+}
+
+// 获取 vip
+
+// 我的地址详情
+export function queryVipPlan() {
+    return request({
+        url: `/us/vip/queryVipPlan`,
+        method: 'get'
+    });
+}
+
+// 提交
+export function wxJsApiPay(data) {
+    return request({
+        url: "/us/vip/wxJsApiPay",
+        method: "post",
+        data: data
+    });
+}
