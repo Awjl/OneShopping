@@ -28,9 +28,11 @@
       </div>
     </div>
     <div class="my-vip">
+      <div class="my-vip-titelVip" v-if="vipData.isVip">会员剩余时间: {{vipData.dueTime | formatEndTime1}}</div>
       <div class="my-vip-titel">- VIP特权 -</div>
       <div class="my-vip-list"></div>
-      <div class="vip-button" @click="goMyVip">开通VIP</div>
+      <div class="vip-button" @click="goMyVip" v-if="!vipData.isVip">开通VIP</div>
+      <div class="vip-button" @click="goMyVip" v-else>续费VIP</div>
     </div>
     <div class="myList" v-if="show">
       <div class="myitem myorder" @click="goMyOrder(0)">
@@ -189,6 +191,8 @@
 
 <script>
 import { getSerinfoes, getPloves, getSummary } from "@/api/user/user";
+import { getUserInfo } from "@/api/login/login";
+
 import { configData } from "@/utils/config";
 export default {
   name: "My",
@@ -221,6 +225,10 @@ export default {
         newNum: 0,
         payNum: 0,
         receiveNum: 0
+      },
+      vipData: {
+        dueTime: "",
+        isVip: ""
       }
     };
   },
@@ -228,15 +236,40 @@ export default {
     this.userData = JSON.parse(window.sessionStorage.getItem("userData"))
       ? JSON.parse(window.sessionStorage.getItem("userData"))
       : "";
+    this.vipData = JSON.parse(window.sessionStorage.getItem("vipData"))
+      ? JSON.parse(window.sessionStorage.getItem("vipData"))
+      : { dueTime: "", isVip: "" };
   },
   mounted() {
     // if (this.userData.uid) {
     this.getSerinfoes();
     this.getPloves();
     this.getSummary();
+    this.getUserInfo();
+
     // }
   },
   methods: {
+    // 获取会员
+    getUserInfo() {
+      getUserInfo()
+        .then(res => {
+          if (res.code === configData.codeState) {
+            // var wx = res.data;
+            console.log("会员");
+            console.log(res.data);
+            this.vipData.dueTime = res.data.login.dueTime;
+            this.vipData.isVip = res.data.login.isVip;
+            window.sessionStorage.setItem(
+              "vipData",
+              JSON.stringify(this.vipData)
+            );
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
     // 获取用户公益信息
     getSerinfoes() {
       getSerinfoes()
@@ -468,6 +501,14 @@ export default {
   padding: 30px 0px;
   box-sizing: border-box;
   margin-bottom: 20px;
+  .my-vip-titelVip {
+    width: 100%;
+    text-align: center;
+    font-size: 28px;
+    color: #4a4a4a;
+    letter-spacing: 1.56px;
+    margin-bottom: 30px;
+  }
   .my-vip-titel {
     width: 100%;
     text-align: center;

@@ -22,3 +22,11 @@ export function getcode(phone) {
     method: "post"
   });
 }
+
+// 获取会员
+export function getUserInfo() {
+  return request({
+    url: `/us/getUserInfo`,
+    method: "get"
+  });
+}

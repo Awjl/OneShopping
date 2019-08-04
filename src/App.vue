@@ -6,7 +6,7 @@
   </div>
 </template>
 <script>
-import { getwxID } from "@/api/login/login";
+import { getwxID, getUserInfo } from "@/api/login/login";
 import { configData, getUrlParam } from "@/utils/config";
 
 export default {
@@ -20,6 +20,10 @@ export default {
         nn: "",
         av: "",
         wxuid: ""
+      },
+      vipData: {
+        dueTime: "",
+        isVip: ""
       }
     };
   },
@@ -29,6 +33,29 @@ export default {
     // console.log(window.sessionStorage.getItem("wxuid"));
   },
   methods: {
+    // 获取会员
+    getUserInfo() {
+      getUserInfo()
+        .then(res => {
+          if (res.code === configData.codeState) {
+            // var wx = res.data;
+            console.log("会员");
+            console.log(res.data);
+            this.vipData.dueTime = res.data.login.dueTime;
+            this.vipData.isVip = res.data.login.isVip;
+            window.sessionStorage.setItem(
+              "vipData",
+              JSON.stringify(this.vipData)
+            );
+
+            // dueTime
+            // isVip
+          }
+        })
+        .catch(function(error) {
+          console.log(error);
+        });
+    },
     getwxID() {
       let code = getUrlParam("code");
       let state = getUrlParam("state");
@@ -47,6 +74,7 @@ export default {
                 "userData",
                 JSON.stringify(this.userData)
               );
+              this.getUserInfo();
             } else {
               //引导用户绑定手机号
               this.wxuid = wx.id;

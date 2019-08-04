@@ -208,6 +208,24 @@ Vue.filter("formatEndTime", function (endTime) {
   }
 })
 
+Vue.filter("formatEndTime1", function (endTime) {
+  console.log(endTime)
+  var minus = endTime - new Date().getTime();
+  console.log(minus);
+  if (minus <= 0) {
+    return "00：00：00";
+  } else {
+    minus = minus / 1000;
+    var day = parseInt(minus / (24 * 60 * 60));
+    var hour = parseInt(minus % (24 * 60 * 60) / (60 * 60));
+    var minute = parseInt(minus % (24 * 60) / 60);
+    var second = parseInt(minus % (60) / 60);
+    if (day > 0) {
+      return day + "天";
+    }
+  }
+})
+
 Vue.filter("pickerValueFilter", function (value) {
   if (Array.isArray(value)) {
     return value.toString()
