@@ -137,7 +137,7 @@ export default {
             // window.location.href =
             //   "http://m.mildland.cn/html/myshop/my-form.html?tid=3";
             //   that.goMyOrder();
-            Toast.text("恭喜您成为一只商店的会员");
+            Toast.text("感谢您成为一只商店的会员");
           } else {
             if (res.err_msg == "get_brand_wcpay_request:cancel") {
               //window.history.go(-1);
