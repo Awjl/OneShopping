@@ -28,8 +28,8 @@ export default {
     };
   },
   created() {
-    // this.getwxID();
-    window.sessionStorage.setItem("wxuid", "205");
+    this.getwxID();
+    // window.sessionStorage.setItem("wxuid", "205");
     // console.log(window.sessionStorage.getItem("wxuid"));
   },
   methods: {
@@ -47,9 +47,6 @@ export default {
               "vipData",
               JSON.stringify(this.vipData)
             );
-
-            // dueTime
-            // isVip
           }
         })
         .catch(function(error) {
