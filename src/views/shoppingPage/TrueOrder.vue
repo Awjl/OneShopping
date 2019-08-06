@@ -33,7 +33,9 @@
       <div class="OrderOptionItem" @click="goUseCoupon">
         <p>败家券</p>
         <p class="OrderOptionItemNum">
-          <span>{{myform.lineItems[0].key.myCoupons.length}}个可用</span>
+          <!-- <span v-if="!msg">{{myform.lineItems[0].key.myCoupons.length}}个可用</span> -->
+          <span>-{{totalfee.couponDiscount | formatFee}}</span>
+          <!-- <span>-{{totalfee.couponDiscount | formatFee}}</span> -->
           <i class="myicon righticon"></i>
         </p>
       </div>
@@ -62,7 +64,7 @@
     </div>
     <div class="orderLineBg"></div>
     <div class="OrderPayBox">
-      <span>应付：¥{{totalfee.total | formatFee}}</span>
+      <span>应付：¥{{totalfee.fee | formatFee}}</span>
       <p @click="goPayOrder">哦了</p>
     </div>
   </div>
@@ -104,7 +106,7 @@ export default {
   },
   created() {
     if (window.sessionStorage.getItem("coupon")) {
-      console.log(window.sessionStorage.getItem("coupon"));
+      console.log(window.sessionStorage.getItem("coupon"), "1231231");
       this.coupon = JSON.parse(window.sessionStorage.getItem("coupon"));
       window.sessionStorage.removeItem("coupon");
     }
@@ -112,7 +114,6 @@ export default {
     this.myform = JSON.parse(window.sessionStorage.getItem("prepareOrder"));
     // window.sessionStorage.removeItem("prepareOrder");
     // }
-    console.log(this.myform);
     //实时获取订单费用
     let skuInfo = this.myform.lineItems[0].value;
     let data = {
@@ -173,11 +174,13 @@ export default {
             console.log("获取费用---------");
             console.log(res.data);
             // Object.assign(this.totalfee, res.data);
-            this.totalfee = res.data;
             if (res.data.couponDiscount == 0 && this.coupon.id) {
-              this.msg =
-                "满" + (this.coupon.limitFee / 100).toFixed(2) + "可用";
-              Toast.text(this.msg);
+              // this.msg = "";
+              let msg = "满" + (this.coupon.limitFee / 100).toFixed(2) + "可用";
+              Toast.text(msg);
+            } else {
+              // this.msg = "1";
+              this.totalfee = res.data;
             }
           }
         })
@@ -427,12 +430,12 @@ export default {
       .OrderOptionItemNum {
         span {
           padding: 5px 10px;
-          border: 2px solid #ef6866;
+          // border: 2px solid #ef6866;
           border-radius: 100px;
-          font-size: 24px;
+          font-size: 30px;
           color: #ed6969;
           letter-spacing: 0.67px;
-          margin-right: 20px;
+          margin-right: 10px;
         }
       }
       .OrderOptionItemTolat {

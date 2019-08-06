@@ -162,7 +162,11 @@ export default {
 }
 .addaddreslist-inp input {
   width: 100%;
+  /* height: 100%; */
   outline: none;
+}
+.addaddreslist-inp input::-webkit-input-placeholder {
+  color: #666;
 }
 .addaddresbtn {
   width: 690px;
